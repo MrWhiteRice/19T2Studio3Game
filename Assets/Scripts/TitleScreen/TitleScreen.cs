@@ -5,11 +5,33 @@ using UnityEngine.SceneManagement;
 
 public class TitleScreen : MonoBehaviour
 {
-  public void OpenScene()
+    public GameObject mainMenu;
+    public GameObject start;
+    public GameObject options;
+    public GameObject gacha;
+    public GameObject party;
+
+    public void LaunchStart()
     {
-        SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
-
-
+        mainMenu.SetActive(false);
+        start.SetActive(true);
     }
 
+    public void LaunchOptions()
+    {
+        mainMenu.SetActive(false);
+        options.SetActive(true);
+    }
+
+    public void LaunchGacha()
+    {
+        mainMenu.SetActive(false);
+        gacha.SetActive(true);
+    }
+
+    public void LaunchParty()
+    {
+        mainMenu.SetActive(false);
+        party.SetActive(true);
+    }
 }
