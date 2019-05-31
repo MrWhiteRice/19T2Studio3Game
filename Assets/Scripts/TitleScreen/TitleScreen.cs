@@ -10,7 +10,8 @@ public class TitleScreen : MonoBehaviour
     public GameObject options;
     public GameObject gacha;
     public GameObject party;
-
+    
+    //Going from main menu to each option
     public void LaunchStart()
     {
         mainMenu.SetActive(false);
@@ -34,4 +35,8 @@ public class TitleScreen : MonoBehaviour
         mainMenu.SetActive(false);
         party.SetActive(true);
     }
+
+    //Return from option to main menu
+    
+
 }
