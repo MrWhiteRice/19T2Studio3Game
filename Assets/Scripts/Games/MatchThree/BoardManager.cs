@@ -18,27 +18,6 @@ public class BoardManager : MonoBehaviour
 	{
 		DrawTiles();
 
-		int count = 0;
-		for(int y = 0; y < tile.GetLength(1); y++)
-		{
-			for(int x = 0; x < tile.GetLength(0); x++)
-			{
-				if(!tile[x, y].GetComponent<GameTile>().destroyed)
-				{
-					count++;
-				}
-			}
-		}
-
-		if(count < (tile.GetLength(0) * tile.GetLength(1)))
-		{
-			//FillSpace();
-		}
-		else
-		{
-			//CheckMatch();
-		}
-
 		FillSpace();
 		CheckMatch();
 
@@ -49,14 +28,58 @@ public class BoardManager : MonoBehaviour
 	{
 		for(int x = 0; x < tile.GetLength(0); x++)
 		{
-			for(int y = tile.GetLength(1); y > 0; y--)
+			for(int y = tile.GetLength(1); y > -1; y--)
 			{
 				if(y == 12)
 				{
+					if (tile[x, y - 1].GetComponent<GameTile>().destroyed)
+					{
+						Vector2 pos = tile[x, y - 1].transform.position;
+						if (pos == new Vector2(x, y-1))
+						{
+							int selected = Random.Range(0, 6);
+
+							Color c = tile[x, y - 1].GetComponentInChildren<Renderer>().material.color;
+
+							switch (selected)
+							{
+								case 0:
+									c = Color.red;
+									break;
+
+								case 1:
+									c = Color.green;
+									break;
+
+								case 2:
+									c = Color.blue;
+									break;
+
+								case 3:
+									c = Color.cyan;
+									break;
+
+								case 4:
+									c = Color.yellow;
+									break;
+
+								case 5:
+									c = Color.grey;
+									break;
+							}
+
+							tile[x, y - 1].transform.position += Vector3.up;
+							tile[x, y - 1].GetComponent<GameTile>().destroyed = false;
+							tile[x, y - 1].GetComponent<GameTile>().type = selected;
+							tile[x, y - 1].GetComponentInChildren<Renderer>().material.color = c;
+							tile[x, y - 1].GetComponentInChildren<Renderer>().material.SetColor("_TINT", Color.white);
+						}
+					}
+
 					continue;
 				}
 
-				if(y - 1 > 0)
+				if (y - 1 > 0)
 				{
 					if(tile[x, y - 1].GetComponent<GameTile>().destroyed)
 					{
@@ -79,6 +102,23 @@ public class BoardManager : MonoBehaviour
 
 	void CheckMatch()
 	{
+		int count = 0;
+		for (int xx = 0; xx < tile.GetLength(0); xx++)
+		{
+			for (int yy = 0; yy < tile.GetLength(1); yy++)
+			{
+				if (tile[xx, yy].GetComponent<GameTile>().active)
+				{
+					count++;
+				}
+			}
+		}
+
+		if (count != tile.GetLength(0) * tile.GetLength(1))
+		{
+			return;
+		}
+
 		//hor check
 		for(int y = 0; y < tile.GetLength(1); y++)
 		{
@@ -101,8 +141,6 @@ public class BoardManager : MonoBehaviour
 
 						if(match == 3)
 						{
-							print("match found!" + type);
-
 							//TODO: Count more than 3
 
 							int check = 0;
@@ -279,7 +317,15 @@ public class BoardManager : MonoBehaviour
 		{
 			for(int y = 0; y < tile.GetLength(1); y++)
 			{
-				tile[x, y].transform.position = Vector2.MoveTowards(tile[x, y].transform.position, new Vector2(x, y), Time.deltaTime * 2);
+				if (Vector3.Distance(tile[x, y].transform.position, tile[x, y].GetComponent<GameTile>().pos) > 2)
+				{
+					print("teleporting");
+					tile[x, y].transform.position = tile[x, y].GetComponent<GameTile>().pos;
+				}
+				else
+				{
+					tile[x, y].transform.position = Vector2.MoveTowards(tile[x, y].transform.position, new Vector2(x, y), Time.deltaTime * 2);
+				}
 			}
 		}
 	}
