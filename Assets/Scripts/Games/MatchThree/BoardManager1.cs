@@ -5,6 +5,8 @@ using UnityEngine;
 public class BoardManager1 : MonoBehaviour
 {
 	public GameObject[,] tiles = new GameObject[8, 12];
+	public GameObject grabbed;
+	Vector2 grabbedPoint;
 
 	void Start()
 	{
@@ -22,13 +24,66 @@ public class BoardManager1 : MonoBehaviour
 		{
 			for (int y = 0; y < tiles.GetLength(1); y++)
 			{
-				print(x + "," + y);
-				if (tiles[x, y].GetComponent<Tile>().Contains(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
-				{
-					print("yes");
+                if (tiles[x, y].GetComponent<Tile>().Contains(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
+                {
+					if (Input.GetMouseButtonDown(0))
+					{
+						grabbed = tiles[x, y];
+						grabbedPoint = Input.mousePosition;
+					}
 				}
 			}
 		}
+
+		if (grabbed != null)
+		{
+			if (Input.GetMouseButtonUp(0))
+			{
+				Vector2 dir = (Vector2)Input.mousePosition - grabbedPoint;
+
+				switch (GetDirection(dir))
+				{
+					case "Left":
+						print("Left");
+						MoveTile(Vector2.left);
+						break;
+
+					case "Right":
+						print("right");
+						MoveTile(Vector2.right);
+						break;
+
+					case "Up":
+						print("up");
+						MoveTile(Vector2.up);
+						break;
+
+					case "Down":
+						print("down");
+						MoveTile(Vector2.down);
+						break;
+				}
+
+				grabbed = null;
+			}
+		}
+	}
+
+	public void MoveTile(Vector2 dir)
+	{
+		//TODO: check out of bounds
+		Vector2 grabbedPos = grabbed.GetComponent<Tile>().pos;
+
+		GameObject oldTile = tiles[(int)grabbedPos.x + (int)dir.x, (int)grabbedPos.y + (int)dir.y];
+		Vector2 newPos = oldTile.GetComponent<Tile>().pos;
+
+		grabbed.GetComponent<Tile>().pos = newPos;
+		oldTile.GetComponent<Tile>().pos = grabbedPos;
+
+		tiles[(int)grabbedPos.x, (int)grabbedPos.y] = oldTile;
+		tiles[(int)grabbedPos.x + (int)dir.x, (int)grabbedPos.y + (int)dir.y] = grabbed;
+
+		grabbed = null;
 	}
 
 	void InitTiles()
@@ -41,84 +96,37 @@ public class BoardManager1 : MonoBehaviour
 				obj.AddComponent<Tile>();
 				obj.GetComponent<Tile>().type = (Tile.TileType)Random.Range(0, 6);
 				obj.GetComponent<Tile>().pos = new Vector2(x, y);
+				obj.name = obj.GetComponent<Tile>().type.ToString();
+				tiles[x, y] = obj;
 			}
 		}
 	}
-}
 
-public class Tile : MonoBehaviour
-{
-	public enum TileType
+	string GetDirection(Vector2 dir)
 	{
-		Green,
-		Blue,
-		Orange,
-		Yellow,
-		Red,
-		Purple
-	}
-
-	public TileType type;
-
-	public bool active;
-	public bool destroyed;
-
-	public Vector2 pos;
-
-	private void Start()
-	{
-		gameObject.AddComponent<SpriteRenderer>().sprite = GetSprite(type.ToString());
-	}
-
-	private void Update()
-	{
-		if (pos != (Vector2)transform.position)
+		if (Mathf.Abs(dir.x) > Mathf.Abs(dir.y))
 		{
-			transform.position = Vector2.MoveTowards(transform.position, pos, Time.deltaTime);
-		}
-	}
-
-	public Sprite GetSprite(string spr)
-	{
-		Sprite[] sprites = Resources.LoadAll<Sprite>("Gems");
-
-		for (int x = 0; x < sprites.Length; x++)
-		{
-			if (sprites[x].name == spr)
+			if (dir.x > 0.5f)
 			{
-				return sprites[x];
+				return "Right";
+			}
+			else if (dir.x < -0.5f)
+			{
+				return "Left";
+			}
+		}
+		else
+		{
+			if (dir.y > 0.5f)
+			{
+				return "Up";
+			}
+			else if (dir.y < -0.5f)
+			{
+				return "Down";
 			}
 		}
 
-		return null;
-	}
-
-	public bool Contains(Vector2 pos)
-	{
-		//left
-		if (pos.x < transform.position.x-0.5f)
-		{
-			return false;
-		}
-
-		//right
-		if (pos.x > transform.position.x+0.5f)
-		{
-			return false;
-		}
-
-		//up
-		if (pos.y < transform.position.y-0.5f)
-		{
-			return false;
-		}
-
-		//down
-		if (pos.y > transform.position.y+0.5f)
-		{
-			return false;
-		}
-
-		return true;
+		return "";
 	}
 }
