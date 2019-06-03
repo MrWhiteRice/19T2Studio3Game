@@ -31,13 +31,23 @@ public class Tile : MonoBehaviour
 		if (pos != (Vector2)transform.position)
 		{
 			active = false;
-			transform.position = Vector2.MoveTowards(transform.position, pos, Time.deltaTime);
+			transform.position = Vector2.MoveTowards(transform.position, pos, Time.deltaTime * 5);
 		}
 		else
 		{
 			active = true;
 		}
-    }
+
+		if(destroyed)
+		{
+			active = false;
+			GetComponent<SpriteRenderer>().sprite = null;
+		}
+		else
+		{
+			GetComponent<SpriteRenderer>().sprite = GetSprite(type.ToString());
+		}
+	}
 
     public Sprite GetSprite(string spr)
     {
@@ -54,8 +64,10 @@ public class Tile : MonoBehaviour
         return null;
     }
 
+	//Checks if the given vector is inside this tiles bounds
     public bool Contains(Vector2 pos)
     {
+		//TODO: condense to one line
         //left
         if (pos.x < transform.position.x - 0.5f)
         {
@@ -82,4 +94,9 @@ public class Tile : MonoBehaviour
 
         return true;
     }
+
+	public static Tile GetTile()
+	{
+		return null;
+	}
 }
