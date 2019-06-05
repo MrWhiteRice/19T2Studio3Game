@@ -32,6 +32,11 @@ public class Tile : MonoBehaviour
 		{
 			active = false;
 			transform.position = Vector2.MoveTowards(transform.position, pos, Time.deltaTime * 5);
+
+			if(Vector2.Distance(transform.position, pos) > 2 && destroyed)
+			{
+				transform.position = pos;
+			}
 		}
 		else
 		{
@@ -40,11 +45,13 @@ public class Tile : MonoBehaviour
 
 		if(destroyed)
 		{
+			name = "[D]" + type.ToString();
 			active = false;
 			GetComponent<SpriteRenderer>().sprite = null;
 		}
 		else
 		{
+			name = type.ToString();
 			GetComponent<SpriteRenderer>().sprite = GetSprite(type.ToString());
 		}
 	}

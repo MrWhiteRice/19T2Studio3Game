@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BoardManager1 : MonoBehaviour
 {
-	public GameObject[,] tiles = new GameObject[8, 12];
-	public GameObject grabbed;
+	GameObject[,] tiles = new GameObject[8, 12];
+	GameObject grabbed;
 	Vector2 grabbedPoint;
 
 	void Start()
@@ -17,13 +17,19 @@ public class BoardManager1 : MonoBehaviour
 	{
         if(CanMove())
         {
-            CheckInput();
+			//Check horizontal Matches
             CheckMatch(tiles.GetLength(0), tiles.GetLength(1), false);
+			
+			//Check vertical Matches
             CheckMatch(tiles.GetLength(1), tiles.GetLength(0), true);
+
+			//Check player move
+			CheckInput();
         }
 		else
 		{
 			FloatTiles();
+			RefilTiles();
 		}
 	}
 
@@ -33,11 +39,41 @@ public class BoardManager1 : MonoBehaviour
 		{
 			for(int x = 0; x < tiles.GetLength(0); x++)
 			{
-				if(GetTile(x, y).destroyed)
+				if(GetTile(x, y))
 				{
-					print(GetTile(x, y + 1).pos);
-					if(GetTile(x, y + 1))
+					if(GetTile(x, y).destroyed)
 					{
+						print(x + "," + y);
+						if(GetTile(x, y + 1))
+						{
+							if(!GetTile(x, y + 1).destroyed)
+							{
+								grabbed = GetTile(x, y).gameObject;
+								MoveTile(Vector2.up);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	void RefilTiles()
+	{
+		for(int y = 0; y < tiles.GetLength(1); y++)
+		{
+			for(int x = 0; x < tiles.GetLength(0); x++)
+			{
+				if(GetTile(x, y))
+				{
+					if(GetTile(x, y).destroyed)
+					{ 
+						if(y == 11)
+						{
+							GetTile(x, y).gameObject.transform.position = new Vector2(x, y + 1);
+							GetTile(x, y).type = (Tile.TileType)Random.Range(0, 6);
+							GetTile(x, y).destroyed = false;
+						}
 					}
 				}
 			}
@@ -121,10 +157,8 @@ public class BoardManager1 : MonoBehaviour
 		}
 	}
 
-	//TODO: Flex on nathan
     void CheckMatch(int xCheck, int yCheck, bool axisSwap)
     {
-        //Hor Check
         for(int y = 0; y < yCheck; y++)
         {
 			int type = -1;
@@ -135,7 +169,6 @@ public class BoardManager1 : MonoBehaviour
 				//if first tile begin match count
 				if(type == -1)
 				{
-					//type = (int)tiles[x, y].GetComponent<Tile>().type;
 					type = (int)GetTile(x, y, axisSwap).type;
 					count = 1;
 					continue;
@@ -145,18 +178,30 @@ public class BoardManager1 : MonoBehaviour
 				if((int)GetTile(x, y, axisSwap).type == type) 
 				{
 					count++;
+					print("match found!: " + x);
 				}
 
-				//if not the same or if at the end of the horizontal check for match threshold then reset
-				if((int)GetTile(x, y, axisSwap).type != type || x == tiles.GetLength(0)-1)
+				//Match Check Precondiditions:
+				//if not the same
+				//if at the end of the horizontal
+
+				//Then Reset
+				//if((int)GetTile(x, y, axisSwap).type != type || x == tiles.GetLength(0) - 1)
+				if((int)GetTile(x, y, axisSwap).type != type || x == xCheck - 1)
 				{
 					//Check match
 					if(count >= 3)
 					{
+						//check if at end of line, if we are dont count 1 back
+						int lim = (x == xCheck - 1) ? 0 : -1;
+						//int lim = (x == tiles.GetLength(0) - 1) ? 0 : -1;
+						print(lim + "," + x + "," + (xCheck-1));
+
 						//iterate backward and 'destroy' the tile
 						for(int c = 0; c < count; c++)
 						{
-							GetTile(x - c - 1, y, axisSwap).destroyed = true;
+							print(x - c + lim + "," + y);
+							GetTile(x - c + lim, y, axisSwap).destroyed = true;
 						}
 					}
 
@@ -172,7 +217,12 @@ public class BoardManager1 : MonoBehaviour
 
 	Tile GetTile(int x, int y)
 	{
-		return GetTile(x, y, false);
+		if(y <= tiles.GetLength(1) - 1)
+		{
+			return GetTile(x, y, false);
+		}
+
+		return null;
 	}
 
 	Tile GetTile(int x, int y, bool swap)
@@ -214,6 +264,7 @@ public class BoardManager1 : MonoBehaviour
 				obj.AddComponent<Tile>();
 				obj.GetComponent<Tile>().type = (Tile.TileType)Random.Range(0, 6);
 				obj.GetComponent<Tile>().pos = new Vector2(x, y);
+				obj.transform.position = new Vector3(tiles.GetLength(0) / 2 - 0.5f, tiles.GetLength(1) / 2 - 0.5f, 0);
 				obj.name = obj.GetComponent<Tile>().type.ToString();
 				tiles[x, y] = obj;
 			}
