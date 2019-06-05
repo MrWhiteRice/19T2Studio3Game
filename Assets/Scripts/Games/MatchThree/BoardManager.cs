@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoardManager1 : MonoBehaviour
+public class BoardManager : MonoBehaviour
 {
 	GameObject[,] tiles = new GameObject[8, 12];
 	GameObject grabbed;
