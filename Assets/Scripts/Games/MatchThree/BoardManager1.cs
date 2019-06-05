@@ -15,17 +15,17 @@ public class BoardManager1 : MonoBehaviour
 
 	private void Update()
 	{
-        if(CanMove())
-        {
+		if(CanMove())
+		{
 			//Check horizontal Matches
-            CheckMatch(tiles.GetLength(0), tiles.GetLength(1), false);
-			
+			CheckMatch(tiles.GetLength(0), tiles.GetLength(1), false);
+
 			//Check vertical Matches
-            CheckMatch(tiles.GetLength(1), tiles.GetLength(0), true);
+			CheckMatch(tiles.GetLength(1), tiles.GetLength(0), true);
 
 			//Check player move
 			CheckInput();
-        }
+		}
 		else
 		{
 			FloatTiles();
@@ -43,7 +43,6 @@ public class BoardManager1 : MonoBehaviour
 				{
 					if(GetTile(x, y).destroyed)
 					{
-						print(x + "," + y);
 						if(GetTile(x, y + 1))
 						{
 							if(!GetTile(x, y + 1).destroyed)
@@ -67,7 +66,7 @@ public class BoardManager1 : MonoBehaviour
 				if(GetTile(x, y))
 				{
 					if(GetTile(x, y).destroyed)
-					{ 
+					{
 						if(y == 11)
 						{
 							GetTile(x, y).gameObject.transform.position = new Vector2(x, y + 1);
@@ -80,39 +79,39 @@ public class BoardManager1 : MonoBehaviour
 		}
 	}
 
-    bool CanMove()
-    {
-        int total = tiles.GetLength(0) * tiles.GetLength(1);
-        int count = 0;
+	bool CanMove()
+	{
+		int total = tiles.GetLength(0) * tiles.GetLength(1);
+		int count = 0;
 
-        for(int x = 0; x < tiles.GetLength(0); x++)
-        {
-            for(int y = 0; y < tiles.GetLength(1); y++)
-            {
-                if(tiles[x, y].GetComponent<Tile>().active)
-                {
-                    count++;
-                }
-            }
-        }
+		for(int x = 0; x < tiles.GetLength(0); x++)
+		{
+			for(int y = 0; y < tiles.GetLength(1); y++)
+			{
+				if(tiles[x, y].GetComponent<Tile>().active)
+				{
+					count++;
+				}
+			}
+		}
 
-        if(count == total)
-        {
-            return true;
-        }
+		if(count == total)
+		{
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 
 	void CheckInput()
 	{
-		for (int x = 0; x < tiles.GetLength(0); x++)
+		for(int x = 0; x < tiles.GetLength(0); x++)
 		{
-			for (int y = 0; y < tiles.GetLength(1); y++)
+			for(int y = 0; y < tiles.GetLength(1); y++)
 			{
-                if (tiles[x, y].GetComponent<Tile>().Contains(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
-                {
-					if (Input.GetMouseButtonDown(0))
+				if(tiles[x, y].GetComponent<Tile>().Contains(Camera.main.ScreenToWorldPoint(Input.mousePosition)))
+				{
+					if(Input.GetMouseButtonDown(0))
 					{
 						grabbed = tiles[x, y];
 						grabbedPoint = Input.mousePosition;
@@ -121,33 +120,29 @@ public class BoardManager1 : MonoBehaviour
 			}
 		}
 
-		if (grabbed != null)
+		if(grabbed != null)
 		{
-			if (Input.GetMouseButtonUp(0))
+			if(Input.GetMouseButtonUp(0))
 			{
 				//direction we moved the mouse
 				Vector2 dir = (Vector2)Input.mousePosition - grabbedPoint;
 
 				//check specified direction then move tile that way
-				switch (GetDirection(dir))
+				switch(GetDirection(dir))
 				{
 					case "Left":
-						print("Left");
 						MoveTile(Vector2.left);
 						break;
 
 					case "Right":
-						print("right");
 						MoveTile(Vector2.right);
 						break;
 
 					case "Up":
-						print("up");
 						MoveTile(Vector2.up);
 						break;
 
 					case "Down":
-						print("down");
 						MoveTile(Vector2.down);
 						break;
 				}
@@ -157,10 +152,10 @@ public class BoardManager1 : MonoBehaviour
 		}
 	}
 
-    void CheckMatch(int xCheck, int yCheck, bool axisSwap)
-    {
-        for(int y = 0; y < yCheck; y++)
-        {
+	void CheckMatch(int xCheck, int yCheck, bool axisSwap)
+	{
+		for(int y = 0; y < yCheck; y++)
+		{
 			int type = -1;
 			int count = 0;
 
@@ -175,10 +170,9 @@ public class BoardManager1 : MonoBehaviour
 				}
 
 				// if type match then add
-				if((int)GetTile(x, y, axisSwap).type == type) 
+				if((int)GetTile(x, y, axisSwap).type == type)
 				{
 					count++;
-					print("match found!: " + x);
 				}
 
 				//Match Check Precondiditions:
@@ -186,22 +180,23 @@ public class BoardManager1 : MonoBehaviour
 				//if at the end of the horizontal
 
 				//Then Reset
-				//if((int)GetTile(x, y, axisSwap).type != type || x == tiles.GetLength(0) - 1)
-				if((int)GetTile(x, y, axisSwap).type != type || x == xCheck - 1)
+				if((int)GetTile(x, y, axisSwap).type != type || xCheck - 1 == x)
 				{
 					//Check match
 					if(count >= 3)
 					{
-						//check if at end of line, if we are dont count 1 back
-						int lim = (x == xCheck - 1) ? 0 : -1;
-						//int lim = (x == tiles.GetLength(0) - 1) ? 0 : -1;
-						print(lim + "," + x + "," + (xCheck-1));
-
 						//iterate backward and 'destroy' the tile
 						for(int c = 0; c < count; c++)
 						{
-							print(x - c + lim + "," + y);
-							GetTile(x - c + lim, y, axisSwap).destroyed = true;
+							if((int)GetTile(x, y, axisSwap).type != type)
+							{
+								GetTile(x - c - 1, y, axisSwap).destroyed = true;
+							}
+
+							else if(xCheck - 1 == x)
+							{
+								GetTile(x - c, y, axisSwap).destroyed = true;
+							}
 						}
 					}
 
@@ -211,9 +206,9 @@ public class BoardManager1 : MonoBehaviour
 					x--;
 					continue;
 				}
-            }
-        }
-    }
+			}
+		}
+	}
 
 	Tile GetTile(int x, int y)
 	{
