@@ -23,6 +23,7 @@ public class Tile : MonoBehaviour
 
     private void Start()
     {
+        gameObject.AddComponent<SpriteRenderer>().maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
         gameObject.AddComponent<SpriteRenderer>().sprite = GetSprite(type.ToString());
     }
 
