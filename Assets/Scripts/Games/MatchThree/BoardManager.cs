@@ -69,7 +69,7 @@ public class BoardManager : MonoBehaviour
 					{
 						if(y == 11)
 						{
-							GetTile(x, y).gameObject.transform.position = new Vector2(x, y + 1);
+							GetTile(x, y).gameObject.transform.localPosition = new Vector2(x, y + 1);
 							GetTile(x, y).type = (Tile.TileType)Random.Range(0, 6);
 							GetTile(x, y).destroyed = false;
 						}
@@ -256,6 +256,7 @@ public class BoardManager : MonoBehaviour
 			for (int x = 0; x < tiles.GetLength(0); x++)
 			{
 				GameObject obj = new GameObject();
+				obj.transform.SetParent(transform);
 				obj.AddComponent<Tile>();
 				obj.GetComponent<Tile>().type = (Tile.TileType)Random.Range(0, 6);
 				obj.GetComponent<Tile>().pos = new Vector2(x, y);

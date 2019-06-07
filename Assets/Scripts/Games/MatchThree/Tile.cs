@@ -28,14 +28,14 @@ public class Tile : MonoBehaviour
 
     private void Update()
     {
-		if (pos != (Vector2)transform.position)
+		if (pos != (Vector2)transform.localPosition)
 		{
 			active = false;
-			transform.position = Vector2.MoveTowards(transform.position, pos, Time.deltaTime * 5);
+			transform.localPosition = Vector2.MoveTowards(transform.localPosition, pos, Time.deltaTime * 5);
 
-			if(Vector2.Distance(transform.position, pos) > 2 && destroyed)
+			if(Vector2.Distance(transform.localPosition, pos) > 2 && destroyed)
 			{
-				transform.position = pos;
+				transform.localPosition = pos;
 			}
 		}
 		else
