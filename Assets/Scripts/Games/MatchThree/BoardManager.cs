@@ -198,6 +198,11 @@ public class BoardManager : MonoBehaviour
 								GetTile(x - c, y, axisSwap).destroyed = true;
 							}
 						}
+
+						//Deal damage
+						int damage = count - 3 + 1;
+
+						GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().CmdDealDamage(damage);
 					}
 
 					//reset

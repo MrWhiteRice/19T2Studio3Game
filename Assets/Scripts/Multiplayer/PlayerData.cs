@@ -5,14 +5,12 @@ using UnityEngine.Networking;
 
 public class PlayerData : NetworkBehaviour
 {
-	[SyncVar]
-	public new string name;
+	[SyncVar] public int ID = -1;
+	[SyncVar] public new string name;
+	[SyncVar] public bool ready;
+	[SyncVar] public bool isHost;
 
-	[SyncVar]
-	public bool ready;
-
-	[SyncVar]
-	public bool isHost;
+	[SyncVar] public int health = 100;
 
 	public void UpdateName(string inputName)
 	{
@@ -22,5 +20,10 @@ public class PlayerData : NetworkBehaviour
 	public void UpdateBool(bool set)
 	{
 		ready = set;
+	}
+
+	public void UpdateID(int id)
+	{
+		ID = id;
 	}
 }

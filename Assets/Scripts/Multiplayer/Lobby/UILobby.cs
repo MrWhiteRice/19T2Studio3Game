@@ -58,4 +58,9 @@ public class UILobby : MonoBehaviour
 	{
 		GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().CmdUpdateReady();
 	}
+
+	public void StartGame()
+	{
+		GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().CmdLoadLevel();
+	}
 }
