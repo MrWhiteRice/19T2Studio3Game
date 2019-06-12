@@ -22,7 +22,7 @@ public class LobbyNetwork : MonoBehaviour
 
 	public void Join()
 	{
-		GameObject.FindObjectOfType<CustomNetworkManager>().JoinMatch(ip.text);
+		GameObject.FindObjectOfType<CustomNetworkManager>().JoinMatch(ip.text, localIP.gameObject);
 	}
 
 	public static string LocalIPAddress()
@@ -30,6 +30,7 @@ public class LobbyNetwork : MonoBehaviour
 		IPHostEntry host;
 		string localIP = "0.0.0.0";
 		host = Dns.GetHostEntry(Dns.GetHostName());
+
 		foreach(IPAddress ip in host.AddressList)
 		{
 			if(ip.AddressFamily == AddressFamily.InterNetwork)
@@ -38,6 +39,7 @@ public class LobbyNetwork : MonoBehaviour
 				break;
 			}
 		}
+
 		return localIP;
 	}
 }

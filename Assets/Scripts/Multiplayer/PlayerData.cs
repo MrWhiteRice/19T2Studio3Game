@@ -10,7 +10,7 @@ public class PlayerData : NetworkBehaviour
 	[SyncVar] public bool ready;
 	[SyncVar] public bool isHost;
 
-	[SyncVar] public int health = 100;
+	[SyncVar] public int health = 50;
 
 	public void UpdateName(string inputName)
 	{

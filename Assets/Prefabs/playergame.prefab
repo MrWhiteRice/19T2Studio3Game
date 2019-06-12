@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a0544ed235e0d342b906ad850553da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: -1
+  gameStart: 0
 --- !u!114 &9162064907615313126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,4 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e2f3f5a5f7c44a4dbeeaefdcad2c667, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: -1
   name: 
+  ready: 0
+  isHost: 0
+  health: 50

@@ -44,6 +44,13 @@ public class Player : NetworkBehaviour
 		}
 	}
 
+	void GameOver(int id)
+	{
+		GameObject.Find("Canvas Game Over").transform.GetChild(0).gameObject.SetActive(true);
+		GameObject.FindObjectOfType<BoardManager>().enabled = false;
+		gameStart = false;
+	}
+
 	[Command] public void CmdDealDamage(int damage)
 	{
 		RpcDealDamage(damage, GetComponent<PlayerData>().ID);
@@ -56,8 +63,30 @@ public class Player : NetworkBehaviour
 			if(players[x].ID != id)
 			{
 				players[x].health -= damage;
+
+				if(players[x].health <= 0)
+				{
+					GameOver(players[x].ID);
+				}
 			}
 		}
+	}
+
+	public void Disconnect()
+	{
+		CmdDisconnect();
+	}
+
+	[Command]
+	void CmdDisconnect()
+	{
+		RpcDisconnect();
+	}
+
+	[ClientRpc]
+	void RpcDisconnect()
+	{
+		FindObjectOfType<CustomNetworkManager>().Disconnect();
 	}
 
 	[Command] public void CmdUpdateName(string inputName)
