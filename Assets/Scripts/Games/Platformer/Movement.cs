@@ -17,9 +17,6 @@ public class Movement : MonoBehaviour
 	int horizontal;
 	int lastDir;
 
-	Vector2 inputDir = Vector2.zero;
-	Vector2 lastInputDir = Vector2.zero;
-
 	public float jumpForce = 400.0f;
 	public float maxSpeed = 10.0f;
 
@@ -40,10 +37,12 @@ public class Movement : MonoBehaviour
 	{
 		grounded = false;
 
+		//get all collisions
 		Collider2D[] collisions = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, whatIsGround);
 
 		for(int x = 0; x < collisions.Length; x++)
 		{
+			//check that its not us
 			if(collisions[x].gameObject != gameObject)
 			{
 				grounded = true;
@@ -53,55 +52,14 @@ public class Movement : MonoBehaviour
 
 	void GetInput()
 	{
+		//check jump
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
 			jump = true;
 		}
 
-		horizontal = 0;
-
-		inputDir.x = Input.GetKey(KeyCode.A) ? 1 : 0;
-		inputDir.y = Input.GetKey(KeyCode.D) ? 1 : 0;
-
-		//detect new movement input
-		if(inputDir != lastInputDir)
-		{
-			if(inputDir == Vector2.one)
-			{
-				//use last
-				print("use last");
-				return;
-			}
-			else if(inputDir != Vector2.zero)
-			{
-				//use new
-				if(inputDir.x == 1)
-				{
-					horizontal = -1;
-				}
-				else if(inputDir.y == 1)
-				{
-					horizontal = 1;
-				}
-
-				print("new input");
-			}
-		}
-		//continue movement
-		else
-		{
-			if(inputDir.x == 1)
-			{
-				horizontal = -1;
-			}
-			else if(inputDir.y == 1)
-			{
-				horizontal = 1;
-			}
-		}
-
-		//save input for next frame
-		lastInputDir = inputDir;
+		//get movement direction
+		horizontal = (int)Input.GetAxisRaw("Horizontal");
 	}
 
 	void Move()
@@ -125,11 +83,13 @@ public class Movement : MonoBehaviour
 
 	void Flip()
 	{
+		//calc which dir we're facing based on movement speed
 		if(horizontal != 0)
 		{
 			facingRight = horizontal < 0 ? false : true;
 		}
 
+		//set movement dir
 		spr.flipX = facingRight;
 	}
 }
