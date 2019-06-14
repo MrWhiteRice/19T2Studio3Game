@@ -15,6 +15,15 @@ public class Bullet : NetworkBehaviour
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 		if(other.name.Contains("Bullet") == false)
-		NetworkServer.Destroy(gameObject);
+		{
+			//test type
+			if(other.name.Contains("Character"))
+			{
+				other.GetComponent<NetworkData>().CmdDamage(10);
+				print("dmage");
+			}
+
+			NetworkServer.Destroy(gameObject);
+		}
 	}
 }
