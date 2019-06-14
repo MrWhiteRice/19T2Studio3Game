@@ -8,6 +8,7 @@ public class Player : NetworkBehaviour
 {
 	public bool gameStart;
 	public GameObject player;
+	public GameObject bullet;
 	[SyncVar] public bool ready;
 
 	void Start()
@@ -152,24 +153,13 @@ public class Player : NetworkBehaviour
 		}
 	}
 
-	[Command] public void CmdSendPacket(int pack)
+	[Command] public void CmdShoot(int dir, Vector3 pos)
 	{
-		RpcSendPacket(pack);
-	}
-	[ClientRpc] void RpcSendPacket(int pack)
-	{
-		string[] split = pack.ToString().Split();
+		GameObject b = Instantiate(bullet);
 
-		for(int x = 0; x < split.Length; x++)
-		{
-			print(split[x]);
-		}
-	}
+		b.transform.position = pos;
+		b.GetComponent<Bullet>().dir = dir;
 
-	public static int CreatePacket(string pack)
-	{
-		string a = "9" + pack;
-
-		return int.Parse(a);
+		NetworkServer.SpawnWithClientAuthority(b, gameObject);
 	}
 }

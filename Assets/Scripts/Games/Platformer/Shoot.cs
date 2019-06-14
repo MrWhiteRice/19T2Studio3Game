@@ -7,7 +7,6 @@ public class Shoot : MonoBehaviour
 	float originalX;
 	public Transform gun;
 	Movement move;
-	public GameObject bullet;
 
 	void Start()
 	{
@@ -34,9 +33,10 @@ public class Shoot : MonoBehaviour
 	{
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
-			GameObject b = Instantiate(bullet, gun.transform.position, Quaternion.identity);
+			//GameObject b = Instantiate(bullet, gun.transform.position, Quaternion.identity);
 			int flip = move.facingRight ? 1 : -1;
-			b.GetComponent<Rigidbody2D>().velocity = b.transform.right * flip * 5;
+			//b.GetComponent<Rigidbody2D>().velocity = b.transform.right * flip * 5;
+			GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().CmdShoot(flip, gun.transform.position);
 		}
 	}
 }

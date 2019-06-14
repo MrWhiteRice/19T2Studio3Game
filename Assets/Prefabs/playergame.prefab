@@ -80,6 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameStart: 0
   player: {fileID: 4372908342781098893, guid: 1dd25e5741167864787dee0e8d5defe1, type: 3}
+  bullet: {fileID: 6076532265113867400, guid: 088b880d7a6a0064d94e6864125c989c, type: 3}
   ready: 0
 --- !u!114 &9162064907615313126
 MonoBehaviour:

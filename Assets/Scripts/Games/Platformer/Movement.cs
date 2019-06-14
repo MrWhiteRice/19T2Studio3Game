@@ -30,24 +30,9 @@ public class Movement : MonoBehaviour
 	{
 		CheckGrounded();
 		GetInput();
-
-		SendPacket();
-
 		Move();
 	}
 
-	void SendPacket()
-	{
-		//packet: jump, left, right, shoot
-		string pack = "";
-
-		pack += jump ? "1" : "0";
-		pack += horizontal < 0 ? "1" : "0";
-		pack += horizontal > 0 ? "1" : "0";
-		pack += "0";
-
-		GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().CmdSendPacket(Player.CreatePacket(pack));
-	}
 	
 	void CheckGrounded()
 	{
