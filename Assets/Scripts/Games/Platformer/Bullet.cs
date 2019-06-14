@@ -20,7 +20,6 @@ public class Bullet : NetworkBehaviour
 			if(other.name.Contains("Character"))
 			{
 				other.GetComponent<NetworkData>().CmdDamage(10);
-				print("dmage");
 			}
 
 			NetworkServer.Destroy(gameObject);

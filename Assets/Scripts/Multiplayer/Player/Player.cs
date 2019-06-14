@@ -52,6 +52,11 @@ public class Player : NetworkBehaviour
 		{
 			CmdReady(true);
 		}
+
+		if(SceneManager.GetActiveScene().name == "Test")
+		{
+			Destroy(gameObject);
+		}
 	}
 
 	void GameOver(int id)
@@ -72,6 +77,7 @@ public class Player : NetworkBehaviour
 
 	[Command] public void CmdSpawnPlayer()
 	{
+		//spawn player 1
 		GameObject p = Instantiate(player);
 		p.GetComponent<NetworkData>().owner = GetComponent<PlayerData>().ID;
 		NetworkServer.SpawnWithClientAuthority(p, gameObject);
