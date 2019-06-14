@@ -22,7 +22,14 @@ public class LobbyNetwork : MonoBehaviour
 
 	public void Join()
 	{
-		GameObject.FindObjectOfType<CustomNetworkManager>().JoinMatch(ip.text, localIP.gameObject);
+		if(ip.text != "")
+		{
+			GameObject.FindObjectOfType<CustomNetworkManager>().JoinMatch(ip.text);
+		}
+		else
+		{
+			GameObject.FindObjectOfType<CustomNetworkManager>().JoinMatch(LocalIPAddress());
+		}
 	}
 
 	public static string LocalIPAddress()

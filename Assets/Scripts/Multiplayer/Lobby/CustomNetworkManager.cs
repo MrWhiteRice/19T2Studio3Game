@@ -10,9 +10,8 @@ public class CustomNetworkManager : NetworkManager
 		singleton.StartHost();
 	}
 
-	public void JoinMatch(string ip, GameObject po)
+	public void JoinMatch(string ip)
 	{
-		Destroy(po);
 		singleton.networkAddress = ip;
 		singleton.StartClient();
 	}

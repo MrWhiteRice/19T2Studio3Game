@@ -4,13 +4,39 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
+	float originalX;
 	public Transform gun;
+	Movement move;
+	public GameObject bullet;
 
-    void Update()
+	void Start()
+	{
+		move = GetComponent<Movement>();
+		originalX = gun.transform.localPosition.x;
+	}
+
+	void Update()
     {
-		Vector2 me = gun.transform.position;
-		Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		Aim();
+		TryShoot();
+	}
 
-		gun.transform.rotation = Quaternion.LookRotation(mouse - me);
-    }
+	void Aim()
+	{
+		int flip = move.facingRight ? 1 : -1;
+
+		Vector3 pos = gun.transform.localPosition;
+		pos.x = originalX * flip;
+		gun.transform.localPosition = pos;
+	}
+
+	void TryShoot()
+	{
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			GameObject b = Instantiate(bullet, gun.transform.position, Quaternion.identity);
+			int flip = move.facingRight ? 1 : -1;
+			b.GetComponent<Rigidbody2D>().velocity = b.transform.right * flip * 5;
+		}
+	}
 }

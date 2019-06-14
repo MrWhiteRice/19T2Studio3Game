@@ -79,6 +79,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameStart: 0
+  player: {fileID: 4372908342781098893, guid: 1dd25e5741167864787dee0e8d5defe1, type: 3}
+  ready: 0
 --- !u!114 &9162064907615313126
 MonoBehaviour:
   m_ObjectHideFlags: 0

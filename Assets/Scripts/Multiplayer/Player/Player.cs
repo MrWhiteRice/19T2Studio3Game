@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class Player : NetworkBehaviour
 {
 	public bool gameStart;
+	public GameObject player;
+	[SyncVar] public bool ready;
 
 	void Start()
 	{
@@ -33,14 +36,20 @@ public class Player : NetworkBehaviour
 		{
 			if(gameStart)
 			{
-				GameObject.Find("Enemy Health").GetComponent<UnityEngine.UI.Slider>().value = GetComponent<PlayerData>().health;
+				//GameObject.Find("Enemy Health").GetComponent<UnityEngine.UI.Slider>().value = GetComponent<PlayerData>().health;
 			}
 			return;
 		}
 
 		if(gameStart)
 		{
-			GameObject.Find("Player Health").GetComponent<UnityEngine.UI.Slider>().value = GetComponent<PlayerData>().health;
+			//GameObject.Find("Player Health").GetComponent<UnityEngine.UI.Slider>().value = GetComponent<PlayerData>().health;
+		}
+
+		//TODO: Change name to correct scene
+		if(SceneManager.GetActiveScene().name == "Platformer")
+		{
+			CmdReady(true);
 		}
 	}
 
@@ -49,6 +58,22 @@ public class Player : NetworkBehaviour
 		GameObject.Find("Canvas Game Over").transform.GetChild(0).gameObject.SetActive(true);
 		GameObject.FindObjectOfType<BoardManager>().enabled = false;
 		gameStart = false;
+	}
+
+	[Command] void CmdReady(bool set)
+	{
+		RpcReady(set);
+	}
+	[ClientRpc] void RpcReady(bool set)
+	{
+		ready = set;
+	}
+
+	[Command] public void CmdSpawnPlayer()
+	{
+		GameObject p = Instantiate(player);
+		p.GetComponent<NetworkData>().owner = GetComponent<PlayerData>().ID;
+		NetworkServer.SpawnWithClientAuthority(p, gameObject);
 	}
 
 	[Command] public void CmdDealDamage(int damage)
@@ -77,14 +102,11 @@ public class Player : NetworkBehaviour
 		CmdDisconnect();
 	}
 
-	[Command]
-	void CmdDisconnect()
+	[Command] void CmdDisconnect()
 	{
 		RpcDisconnect();
 	}
-
-	[ClientRpc]
-	void RpcDisconnect()
+	[ClientRpc] void RpcDisconnect()
 	{
 		FindObjectOfType<CustomNetworkManager>().Disconnect();
 	}
@@ -122,11 +144,32 @@ public class Player : NetworkBehaviour
 	}
 	[ClientRpc]	void RpcLoadLevel()
 	{
-		UnityEngine.SceneManagement.SceneManager.LoadScene("Match 3");
+		SceneManager.LoadScene("Platformer");
 
 		foreach(Player p in GameObject.FindObjectsOfType<Player>())
 		{
 			p.gameStart = true;
 		}
+	}
+
+	[Command] public void CmdSendPacket(int pack)
+	{
+		RpcSendPacket(pack);
+	}
+	[ClientRpc] void RpcSendPacket(int pack)
+	{
+		string[] split = pack.ToString().Split();
+
+		for(int x = 0; x < split.Length; x++)
+		{
+			print(split[x]);
+		}
+	}
+
+	public static int CreatePacket(string pack)
+	{
+		string a = "9" + pack;
+
+		return int.Parse(a);
 	}
 }

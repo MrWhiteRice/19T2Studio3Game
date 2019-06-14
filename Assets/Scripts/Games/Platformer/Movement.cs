@@ -13,7 +13,7 @@ public class Movement : MonoBehaviour
 
 	bool grounded;
 	bool jump;
-	bool facingRight = true;
+	public bool facingRight = true;
 	int horizontal;
 	int lastDir;
 
@@ -30,9 +30,25 @@ public class Movement : MonoBehaviour
 	{
 		CheckGrounded();
 		GetInput();
+
+		SendPacket();
+
 		Move();
 	}
 
+	void SendPacket()
+	{
+		//packet: jump, left, right, shoot
+		string pack = "";
+
+		pack += jump ? "1" : "0";
+		pack += horizontal < 0 ? "1" : "0";
+		pack += horizontal > 0 ? "1" : "0";
+		pack += "0";
+
+		GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().CmdSendPacket(Player.CreatePacket(pack));
+	}
+	
 	void CheckGrounded()
 	{
 		grounded = false;
@@ -53,7 +69,7 @@ public class Movement : MonoBehaviour
 	void GetInput()
 	{
 		//check jump
-		if(Input.GetKeyDown(KeyCode.Space))
+		if(Input.GetKeyDown(KeyCode.W))
 		{
 			jump = true;
 		}
