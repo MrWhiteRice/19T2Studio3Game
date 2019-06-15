@@ -16,6 +16,11 @@ public class Shoot : MonoBehaviour
 
 	void Update()
     {
+		if(!GetComponent<NetworkData>().IsMyTurn())
+		{
+			return;
+		}
+
 		Aim();
 		TryShoot();
 	}

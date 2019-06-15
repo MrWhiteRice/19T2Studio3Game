@@ -28,6 +28,11 @@ public class Movement : MonoBehaviour
 
 	void FixedUpdate()
 	{
+		if(!GetComponent<NetworkData>().IsMyTurn())
+		{
+			return;
+		}
+
 		CheckGrounded();
 		GetInput();
 		Move();

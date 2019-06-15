@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 4372908344435783068}
-  bullet: {fileID: 6076532265113867400, guid: 088b880d7a6a0064d94e6864125c989c, type: 3}
 --- !u!50 &4372908342781098888
 Rigidbody2D:
   serializedVersion: 4
@@ -173,7 +172,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 5
 --- !u!70 &4372908342781098889
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -259,6 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: 0
   health: 100
+  ID: 0
 --- !u!1 &4372908344435783071
 GameObject:
   m_ObjectHideFlags: 0

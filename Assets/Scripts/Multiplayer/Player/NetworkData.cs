@@ -11,18 +11,18 @@ public class NetworkData : NetworkBehaviour
 	[SyncVar] public int ID;
 	Text text;
 
+	public RigidbodyConstraints2D rbc;
+
 	private void Start()
 	{
 		text = GetComponentInChildren<Text>();
+
+		rbc = GetComponent<Rigidbody2D>().constraints;
 
 		if(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerData>().ID == owner)
 		{
 			GetComponent<Movement>().enabled = true;
 			GetComponent<Shoot>().enabled = true;
-		}
-		else
-		{
-			GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
 		}
 	}
 
@@ -31,16 +31,21 @@ public class NetworkData : NetworkBehaviour
 		string a = IsMyTurn() ? "Me: " : "";
 		text.text = a + health.ToString();
 
-		if(Input.GetMouseButtonDown(2))
+
+		if(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerData>().ID == owner)
 		{
 			if(IsMyTurn())
 			{
-				GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().CmdEndTurn();
+				GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+			}
+			else
+			{
+				GetComponent<Rigidbody2D>().constraints = rbc;
 			}
 		}
 	}
 
-	bool IsMyTurn()
+	public bool IsMyTurn()
 	{
 		int mod = 0;
 

@@ -177,6 +177,15 @@ public class Player : NetworkBehaviour
 
 	[Command] public void CmdEndTurn()
 	{
-		FindObjectOfType<RoundManager>().turnOrder++;
+		foreach(NetworkData c in FindObjectsOfType<NetworkData>())
+		{
+			if(c.IsMyTurn())
+			{
+				if(GetComponent<PlayerData>().ID == c.owner)
+				{
+					FindObjectOfType<RoundManager>().turnOrder++;
+				}
+			}
+		}
 	}
 }

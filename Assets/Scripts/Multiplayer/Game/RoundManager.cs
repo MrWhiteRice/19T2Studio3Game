@@ -51,8 +51,8 @@ public class RoundManager : NetworkBehaviour
 		{
 			foreach(Player p in players)
 			{
-				//get which type of player we have | 0 = host, 1 = client
-				int type = p.GetComponent<PlayerData>().isHost ? 0 : 1;
+				//get which type of player we have | 0 = client, 1 = host
+				int type = p.GetComponent<PlayerData>().isHost ? 1 : 0;
 
 				//create spawnpoints array
 				List<SpawnPoint> points = new List<SpawnPoint>();
