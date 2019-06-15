@@ -44,6 +44,12 @@ public class Player : NetworkBehaviour
 
 		if(gameStart)
 		{
+			if(isServer)
+			{
+				NetworkServer.SpawnWithClientAuthority((GameObject)Instantiate(Resources.Load("RoundManager")), gameObject);
+			}
+
+			gameStart = false;
 			//GameObject.Find("Player Health").GetComponent<UnityEngine.UI.Slider>().value = GetComponent<PlayerData>().health;
 		}
 
@@ -167,5 +173,10 @@ public class Player : NetworkBehaviour
 		b.GetComponent<Bullet>().dir = dir;
 
 		NetworkServer.SpawnWithClientAuthority(b, gameObject);
+	}
+
+	[Command] public void CmdEndTurn()
+	{
+		FindObjectOfType<RoundManager>().turnOrder++;
 	}
 }
