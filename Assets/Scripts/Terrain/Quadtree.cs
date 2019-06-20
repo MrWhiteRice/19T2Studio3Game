@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,127 +13,169 @@ public enum QuadtreeIndex
 
 public class Quadtree<TType>
 {
-	private QuadTreeNode<TType> node;
+	private QuadtreeNode<TType> node;
 	private int depth;
+
+	public event EventHandler QuadtreeUpdated;
 
 	public Quadtree(Vector2 position, float size, int depth)
 	{
-		node = new QuadTreeNode<TType>(position, size);
-		node.Subdivide(depth);
+		node = new QuadtreeNode<TType>(position, size, depth);
+		this.depth = depth;
 	}
 
-	public class QuadTreeNode<TType>
+	public void Insert(TType type, Vector2 pos)
+	{
+		QuadtreeNode<TType> leafNode = node.Subdivide(type, pos, depth);
+		leafNode.Type = type;
+
+		NotifyQuadtreeUpdate();
+	}
+
+	private void NotifyQuadtreeUpdate()
+	{
+		if(QuadtreeUpdated != null)
+		{
+			QuadtreeUpdated(this, new EventArgs());
+		}
+	}
+
+	public class QuadtreeNode<TType>
 	{
 		Vector2 position;
 		float size;
-		QuadTreeNode<TType>[] subNodes;
-		List<TType> value;
+		QuadtreeNode<TType>[] subNodes;
+		TType type;
+		int depth;
 
-		public QuadTreeNode(Vector2 pos, float size)
+		public QuadtreeNode(Vector2 pos, float size, int depth, TType type = default(TType))
 		{
 			position = pos;
 			this.size = size;
+			this.depth = depth;
 		}
 
-		public IEnumerable<QuadTreeNode<TType>> Nodes
+		public IEnumerable<QuadtreeNode<TType>> Nodes
 		{
-			get
-			{
-				return subNodes;
-			}
+			get { return subNodes; }
 		}
 
 		public Vector2 Position
 		{
-			get
-			{
-				return position;
-			}
+			get	{ return position; }
 		}
 
 		public float Size
 		{
-			get
-			{
-				return size;
-			}
+			get { return size; }
 		}
 
-		public void Subdivide(int depth)
+		public TType Type
 		{
-			subNodes = new QuadTreeNode<TType>[4];
+			get { return type; }
+			internal set { type = value; }
+		}
 
-			for(int x = 0; x < subNodes.Length; ++x)
+		public QuadtreeNode<TType> Subdivide(TType type, Vector2 targetPos, int depth = 0)
+		{
+			if(depth == 0)
 			{
-				Vector2 newPos = position;
+				return this;
+			}
 
-				//& is a bitwise AND check
-				//so x = 6 & 4 ---- convert both numbers into binary
-				//6 = 1110 || 4 = 0110 ---- the result will be 0110
-				//2^(n-1)
-				//8421
-				//0000 0001 0010 0011 0100
-				//   0    1    2    3    4
+			int subDivideIndex = GetIndexOfPosition(targetPos, position);
 
-				//y up
-				if((x & 2) == 2)
-				{
-					var binaryString = System.Convert.ToString(x, 2);
-					Debug.Log("Down" + binaryString);
-					newPos.y -= size * 0.25f;
-				}
-				//y down
-				else
-				{
-					var binaryString = System.Convert.ToString(x, 2);
-					Debug.Log("Down" + binaryString);
-					newPos.y += size * 0.25f;
-				}
+			if(subNodes == null)
+			{
+				subNodes = new QuadtreeNode<TType>[4];
 
-				//x up
-				if((x & 1) == 1)
+				for(int x = 0; x < subNodes.Length; ++x)
 				{
-					var binaryString = System.Convert.ToString(x, 2);
-					Debug.Log("Down" + binaryString);
-					newPos.x += size * 0.25f;
-				}
-				//x down
-				else
-				{
-					var binaryString = System.Convert.ToString(x, 2);
-					Debug.Log("Down" + binaryString);
-					newPos.x -= size * 0.25f;
-				}
+					Vector2 newPos = position;
 
-				subNodes[x] = new QuadTreeNode<TType>(newPos, size * .5f);
+					//& is a bitwise AND check
+					//so x = 6 & 4 ---- convert both numbers into binary
+					//6 = 1110 || 4 = 0110 ---- the result will be 0110
+					//2^(n-1)
+					//8421
+					//0000 0001 0010 0011 0100
+					//   0    1    2    3    4
 
-				if(depth > 0)
-				{
-					subNodes[x].Subdivide(depth - 1);
+					//y up
+					if((x & 2) == 2)
+					{
+						newPos.y -= size * 0.25f;
+					}
+					//y down
+					else
+					{
+						newPos.y += size * 0.25f;
+					}
+
+					//x up
+					if((x & 1) == 1)
+					{
+						newPos.x += size * 0.25f;
+					}
+					//x down
+					else
+					{
+						newPos.x -= size * 0.25f;
+					}
+
+					subNodes[x] = new QuadtreeNode<TType>(newPos, size * .5f, depth - 1);
 				}
 			}
+
+			return subNodes[subDivideIndex].Subdivide(type, targetPos, depth - 1);
 		}
 
 		public bool IsLeaf()
 		{
-			return subNodes == null;
+			return depth == 0;
+		}
+
+		public IEnumerable<QuadtreeNode<TType>> GetLeafNodes()
+		{
+			if(IsLeaf())
+			{
+				yield return this;
+			}
+			else
+			{
+				if(Nodes != null)
+				{
+					foreach(var node in subNodes)
+					{
+						foreach(var leaf in node.GetLeafNodes())
+						{
+							yield return leaf;
+						}
+					}
+				}
+			}
 		}
 	}
 
-	private int GetIndexOfPosition(Vector2 lookupPosition, Vector2 nodePosition)
+	private static int GetIndexOfPosition(Vector2 lookupPosition, Vector2 nodePosition)
 	{
 		int index = 0;
 
 		//TODO Learn |=
 
-		index |= lookupPosition.y > nodePosition.y ? 2 : 0;
-		index |= lookupPosition.x > nodePosition.y ? 1 : 0;
+		index |= lookupPosition.y < nodePosition.y ? 2 : 0;
+		index |= lookupPosition.x > nodePosition.x ? 1 : 0;
 
 		return index;
 	}
 
-	public QuadTreeNode<TType> GetRoot()
+	public QuadtreeNode<TType> GetRoot()
 	{
 		return node;
+	}
+
+	public IEnumerable<QuadtreeNode<TType>> GetLeafNodes()
+	{
+		return node.GetLeafNodes();
 	}
 }
