@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//part 7
 public class QuadMeshGenerator : MonoBehaviour
 {
 	public bool generate = false;

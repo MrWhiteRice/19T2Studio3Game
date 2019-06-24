@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 60326995}
   - component: {fileID: 60326998}
   - component: {fileID: 60326999}
+  - component: {fileID: 60327000}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -168,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 10
-  depth: 6
+  depth: 7
 --- !u!4 &60326997
 Transform:
   m_ObjectHideFlags: 0
@@ -197,8 +198,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   generate: 1
   quadtree: {fileID: 60326996}
-  mat: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  mat: {fileID: 2100000, guid: 39b75d2ae5d23c8468d29618edab3e80, type: 2}
 --- !u!114 &60326999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60326994}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8667e5f95e0cba3438392b8e1b4a5228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quadtree: {fileID: 60326996}
+--- !u!114 &60327000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,7 +221,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 60326994}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8667e5f95e0cba3438392b8e1b4a5228, type: 3}
+  m_Script: {fileID: 11500000, guid: f8c18e78bc9dec3488d8dee365e27894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   quadtree: {fileID: 60326996}

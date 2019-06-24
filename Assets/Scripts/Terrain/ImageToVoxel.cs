@@ -32,5 +32,7 @@ public class ImageToVoxel : MonoBehaviour
 				}
 			}
 		}
+
+		//Reduce after generate
 	}
 }
