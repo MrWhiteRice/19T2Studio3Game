@@ -67,13 +67,6 @@ public class Quadtree<TType> where TType : IComparable
 		BuildQuadtreeRecursive(tree, nextNode + 4);
 	}
 
-	/*public void Insert(Vector2 position, TType value)
-	{
-		var leafNode = nodes.Subdivide(position, value, depth);
-		leafNode.Type = value;
-		NotifyQuadtreeUpdate();
-	}*/
-
 	public void InsertCircle(TType type, Vector2 pos, float radius)
 	{
 		var leafNodes = new LinkedList<QuadtreeNode<TType>>();
