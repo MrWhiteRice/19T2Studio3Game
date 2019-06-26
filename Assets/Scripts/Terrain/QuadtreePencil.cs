@@ -13,15 +13,15 @@ public class QuadtreePencil : MonoBehaviour
 
     void Update()
     {
-		Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		//Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-		if(Input.GetMouseButton(0))
-		{
-			quadtree.Quadtree.Insert(true, pos);
-		}
-		else if(Input.GetMouseButton(1))
-		{
-			quadtree.Quadtree.Insert(false, pos);
-		}
+		//if(Input.GetMouseButton(0))
+		//{
+		//	quadtree.Quadtree.Insert(true, pos);
+		//}
+		//else if(Input.GetMouseButton(1))
+		//{
+		//	quadtree.Quadtree.Insert(false, pos);
+		//}
     }
 }

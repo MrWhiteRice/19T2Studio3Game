@@ -28,7 +28,7 @@ public class ImageToVoxel : MonoBehaviour
 				Color pixel = image.GetPixelBilinear(x / (float)cells, y / (float)cells);
 				if(pixel.r > threshold)
 				{
-					quadtree.Quadtree.Insert(true, pos);
+					quadtree.Quadtree.InsertCircle(true, pos, 0.0001f);
 				}
 			}
 		}
