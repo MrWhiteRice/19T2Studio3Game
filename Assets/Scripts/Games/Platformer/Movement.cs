@@ -22,7 +22,7 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
-		rb = GetComponent<Rigidbody2D>();
+		//rb = GetComponent<Rigidbody2D>();
 		spr = GetComponentInChildren<SpriteRenderer>();
     }
 
@@ -70,7 +70,7 @@ public class Movement : MonoBehaviour
 	void Move()
 	{
 		//move
-		rb.velocity = new Vector2(horizontal * maxSpeed, rb.velocity.y);
+		//rb.velocity = new Vector2(horizontal * maxSpeed, rb.velocity.y);
 
 		//check if we need to flip sprite
 		Flip();
