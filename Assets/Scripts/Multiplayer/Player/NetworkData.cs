@@ -17,7 +17,7 @@ public class NetworkData : NetworkBehaviour
 	{
 		text = GetComponentInChildren<Text>();
 
-		rbc = GetComponent<Rigidbody2D>().constraints;
+		//rbc = GetComponent<Rigidbody2D>().constraints;
 
 		if(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerData>().ID == owner)
 		{
@@ -36,11 +36,11 @@ public class NetworkData : NetworkBehaviour
 		{
 			if(IsMyTurn())
 			{
-				GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+				//GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
 			}
 			else
 			{
-				GetComponent<Rigidbody2D>().constraints = rbc;
+				//GetComponent<Rigidbody2D>().constraints = rbc;
 			}
 		}
 	}
