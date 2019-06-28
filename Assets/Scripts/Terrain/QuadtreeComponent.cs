@@ -29,16 +29,16 @@ public class QuadtreeComponent : MonoBehaviour
 		text.text = (int)(1.0f / Time.smoothDeltaTime) + "";
 	}
 
-	private void OnDrawGizmos()
-	{
-		if(quadtree != null)
-		{
-			foreach(var node in quadtree.Nodes)
-			{
-				DrawNode(node);
-			}
-		}
-	}
+	//private void OnDrawGizmos()
+	//{
+	//	if(quadtree != null)
+	//	{
+	//		foreach(var node in quadtree.Nodes)
+	//		{
+	//			DrawNode(node);
+	//		}
+	//	}
+	//}
 
 	private Color minColor = new Color(1, 1, 1, 1);
 	private Color maxColor = new Color(0, 0.5f, 1, 0.25f);

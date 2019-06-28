@@ -76,6 +76,8 @@ public class QuadMeshGenerator : MonoBehaviour
 
 		MeshFilter filter = terrain.AddComponent<MeshFilter>();
 		MeshRenderer renderer = terrain.AddComponent<MeshRenderer>();
+		MeshCollider col = terrain.AddComponent<MeshCollider>();
+		col.sharedMesh = mesh;
 
 		renderer.material = mat;
 		filter.mesh = mesh;
