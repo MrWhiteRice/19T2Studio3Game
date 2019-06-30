@@ -19,7 +19,7 @@ public class Player : NetworkBehaviour
 		{
 			return;
 		}
-
+		 
 		if(isServer)
 		{
 			GetComponent<PlayerData>().isHost = true;
