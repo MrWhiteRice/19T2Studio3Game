@@ -32,6 +32,7 @@ public class QuadMeshGenerator : MonoBehaviour
 		}
 
 		GameObject terrain = new GameObject("Terrain");
+		terrain.layer = gameObject.layer;
 		terrain.transform.parent = quadtree.transform;
 
 		Mesh mesh = new Mesh();

@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour
 	public float groundCheckRadius = 0.2f;
 	public LayerMask whatIsGround;
 
-	Rigidbody2D rb;
+	Rigidbody rb;
 	SpriteRenderer spr;
 
 	bool grounded;
@@ -22,17 +22,12 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
-		//rb = GetComponent<Rigidbody2D>();
+		rb = GetComponent<Rigidbody>();
 		spr = GetComponentInChildren<SpriteRenderer>();
     }
 
-	void FixedUpdate()
+	void Update()
 	{
-		if(!GetComponent<NetworkData>().IsMyTurn())
-		{
-			return;
-		}
-
 		CheckGrounded();
 		GetInput();
 		Move();
@@ -43,7 +38,7 @@ public class Movement : MonoBehaviour
 		grounded = false;
 
 		//get all collisions
-		Collider2D[] collisions = Physics2D.OverlapCircleAll(groundCheck.position, groundCheckRadius, whatIsGround);
+		Collider[] collisions = Physics.OverlapSphere(groundCheck.position, groundCheckRadius, whatIsGround);
 
 		for(int x = 0; x < collisions.Length; x++)
 		{
@@ -70,7 +65,7 @@ public class Movement : MonoBehaviour
 	void Move()
 	{
 		//move
-		//rb.velocity = new Vector2(horizontal * maxSpeed, rb.velocity.y);
+		rb.velocity = new Vector2(horizontal * maxSpeed, rb.velocity.y);
 
 		//check if we need to flip sprite
 		Flip();
