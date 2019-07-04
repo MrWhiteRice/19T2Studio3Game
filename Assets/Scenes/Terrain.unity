@@ -766,7 +766,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d0561e38c453f246b61e1c439a6a9fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 4372908342781098893, guid: 02df63125b2b7a24589859e0f34ed0e3, type: 3}
+  player: {fileID: 4372908342781098893, guid: 470750b074fa8014ca256b887442a0e6, type: 3}
+  turn: 0
+  redPlayers: []
+  bluePlayers: []
 --- !u!1 &1778223326
 GameObject:
   m_ObjectHideFlags: 0

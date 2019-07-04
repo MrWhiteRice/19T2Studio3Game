@@ -19,8 +19,16 @@ public class Grenade : MonoBehaviour
 
 			foreach(Collider hit in Physics.OverlapSphere(transform.position, explosionRadius, player))
 			{
+				if(hit is CapsuleCollider == false)
+				{
+					continue;
+				}
+
 				Vector3 forceDir = hit.transform.position - transform.position;
 				hit.GetComponent<Rigidbody>().velocity = (forceDir + Vector3.up) * 5;
+
+				float damageMod = 1 - Vector3.Distance(transform.position, hit.transform.position);
+				hit.GetComponent<PlayerDataSP>().health -= (damageMod * 50);
 			}
 		}
     }

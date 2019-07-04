@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerDataSP : MonoBehaviour
 {
-	public int health = 100;
+	public float health = 100;
 	public int ID = 0;
 	public SpawnPoint.Team team;
 	UnityEngine.UI.Text healthText;
@@ -30,14 +30,14 @@ public class PlayerDataSP : MonoBehaviour
 	{
 		if(IsTurn())
 		{
-			healthText.text = "Me: 100";
+			healthText.text = "Me: " + health.ToString("f0");
 			GetComponent<Movement>().enabled = true;
 			GetComponent<Shoot>().enabled = true;
 			//GetComponent<Rigidbody>().constraints = rbc;
 		}
 		else
 		{
-			healthText.text = "100";
+			healthText.text = "" + health.ToString("f0");
 			GetComponent<Movement>().enabled = false;
 			GetComponent<Shoot>().enabled = false;
 			//GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
