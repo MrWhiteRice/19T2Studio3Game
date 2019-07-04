@@ -9,7 +9,6 @@ public class Movement : MonoBehaviour
 	public LayerMask whatIsGround;
 
 	Rigidbody rb;
-	//SpriteRenderer spr;
 	public GameObject playerSpr;
 
 	bool grounded;
@@ -24,7 +23,6 @@ public class Movement : MonoBehaviour
     void Start()
     {
 		rb = GetComponent<Rigidbody>();
-		//spr = GetComponentInChildren<SpriteRenderer>();
     }
 
 	void Update()
@@ -91,7 +89,6 @@ public class Movement : MonoBehaviour
 		}
 
 		//set movement dir
-		//spr.flipX = facingRight;
 		foreach(SpriteRenderer spr in playerSpr.GetComponentsInChildren<SpriteRenderer>())
 		{
 			spr.flipX = facingRight;
