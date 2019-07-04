@@ -28,8 +28,21 @@ public class PlayerDataSP : MonoBehaviour
 
 	private void Update()
 	{
+		if(health <= 0)
+		{
+			foreach(SpriteRenderer spr in GetComponentsInChildren<SpriteRenderer>())
+			{
+				spr.flipY = true;
+			}
+		}
+
 		if(IsTurn())
 		{
+			if(health <= 0)
+			{
+				FindObjectOfType<GameManager>().NextTurn();
+			}
+
 			healthText.text = "Me: " + health.ToString("f0");
 			GetComponent<Movement>().enabled = true;
 			GetComponent<Shoot>().enabled = true;
