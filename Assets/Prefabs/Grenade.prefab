@@ -159,3 +159,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 3
   explosionRadius: 1
+  player:
+    serializedVersion: 2
+    m_Bits: 512

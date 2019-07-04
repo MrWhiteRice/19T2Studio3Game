@@ -33,14 +33,14 @@ public class PlayerDataSP : MonoBehaviour
 			healthText.text = "Me: 100";
 			GetComponent<Movement>().enabled = true;
 			GetComponent<Shoot>().enabled = true;
-			GetComponent<Rigidbody>().constraints = rbc;
+			//GetComponent<Rigidbody>().constraints = rbc;
 		}
 		else
 		{
 			healthText.text = "100";
 			GetComponent<Movement>().enabled = false;
 			GetComponent<Shoot>().enabled = false;
-			GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+			//GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
 		}
 	}
 

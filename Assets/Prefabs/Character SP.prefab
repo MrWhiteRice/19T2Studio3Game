@@ -252,9 +252,9 @@ GameObject:
   - component: {fileID: -1740766124022386151}
   - component: {fileID: 9047550298075193114}
   - component: {fileID: 2522232585246301221}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Character SP
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -326,6 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  ID: 0
   team: 0
 --- !u!54 &-1740766124022386151
 Rigidbody:
