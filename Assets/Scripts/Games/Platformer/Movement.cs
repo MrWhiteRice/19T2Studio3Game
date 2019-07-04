@@ -9,7 +9,8 @@ public class Movement : MonoBehaviour
 	public LayerMask whatIsGround;
 
 	Rigidbody rb;
-	SpriteRenderer spr;
+	//SpriteRenderer spr;
+	public GameObject playerSpr;
 
 	bool grounded;
 	bool jump;
@@ -23,7 +24,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
 		rb = GetComponent<Rigidbody>();
-		spr = GetComponentInChildren<SpriteRenderer>();
+		//spr = GetComponentInChildren<SpriteRenderer>();
     }
 
 	void Update()
@@ -86,10 +87,14 @@ public class Movement : MonoBehaviour
 		//calc which dir we're facing based on movement speed
 		if(horizontal != 0)
 		{
-			facingRight = horizontal < 0 ? false : true;
+			facingRight = horizontal < 0 ? true : false;
 		}
 
 		//set movement dir
-		spr.flipX = facingRight;
+		//spr.flipX = facingRight;
+		foreach(SpriteRenderer spr in playerSpr.GetComponentsInChildren<SpriteRenderer>())
+		{
+			spr.flipX = facingRight;
+		}
 	}
 }
