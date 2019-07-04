@@ -15,7 +15,8 @@ public class Shoot : MonoBehaviour
 		Class,
 		Grenade,
 		Utility,
-		Special
+		Special,
+		Melee
 	}
 
 	public Gun selectedWeapon;
@@ -56,6 +57,11 @@ public class Shoot : MonoBehaviour
 			//Special Weapon
 			case "4":
 				selectedWeapon = Gun.Special;
+				break;
+
+			//Melee
+			case "5":
+				selectedWeapon = Gun.Melee;
 				break;
 		}
 	}
@@ -106,6 +112,9 @@ public class Shoot : MonoBehaviour
 						break;
 
 					case Gun.Special:
+						break;
+
+					case Gun.Melee:
 						break;
 				}
 			}

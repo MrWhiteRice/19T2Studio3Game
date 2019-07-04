@@ -11,8 +11,6 @@ public class QuadtreeComponent : MonoBehaviour
 
 	Quadtree<bool> quadtree;
 
-	public UnityEngine.UI.Text text;
-
 	public Quadtree<bool> Quadtree
 	{
 		get { return quadtree; }
@@ -20,13 +18,7 @@ public class QuadtreeComponent : MonoBehaviour
 
 	private void Start()
 	{
-		text = FindObjectOfType<UnityEngine.UI.Text>();
 		quadtree = new Quadtree<bool>(this.transform.position, size, depth);
-	}
-
-	private void Update()
-	{
-		text.text = (int)(1.0f / Time.smoothDeltaTime) + "";
 	}
 
 	//private void OnDrawGizmos()
