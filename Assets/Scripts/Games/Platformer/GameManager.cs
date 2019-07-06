@@ -27,10 +27,7 @@ public class GameManager : MonoBehaviour
 	{
 		turn++;
 
-		if(turn >= 6)
-		{
-			turn = 0;
-		}
+		turn %= 6;
 	}
 
 	void SpawnPlayers()

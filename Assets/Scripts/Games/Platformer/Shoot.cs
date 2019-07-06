@@ -68,11 +68,24 @@ public class Shoot : MonoBehaviour
 
 	void Aim()
 	{
-		int flip = move.facingRight ? 1 : -1;
+		//get mouse direction from player
+		Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
-		Vector3 pos = gun.transform.localPosition;
-		pos.x = originalX * -flip;
-		gun.transform.localPosition = pos;
+		//check if dir is right or left, 1 = right, -1 = left
+		int flip = dir.x > 0 ? 1 : -1;
+
+		//apply flip depending on side mouse is on
+		Vector3 scale = gun.transform.localScale;
+		scale.x = 1 * flip;
+		gun.transform.localScale = scale;
+
+		//adjust rotation so it looks at mouse
+		//gun.transform.localRotation = Quaternion.LookRotation(dir, Vector3.forward);
+		float angle = Vector2.SignedAngle(gun.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition) - gun.transform.position);
+		Vector3 rot = gun.transform.eulerAngles;
+		rot.z = angle;
+		gun.transform.eulerAngles = rot;
+		print(angle);
 	}
 
 	void TryShoot()
