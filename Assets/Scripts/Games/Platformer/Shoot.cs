@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
-	float originalX;
 	public Transform gun;
 	Movement move;
 	public GameObject bullet;
@@ -24,7 +23,6 @@ public class Shoot : MonoBehaviour
 	void Start()
 	{
 		move = GetComponent<Movement>();
-		originalX = gun.transform.localPosition.x;
 	}
 
 	void Update()
@@ -75,17 +73,21 @@ public class Shoot : MonoBehaviour
 		int flip = dir.x > 0 ? 1 : -1;
 
 		//apply flip depending on side mouse is on
-		Vector3 scale = gun.transform.localScale;
-		scale.x = 1 * flip;
-		gun.transform.localScale = scale;
+		//Vector3 scale = gun.transform.localScale;
+		//scale.x = 1 * flip;
+		//gun.transform.localScale = scale;
 
-		//adjust rotation so it looks at mouse
-		//gun.transform.localRotation = Quaternion.LookRotation(dir, Vector3.forward);
-		float angle = Vector2.SignedAngle(gun.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition) - gun.transform.position);
-		Vector3 rot = gun.transform.eulerAngles;
-		rot.z = angle;
-		gun.transform.eulerAngles = rot;
-		print(angle);
+		//convert gunpos to screenpos && zero out z axis
+		Vector3 mousePos = Input.mousePosition;
+		mousePos.z = 0;
+		Vector3 objectPos = Camera.main.WorldToScreenPoint(gun.transform.position);
+		objectPos.z = 0;
+
+		//calc angle between mouse and gun
+		float angle = Mathf.Atan2(mousePos.y - objectPos.y, mousePos.x - objectPos.x) * Mathf.Rad2Deg;
+
+		//apply rotation
+		gun.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 	}
 
 	void TryShoot()
@@ -117,7 +119,6 @@ public class Shoot : MonoBehaviour
 						b = Instantiate(grenade);
 
 						b.transform.position = gun.transform.position;
-						//b.GetComponent<Grenade>().dir = flip;
 						b.GetComponent<Rigidbody>().velocity = b.transform.right * 5;
 						break;
 
