@@ -57,7 +57,6 @@ public class PlayerDataSP : MonoBehaviour
 
 			if((int)FindObjectOfType<GameManager>().phase > 1)
 			{
-				print("asd");
 				GetComponent<Movement>().enabled = false;
 				GetComponent<Shoot>().enabled = false;
 			}
@@ -69,14 +68,15 @@ public class PlayerDataSP : MonoBehaviour
 			}
 
 			healthText.text = "Me: " + health.ToString("f0");
-			staminaSlider.enabled = true;
+			staminaSlider.gameObject.SetActive(true);
 			staminaSlider.value = stamina;
 			//GetComponent<Rigidbody>().constraints = rbc;
 		}
 		else
 		{
+			print("noh");
 			healthText.text = "" + health.ToString("f0");
-			staminaSlider.enabled = false;
+			staminaSlider.gameObject.SetActive(false);
 			//GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
 		}
 	}
@@ -85,9 +85,12 @@ public class PlayerDataSP : MonoBehaviour
 	{
 		if(stamina <= 0)
 		{
-			FindObjectOfType<GameManager>().phase++;
 			stamina = 100;
+			FindObjectOfType<GameManager>().phase++;
 		}
+
+
+
 		GetComponent<Movement>().enabled = true;
 		GetComponent<Shoot>().enabled = false;
 	}

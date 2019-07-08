@@ -27,8 +27,7 @@ public class Grenade : MonoBehaviour
 				Vector3 forceDir = hit.transform.position - transform.position;
 				hit.GetComponent<Rigidbody>().velocity = (forceDir + Vector3.up) * 5;
 
-				float damageMod = 1 - Vector3.Distance(transform.position, hit.transform.position);
-				print(damageMod);
+				float damageMod = (1 - Vector3.Distance(transform.position, hit.transform.position)) + 0.5f;
 				hit.GetComponent<PlayerDataSP>().health -= (Mathf.Abs(damageMod) * 50);
 			}
 		}

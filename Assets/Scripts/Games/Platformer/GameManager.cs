@@ -26,9 +26,12 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-		if(Input.GetKeyDown(KeyCode.Return))
+		if(phase == TurnPhase.Damage)
 		{
-			NextTurn();
+			if(FindObjectsOfType<Grenade>().Length == 0)
+			{
+				NextPhase();
+			}
 		}
     }
 

@@ -48,7 +48,7 @@ public class Shoot : MonoBehaviour
 				break;
 
 			//Utility Item
-			case "3":
+			/*case "3":
 				selectedWeapon = Gun.Utility;
 				break;
 
@@ -60,7 +60,7 @@ public class Shoot : MonoBehaviour
 			//Melee
 			case "5":
 				selectedWeapon = Gun.Melee;
-				break;
+				break;*/
 		}
 	}
 
