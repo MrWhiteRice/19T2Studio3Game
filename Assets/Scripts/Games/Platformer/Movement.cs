@@ -66,12 +66,20 @@ public class Movement : MonoBehaviour
 		//move
 		rb.velocity = new Vector2(horizontal * maxSpeed, rb.velocity.y);
 
+		//check should burn stamina
+		if(rb.velocity.x != 0 && grounded)
+		{
+			GetComponent<PlayerDataSP>().stamina -= Time.deltaTime * 20;
+		}
+
 		//check if we need to flip sprite
 		Flip();
 
 		//check jump
 		if(grounded && jump)
 		{
+			GetComponent<PlayerDataSP>().stamina -= 20;
+
 			grounded = false;
 
 			rb.AddForce(Vector2.up * jumpForce);

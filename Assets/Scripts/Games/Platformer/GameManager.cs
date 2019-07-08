@@ -9,6 +9,15 @@ public class GameManager : MonoBehaviour
 	public List<GameObject> redPlayers = new List<GameObject>();
 	public List<GameObject> bluePlayers = new List<GameObject>();
 
+	public enum TurnPhase
+	{
+		Move = 0,
+		Shoot = 1,
+		Damage = 2,
+		Death = 3
+	}
+	public TurnPhase phase = TurnPhase.Move;
+
     void Start()
     {
 		SpawnPlayers();
@@ -28,6 +37,19 @@ public class GameManager : MonoBehaviour
 		turn++;
 
 		turn %= 6;
+
+		phase = TurnPhase.Move;
+	}
+
+	public void NextPhase()
+	{
+		FindObjectOfType<GameManager>().phase++;
+
+		if((int)FindObjectOfType<GameManager>().phase == 4)
+		{
+			NextTurn();
+			FindObjectOfType<GameManager>().phase = GameManager.TurnPhase.Move;
+		}
 	}
 
 	void SpawnPlayers()

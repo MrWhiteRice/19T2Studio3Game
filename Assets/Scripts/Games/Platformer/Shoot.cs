@@ -99,7 +99,7 @@ public class Shoot : MonoBehaviour
 			//TODO: UPDATE TO MP
 			if(!GetComponent<PlayerDataSP>())
 			{
-				GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().CmdShoot(flip, gun.transform.position);
+				//GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().CmdShoot(flip, gun.transform.position);
 			}
 			else
 			{
@@ -112,13 +112,14 @@ public class Shoot : MonoBehaviour
 						b = Instantiate(bullet);
 
 						b.transform.position = gun.transform.position;
-						b.GetComponent<Bullet>().dir = flip;
+						//b.GetComponent<Bullet>().dir = flip;
 						break;
 
 					case Gun.Grenade:
 						b = Instantiate(grenade);
 
-						b.transform.position = gun.transform.position;
+						b.transform.position = gun.transform.GetChild(0).transform.position;
+						b.transform.rotation = gun.transform.rotation;
 						b.GetComponent<Rigidbody>().velocity = b.transform.right * 5;
 						break;
 
@@ -132,6 +133,8 @@ public class Shoot : MonoBehaviour
 						break;
 				}
 			}
+
+			FindObjectOfType<GameManager>().phase++;
 		}
 	}
 }
