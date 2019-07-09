@@ -68,13 +68,20 @@ public class PlayerDataSP : MonoBehaviour
 			}
 
 			healthText.text = "Me: " + health.ToString("f0");
-			staminaSlider.gameObject.SetActive(true);
 			staminaSlider.value = stamina;
 			//GetComponent<Rigidbody>().constraints = rbc;
 		}
 		else
 		{
-			print("noh");
+			if(FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.End || FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.Damage)
+			{
+				GetComponent<Rigidbody>().constraints = rbc;
+			}
+			else
+			{
+				//GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+				GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+			}
 			healthText.text = "" + health.ToString("f0");
 			staminaSlider.gameObject.SetActive(false);
 			//GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
@@ -85,19 +92,21 @@ public class PlayerDataSP : MonoBehaviour
 	{
 		if(stamina <= 0)
 		{
-			stamina = 100;
 			FindObjectOfType<GameManager>().phase++;
 		}
 
+		GetComponent<Rigidbody>().constraints = rbc;
 
-
+		staminaSlider.gameObject.SetActive(true);
 		GetComponent<Movement>().enabled = true;
 		GetComponent<Shoot>().enabled = false;
 	}
 
 	void ShootPhase()
 	{
+		staminaSlider.gameObject.SetActive(false);
 		GetComponent<Movement>().enabled = false;
+		//GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 		GetComponent<Shoot>().enabled = true;
 	}
 

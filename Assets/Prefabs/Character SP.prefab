@@ -348,7 +348,7 @@ MonoBehaviour:
   gun: {fileID: 3209082044903046955}
   bullet: {fileID: 6076532265113867400, guid: 088b880d7a6a0064d94e6864125c989c, type: 3}
   grenade: {fileID: 6076532265113867400, guid: 06b6aa93528bff54dbc9db7424642cad, type: 3}
-  selectedWeapon: 0
+  selectedWeapon: 1
 --- !u!114 &6524276184389340516
 MonoBehaviour:
   m_ObjectHideFlags: 0

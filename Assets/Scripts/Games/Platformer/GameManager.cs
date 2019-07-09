@@ -5,27 +5,53 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 	public GameObject player;
-	public int turn = 0;
+	public int turn = 6;
 	public List<GameObject> redPlayers = new List<GameObject>();
 	public List<GameObject> bluePlayers = new List<GameObject>();
+	bool gameStart = false;
+	int selectedLevel = 0;
 
 	public enum TurnPhase
 	{
 		Move = 0,
 		Shoot = 1,
 		Damage = 2,
-		Death = 3
+		End = 3
 	}
-	public TurnPhase phase = TurnPhase.Move;
+	public TurnPhase phase = TurnPhase.End;
 
     void Start()
     {
+		turn = Random.Range(0, 6);
 		SpawnPlayers();
 		NumberPlayers();
+		Invoke("BeginGame", 3f);
     }
+
+	void BeginGame()
+	{
+		gameStart = true;
+	}
 
     void Update()
     {
+		if(Input.GetKeyDown(KeyCode.Keypad0))
+		{
+			selectedLevel = 0;
+		}
+		if(Input.GetKeyDown(KeyCode.Keypad1))
+		{
+			selectedLevel = 1;
+		}
+		if(Input.GetKeyDown(KeyCode.Keypad2))
+		{
+			selectedLevel = 2;
+		}
+		if(Input.GetKeyDown(KeyCode.Backspace))
+		{
+			UnityEngine.SceneManagement.SceneManager.LoadScene("Terrain " + selectedLevel);
+		}
+
 		if(phase == TurnPhase.Damage)
 		{
 			if(FindObjectsOfType<Grenade>().Length == 0)
@@ -33,7 +59,21 @@ public class GameManager : MonoBehaviour
 				NextPhase();
 			}
 		}
-    }
+
+		if(gameStart)
+		{
+			foreach(PlayerDataSP player in FindObjectsOfType<PlayerDataSP>())
+			{
+				if(player.ID == turn)
+				{
+					return;
+				}
+			}
+
+			print("yuh");
+			NextTurn();
+		}
+	}
 
 	public void NextTurn()
 	{
@@ -42,6 +82,17 @@ public class GameManager : MonoBehaviour
 		turn %= 6;
 
 		phase = TurnPhase.Move;
+
+		foreach(PlayerDataSP player in FindObjectsOfType<PlayerDataSP>())
+		{
+			player.stamina = 100;
+			if(player.ID == turn)
+			{
+				return;
+			}
+		}
+
+		NextTurn();
 	}
 
 	public void NextPhase()
