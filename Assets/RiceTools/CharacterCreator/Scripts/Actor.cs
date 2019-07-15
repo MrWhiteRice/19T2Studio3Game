@@ -5,9 +5,10 @@ public class Actor : ScriptableObject
 	int id;
 
 	Sprite icon;
-	new string name;
+	string characterName;
 	WeightClass weight;
 	int rarity;
+	int initiative;
 
 	public enum WeightClass
 	{
@@ -28,10 +29,10 @@ public class Actor : ScriptableObject
 		set { icon = value; }
 	}
 
-	public string Name
+	public string CharacterName
 	{
-		get { return name; }
-		set { name = value; }
+		get { return characterName; }
+		set { characterName = value; }
 	}
 
 	public WeightClass Weight
@@ -46,22 +47,26 @@ public class Actor : ScriptableObject
 		set { rarity = value; }
 	}
 
+	public int Initiative
+	{
+		get { return initiative; }
+		set { initiative = value; }
+	}
+
 	public static Actor FindActor(string actorName)
 	{
-		Object[] loadedAssets = Resources.LoadAll("Actors/");
+		Object[] loadedAssets = Resources.LoadAll("RiceStuff/Actors/");
 
 		for(int x = 0; x < loadedAssets.Length; x++)
 		{
 			Actor actor = (Actor)loadedAssets[x];
-
-			if(actor.name == actorName)
+			
+			if(actor.CharacterName == actorName)
 			{
-				Debug.Log("found");
 				return (Actor)loadedAssets[x];
 			}
 		}
 
-		Debug.Log("no one ofund" + actorName);
 		return null;
 	}
 }
