@@ -9,6 +9,9 @@ public class Weapon : ScriptableObject
 	WeightClass weight;
 	int rarity;
 	int damage;
+	int shots;
+	int accuracy;
+	int knockback;
 
 	public enum WeightClass
 	{
@@ -51,6 +54,24 @@ public class Weapon : ScriptableObject
 	{
 		get { return damage; }
 		set { damage = value; }
+	}
+
+	public int Shots
+	{
+		get { return shots; }
+		set { shots = value; }
+	}
+
+	public int Accuracy
+	{
+		get { return accuracy; }
+		set { accuracy = value; }
+	}
+
+	public int Knockback
+	{
+		get { return knockback; }
+		set { knockback = value; }
 	}
 
 	public static Weapon FindActor(string actorName)

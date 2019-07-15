@@ -93,6 +93,11 @@ public class GunEditorWindow : EditorWindow
 		weapons[id].Weight = (Weapon.WeightClass)EditorGUILayout.EnumPopup("Weight Class", weapons[id].Weight);
 		weapons[id].Rarity = EditorGUILayout.IntSlider("Rarity", weapons[id].Rarity, 1, 5);
 
+		weapons[id].Damage = EditorGUILayout.IntField("Damage", weapons[id].Damage);
+		weapons[id].Shots= EditorGUILayout.IntField("Shots", weapons[id].Shots);
+		weapons[id].Accuracy = EditorGUILayout.IntSlider("Accuracy", weapons[id].Accuracy, 1, 5);
+		weapons[id].Knockback = EditorGUILayout.IntSlider("Knockback", weapons[id].Knockback, 1, 5);
+
 		Color c = GUI.color;
 		GUI.color = Color.red;
 
