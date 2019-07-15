@@ -33,6 +33,9 @@ public class PlayerDataSP : MonoBehaviour
 
 	private void Update()
 	{
+		print(Input.GetKey("joystick button 0")); 
+		//1 b
+
 		//TODO: update death to actual death
 		if(health <= 0)
 		{

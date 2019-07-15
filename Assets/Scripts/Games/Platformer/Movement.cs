@@ -13,6 +13,7 @@ public class Movement : MonoBehaviour
 
 	bool grounded;
 	bool jump;
+	bool upJump;
 	public bool facingRight = true;
 	int horizontal;
 	int lastDir;
@@ -45,6 +46,7 @@ public class Movement : MonoBehaviour
 			if(collisions[x].gameObject != gameObject)
 			{
 				grounded = true;
+				upJump = false;
 			}
 		}
 	}
@@ -54,6 +56,12 @@ public class Movement : MonoBehaviour
 		//check jump
 		if(Input.GetKeyDown(KeyCode.W))
 		{
+			upJump = true;
+			jump = true;
+		}
+		else if(Input.GetKeyDown(KeyCode.Space))
+		{
+			upJump = false;
 			jump = true;
 		}
 
@@ -63,8 +71,11 @@ public class Movement : MonoBehaviour
 
 	void Move()
 	{
-		//move
-		rb.velocity = new Vector2(horizontal * maxSpeed, rb.velocity.y);
+		if(grounded)
+		{
+			//move
+			rb.velocity = new Vector2(horizontal * maxSpeed, rb.velocity.y);
+		}
 
 		//check should burn stamina
 		if(rb.velocity.x != 0 && grounded)
@@ -78,14 +89,34 @@ public class Movement : MonoBehaviour
 		//check jump
 		if(grounded && jump)
 		{
-			GetComponent<PlayerDataSP>().stamina -= 20;
+			rb.velocity = Vector3.zero;
 
+			GetComponent<PlayerDataSP>().stamina -= 20;
 			grounded = false;
 
-			rb.AddForce(Vector2.up * jumpForce);
+			int flipMod = facingRight ? -1 : 1;
+
+			Vector3 up = upJump ?
+				(Vector3.up * jumpForce) :
+				(Vector3.up * jumpForce * 0.5f);
+
+			Vector3 forward = upJump ?
+				(Vector3.right * flipMod * (jumpForce) * 0.25f) :
+				(Vector3.right * flipMod * (jumpForce));
+
+			StartCoroutine(AddJumpForce(up, forward));
 		}
 
 		jump = false;
+	}
+
+	IEnumerator AddJumpForce(Vector3 up, Vector3 forward)
+	{
+		rb.AddForce(up);
+
+		yield return new WaitForSeconds(0.05f);
+
+		rb.AddForce(forward);
 	}
 
 	void Flip()
