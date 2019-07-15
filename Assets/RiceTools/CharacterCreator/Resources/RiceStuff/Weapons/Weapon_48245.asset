@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ed1329858077b4418939e3e788c45d6, type: 3}
-  m_Name: Actor_77213
+  m_Script: {fileID: 11500000, guid: bcd2830bcfd3b5c47972fcb00b5cd731, type: 3}
+  m_Name: Weapon_48245
   m_EditorClassIdentifier: 

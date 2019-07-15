@@ -26,10 +26,13 @@ public class CharacterEditorWindow : EditorWindow
 
 	void AddActor()
 	{
+		Color c = GUI.color;
+		GUI.color = Color.green;
 		if(GUILayout.Button("New Actor", GUILayout.Height(30)))
 		{
 			CreateActor();
 		}
+		GUI.color = c;
 	}
 
 	void LoadActors()
@@ -52,7 +55,7 @@ public class CharacterEditorWindow : EditorWindow
 
 	void CreateActor()
 	{
-		Random.Range(0, 99999); Actor asset = ScriptableObject.CreateInstance<Actor>();
+		Actor asset = ScriptableObject.CreateInstance<Actor>();
 
 		int id = Random.Range(0, 99999);
 
@@ -92,10 +95,25 @@ public class CharacterEditorWindow : EditorWindow
 		actors[id].Rarity = EditorGUILayout.IntSlider("Rarity", actors[id].Rarity, 1, 5);
 		actors[id].Initiative = EditorGUILayout.IntSlider("Initiative", actors[id].Initiative, 1, 100);
 
+		Weapon[] loadedWeapons = Resources.LoadAll<Weapon>("RiceStuff/Weapons");
+
+		string[] names = new string[loadedWeapons.Length];
+		for(int x = 0; x < names.Length; x++)
+		{
+			names[x] = loadedWeapons[x].WeaponName;
+		}
+
+		actors[id].StartingItem = EditorGUILayout.Popup("Selected Weapon", actors[id].StartingItem, names);
+
+		Color c = GUI.color;
+		GUI.color = Color.red;
+
 		if(GUILayout.Button("Delete"))
 		{
 			AssetDatabase.DeleteAsset("Assets/RiceTools/CharacterCreator/Resources/RiceStuff/Actors/Actor_" + actors[id].ID + ".asset");
 		}
+		GUI.color = c;
+
 		GUILayout.EndVertical();
 
 		GUILayout.EndHorizontal();

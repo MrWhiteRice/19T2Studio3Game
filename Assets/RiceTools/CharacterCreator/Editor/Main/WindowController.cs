@@ -11,4 +11,11 @@ public class WindowController
 		window.minSize = new Vector2(510, 450);
 		window.Show();
 	}
+
+	public static void CreateWeaponList()
+	{
+		GunEditorWindow window = (GunEditorWindow)EditorWindow.GetWindow(typeof(GunEditorWindow), false, "Guns");
+		window.minSize = new Vector2(510, 450);
+		window.Show();
+	}
 }

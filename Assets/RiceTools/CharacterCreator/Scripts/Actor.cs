@@ -9,6 +9,7 @@ public class Actor : ScriptableObject
 	WeightClass weight;
 	int rarity;
 	int initiative;
+	int startingItem;
 
 	public enum WeightClass
 	{
@@ -51,6 +52,12 @@ public class Actor : ScriptableObject
 	{
 		get { return initiative; }
 		set { initiative = value; }
+	}
+
+	public int StartingItem
+	{
+		get { return startingItem; }
+		set { startingItem = value; }
 	}
 
 	public static Actor FindActor(string actorName)
