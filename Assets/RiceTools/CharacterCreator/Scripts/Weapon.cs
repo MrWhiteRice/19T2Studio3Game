@@ -4,14 +4,14 @@ public class Weapon : ScriptableObject
 {
 	int id;
 
-	Sprite icon;
-	string weaponName;
-	WeightClass weight;
-	int rarity;
-	int damage;
-	int shots;
-	int accuracy;
-	int knockback;
+	public Sprite icon;
+	public string weaponName;
+	public WeightClass weight;
+	public int rarity;
+	public int damage;
+	public int shots;
+	public int accuracy;
+	public int knockback;
 
 	public enum WeightClass
 	{
