@@ -72,11 +72,6 @@ public class Shoot : MonoBehaviour
 		//check if dir is right or left, 1 = right, -1 = left
 		int flip = dir.x > 0 ? 1 : -1;
 
-		//apply flip depending on side mouse is on
-		//Vector3 scale = gun.transform.localScale;
-		//scale.x = 1 * flip;
-		//gun.transform.localScale = scale;
-
 		//convert gunpos to screenpos && zero out z axis
 		Vector3 mousePos = Input.mousePosition;
 		mousePos.z = 0;
@@ -111,7 +106,10 @@ public class Shoot : MonoBehaviour
 					case Gun.Class:
 						b = Instantiate(shoot);
 
-						b.transform.position = gun.transform.position;
+						b.transform.position = gun.GetChild(0).transform.position;
+						b.transform.rotation = gun.transform.rotation;
+						b.GetComponent<Shooter>().Init(3, 0.1f, 5, 2, 50);
+						
 						//b.GetComponent<Bullet>().dir = flip;
 						break;
 
