@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd2830bcfd3b5c47972fcb00b5cd731, type: 3}
   m_Name: Weapon_18601
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 5e921bb30928eba4faeaeba7b3fb0eee, type: 3}
-  weaponName: aaaaa
-  weight: 2
-  rarity: 5
-  damage: 123
-  shots: 2222
+  icon: {fileID: 0}
+  weaponName: Punch
+  weight: 1
+  rarity: 1
+  damage: 35
+  shots: 1
   accuracy: 5
-  knockback: 5
+  knockback: 3
   traversal: 1
   usesTurn: 0
+  passive: 0

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Actor_93748
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  characterName: 
+  characterName: Steven
   weight: 0
-  rarity: 1
-  initiative: 1
+  rarity: 5
+  initiative: 79
   startingItem: 1

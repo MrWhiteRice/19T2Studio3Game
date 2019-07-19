@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Actor_90080
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  characterName: 
-  weight: 0
-  rarity: 1
-  initiative: 1
+  characterName: Brandon
+  weight: 2
+  rarity: 5
+  initiative: 31
   startingItem: 0
