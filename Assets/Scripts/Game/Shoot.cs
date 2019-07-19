@@ -6,7 +6,7 @@ public class Shoot : MonoBehaviour
 {
 	public Transform gun;
 	Movement move;
-	public GameObject bullet;
+	public GameObject shoot;
 	public GameObject grenade;
 
 	public enum Gun
@@ -109,7 +109,7 @@ public class Shoot : MonoBehaviour
 				switch(selectedWeapon)
 				{
 					case Gun.Class:
-						b = Instantiate(bullet);
+						b = Instantiate(shoot);
 
 						b.transform.position = gun.transform.position;
 						//b.GetComponent<Bullet>().dir = flip;

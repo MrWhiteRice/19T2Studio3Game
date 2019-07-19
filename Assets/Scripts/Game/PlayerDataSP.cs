@@ -33,7 +33,8 @@ public class PlayerDataSP : MonoBehaviour
 
 	private void Update()
 	{
-		print(Input.GetKey("joystick button 0")); 
+		//TODO: Add controller support
+		//print(Input.GetKey("joystick button 0")); 
 		//1 b
 
 		//TODO: update death to actual death
