@@ -4,16 +4,17 @@ public class Weapon : ScriptableObject
 {
 	int id;
 
-	public Sprite icon;
-	public string weaponName;
-	public WeightClass weight;
-	public int rarity;
-	public int damage;
-	public int shots;
-	public int accuracy;
-	public int knockback;
-	public bool traversal;
-	public bool usesTurn;
+	[SerializeField]Sprite icon;
+	[SerializeField] string weaponName;
+	[SerializeField] WeightClass weight;
+	[SerializeField] int rarity;
+	[SerializeField] int damage;
+	[SerializeField] int shots;
+	[SerializeField] int accuracy;
+	[SerializeField] int knockback;
+	[SerializeField] bool traversal;
+	[SerializeField] bool usesTurn;
+	[SerializeField] bool passive;
 
 	public enum WeightClass
 	{
@@ -86,6 +87,12 @@ public class Weapon : ScriptableObject
 	{
 		get { return usesTurn; }
 		set { usesTurn = value; }
+	}
+
+	public bool Passive
+	{
+		get { return passive; }
+		set { passive = value; }
 	}
 
 	public static Weapon FindActor(string actorName)

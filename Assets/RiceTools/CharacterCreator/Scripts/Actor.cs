@@ -4,12 +4,12 @@ public class Actor : ScriptableObject
 {
 	int id;
 
-	public Sprite icon;
-	public string characterName;
-	public WeightClass weight;
-	public int rarity;
-	public int initiative;
-	public int startingItem;
+	[SerializeField] Sprite icon;
+	[SerializeField] string characterName;
+	[SerializeField] WeightClass weight;
+	[SerializeField] int rarity;
+	[SerializeField] int initiative;
+	[SerializeField] int startingItem;
 
 	public enum WeightClass
 	{

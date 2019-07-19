@@ -105,6 +105,7 @@ public class GunEditorWindow : EditorWindow
 
 		SO.FindProperty("traversal").boolValue = EditorGUILayout.Toggle("Traversal Item", weapons[id].Traversal);
 		SO.FindProperty("usesTurn").boolValue = EditorGUILayout.Toggle("Uses turn", weapons[id].UsesTurn);
+		SO.FindProperty("passive").boolValue = EditorGUILayout.Toggle("Passive", weapons[id].Passive);
 
 		Color c = GUI.color;
 		GUI.color = Color.red;
