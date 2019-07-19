@@ -111,7 +111,7 @@ public class CharacterEditorWindow : EditorWindow
 			names[x] = loadedWeapons[x].WeaponName;
 		}
 
-		actors[id].StartingItem = EditorGUILayout.Popup("Selected Weapon", actors[id].StartingItem, names);
+		SO.FindProperty("startingItem").intValue = EditorGUILayout.Popup("Selected Weapon", actors[id].StartingItem, names);
 
 		Color c = GUI.color;
 		GUI.color = Color.red;

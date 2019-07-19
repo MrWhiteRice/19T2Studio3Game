@@ -12,3 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd2830bcfd3b5c47972fcb00b5cd731, type: 3}
   m_Name: Weapon_99954
   m_EditorClassIdentifier: 
+  icon: {fileID: 0}
+  weaponName: 
+  weight: 0
+  rarity: 1
+  damage: 0
+  shots: 0
+  accuracy: 1
+  knockback: 1

@@ -84,19 +84,27 @@ public class GunEditorWindow : EditorWindow
 
 	void DrawTile(int id)
 	{
+		var SO = new SerializedObject(weapons[id]);
+
 		GUILayout.BeginHorizontal(skin.box);
-		weapons[id].Icon = (Sprite)EditorGUILayout.ObjectField("Icon", weapons[id].Icon, typeof(Sprite), false);
+		//icon
+		SO.FindProperty("icon").objectReferenceValue = (Sprite)EditorGUILayout.ObjectField("Icon", weapons[id].Icon, typeof(Sprite), false);
 
 		GUILayout.BeginVertical();
-		weapons[id].WeaponName = EditorGUILayout.TextField("Name", weapons[id].WeaponName);
+		SO.FindProperty("weaponName").stringValue = EditorGUILayout.TextField("Name", weapons[id].WeaponName);
 
-		weapons[id].Weight = (Weapon.WeightClass)EditorGUILayout.EnumPopup("Weight Class", weapons[id].Weight);
-		weapons[id].Rarity = EditorGUILayout.IntSlider("Rarity", weapons[id].Rarity, 1, 5);
+		Weapon.WeightClass weight = (Weapon.WeightClass)EditorGUILayout.EnumPopup("Weight Class", weapons[id].Weight);
+		SO.FindProperty("weight").enumValueIndex = (int)weight;
 
-		weapons[id].Damage = EditorGUILayout.IntField("Damage", weapons[id].Damage);
-		weapons[id].Shots= EditorGUILayout.IntField("Shots", weapons[id].Shots);
-		weapons[id].Accuracy = EditorGUILayout.IntSlider("Accuracy", weapons[id].Accuracy, 1, 5);
-		weapons[id].Knockback = EditorGUILayout.IntSlider("Knockback", weapons[id].Knockback, 1, 5);
+		SO.FindProperty("rarity").intValue = EditorGUILayout.IntSlider("Rarity", weapons[id].Rarity, 1, 5);
+
+		SO.FindProperty("damage").intValue = EditorGUILayout.IntField("Damage", weapons[id].Damage);
+		SO.FindProperty("shots").intValue = EditorGUILayout.IntField("Shots", weapons[id].Shots);
+		SO.FindProperty("accuracy").intValue = EditorGUILayout.IntSlider("Accuracy", weapons[id].Accuracy, 1, 5);
+		SO.FindProperty("knockback").intValue = EditorGUILayout.IntSlider("Knockback", weapons[id].Knockback, 1, 5);
+
+		SO.FindProperty("traversal").boolValue = EditorGUILayout.Toggle("Traversal Item", weapons[id].Traversal);
+		SO.FindProperty("usesTurn").boolValue = EditorGUILayout.Toggle("Uses turn", weapons[id].UsesTurn);
 
 		Color c = GUI.color;
 		GUI.color = Color.red;
@@ -110,5 +118,7 @@ public class GunEditorWindow : EditorWindow
 		GUILayout.EndVertical();
 
 		GUILayout.EndHorizontal();
+
+		SO.ApplyModifiedProperties();
 	}
 }
