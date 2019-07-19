@@ -43,7 +43,6 @@ public class CharacterEditorWindow : EditorWindow
 
 		for(int x = 0; x < loadedAssets.Length; x++)
 		{
-			Debug.Log(loadedAssets[x].name);
 			if(loadedAssets[x].name.Contains("Actor_"))
 			{
 				Actor actor = (Actor)loadedAssets[x];
@@ -85,15 +84,24 @@ public class CharacterEditorWindow : EditorWindow
 
 	void DrawTile(int id)
 	{
+		var SO = new SerializedObject(actors[id]);
+
 		GUILayout.BeginHorizontal(skin.box);
-		actors[id].Icon = (Sprite)EditorGUILayout.ObjectField("Icon", actors[id].Icon, typeof(Sprite), false);
-
+		//icon
+		SO.FindProperty("icon").objectReferenceValue = (Sprite)EditorGUILayout.ObjectField("Icon", actors[id].Icon, typeof(Sprite), false);
+		
 		GUILayout.BeginVertical();
-		actors[id].CharacterName = EditorGUILayout.TextField("Name", actors[id].CharacterName);
+		//name
+		SO.FindProperty("characterName").stringValue = EditorGUILayout.TextField("Name", actors[id].CharacterName);
 
-		actors[id].Weight = (Actor.WeightClass)EditorGUILayout.EnumPopup("Weight Class", actors[id].Weight);
-		actors[id].Rarity = EditorGUILayout.IntSlider("Rarity", actors[id].Rarity, 1, 5);
-		actors[id].Initiative = EditorGUILayout.IntSlider("Initiative", actors[id].Initiative, 1, 100);
+		//weight
+		Actor.WeightClass weight = (Actor.WeightClass)EditorGUILayout.EnumPopup("Weight Class", actors[id].Weight);
+		SO.FindProperty("weight").enumValueIndex = (int)weight;
+
+		//rarity
+		SO.FindProperty("rarity").intValue = EditorGUILayout.IntSlider("Rarity", actors[id].Rarity, 1, 5);
+		//initiative
+		SO.FindProperty("initiative").intValue = EditorGUILayout.IntSlider("Initiative", actors[id].Initiative, 1, 100);
 
 		Weapon[] loadedWeapons = Resources.LoadAll<Weapon>("RiceStuff/Weapons");
 
@@ -117,5 +125,7 @@ public class CharacterEditorWindow : EditorWindow
 		GUILayout.EndVertical();
 
 		GUILayout.EndHorizontal();
+
+		SO.ApplyModifiedProperties();
 	}
 }

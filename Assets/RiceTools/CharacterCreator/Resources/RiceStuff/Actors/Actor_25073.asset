@@ -12,3 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ed1329858077b4418939e3e788c45d6, type: 3}
   m_Name: Actor_25073
   m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: d2444990191f29648a90c967d7b7d1ec, type: 3}
+  characterName: yeet
+  weight: 1
+  rarity: 5
+  initiative: 2
+  startingItem: 0
