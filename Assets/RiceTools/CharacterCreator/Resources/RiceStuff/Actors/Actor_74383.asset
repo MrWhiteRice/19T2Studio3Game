@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ed1329858077b4418939e3e788c45d6, type: 3}
   m_Name: Actor_74383
   m_EditorClassIdentifier: 
+  id: 74383
   icon: {fileID: 0}
   characterName: Jack
   weight: 2

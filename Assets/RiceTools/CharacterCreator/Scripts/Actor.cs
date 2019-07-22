@@ -2,7 +2,7 @@
 
 public class Actor : ScriptableObject
 {
-	int id;
+	[SerializeField] public int id;
 
 	[SerializeField] Sprite icon;
 	[SerializeField] string characterName;

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd2830bcfd3b5c47972fcb00b5cd731, type: 3}
   m_Name: Weapon_48245
   m_EditorClassIdentifier: 
+  id: 48245
   icon: {fileID: 0}
   weaponName: Mac 10
   weight: 0

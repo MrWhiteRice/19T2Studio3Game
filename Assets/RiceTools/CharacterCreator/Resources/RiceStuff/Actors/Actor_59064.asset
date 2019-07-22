@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ed1329858077b4418939e3e788c45d6, type: 3}
   m_Name: Actor_59064
   m_EditorClassIdentifier: 
+  id: 59064
   icon: {fileID: 21300000, guid: 8674e50e76aa58443830d92f55d2f7e2, type: 3}
   characterName: Jeffry
   weight: 2

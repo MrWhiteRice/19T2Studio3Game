@@ -2,7 +2,7 @@
 
 public class Weapon : ScriptableObject
 {
-	int id;
+	[SerializeField]public int id;
 
 	[SerializeField]Sprite icon;
 	[SerializeField] string weaponName;

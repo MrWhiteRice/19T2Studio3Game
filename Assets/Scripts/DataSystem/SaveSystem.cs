@@ -6,7 +6,7 @@ public static class SaveSystem
 {
 	public static void SaveData(DataContainer box)
 	{
-		string path = Application.dataPath + "/Rice.Data";
+		string path = Application.dataPath + "/RiceData1.Data";
 		BinaryFormatter formatter = new BinaryFormatter();
 
 		FileStream stream = new FileStream(path, FileMode.Create);
@@ -17,7 +17,7 @@ public static class SaveSystem
 
 	public static DataContainer loadData()
 	{
-		string path = Application.dataPath + "/Rice.Data";
+		string path = Application.dataPath + "/RiceData1.Data";
 
 		if(File.Exists(path))
 		{
@@ -31,7 +31,19 @@ public static class SaveSystem
 		}
 		else
 		{
-			return null;
+			DataContainer dataContainer = new DataContainer();
+
+			foreach(Weapon wep in Resources.LoadAll<Weapon>("RiceStuff/Weapons/"))
+			{
+				dataContainer.unlockedWeapons.Add(new WeaponData(wep.WeaponName, false, wep.ID));
+			}
+
+			foreach(Actor cha in Resources.LoadAll<Actor>("RiceStuff/Actors/"))
+			{
+				dataContainer.unlockedCharacters.Add(new CharacterData(cha.CharacterName, false, cha.ID));
+			}
+
+			return dataContainer;
 		}
 	}
 }

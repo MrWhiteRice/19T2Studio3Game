@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd2830bcfd3b5c47972fcb00b5cd731, type: 3}
   m_Name: Weapon_29392
   m_EditorClassIdentifier: 
+  id: 29392
   icon: {fileID: 0}
   weaponName: Punch +3
   weight: 0
