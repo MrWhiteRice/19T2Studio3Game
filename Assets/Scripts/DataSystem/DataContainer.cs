@@ -56,11 +56,11 @@ public class DataContainer
 	public List<CharacterData> unlockedCharacters = new List<CharacterData>();
 	public List<WeaponData> unlockedWeapons = new List<WeaponData>();
 
-	public CharacterData FindCharacter(string name)
+	public CharacterData FindCharacter(int id)
 	{
 		foreach(CharacterData cd in unlockedCharacters)
 		{
-			if(cd.characterName == name)
+			if(cd.ID == id)
 			{
 				return cd;
 			}
@@ -69,11 +69,11 @@ public class DataContainer
 		return null;
 	}
 
-	public WeaponData FindWeapon(string name)
+	public WeaponData FindWeapon(int id)
 	{
 		foreach(WeaponData wd in unlockedWeapons)
 		{
-			if(wd.weaponName == name)
+			if(wd.ID == id)
 			{
 				return wd;
 			}

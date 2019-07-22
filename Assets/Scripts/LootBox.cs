@@ -27,7 +27,7 @@ public class LootBox : MonoBehaviour
 
 		foreach(Weapon w in weps)
 		{
-			WeaponData wd = data.FindWeapon(w.WeaponName);
+			WeaponData wd = data.FindWeapon(w.ID);
 
 			if(wd.unlocked)
 			{
@@ -45,7 +45,7 @@ public class LootBox : MonoBehaviour
 
 		foreach(Actor w in chars)
 		{
-			CharacterData wd = data.FindCharacter(w.CharacterName);
+			CharacterData wd = data.FindCharacter(w.ID);
 
 			if(wd.unlocked)
 			{
@@ -81,7 +81,7 @@ public class LootBox : MonoBehaviour
 
 			int rand = Random.Range(0, oneStar.Count);
 
-			WeaponData wd = data.FindWeapon(weps[rand].WeaponName);
+			WeaponData wd = data.FindWeapon(oneStar[rand].ID);
 
 			if(wd.unlocked != true)
 			{
@@ -92,7 +92,7 @@ public class LootBox : MonoBehaviour
 				print("refund 1 star");
 			}
 
-			print("[1]" + oneStar[rand].WeaponName);
+			print("[1]" + wd.weaponName);
 		}
 
 		//2 Star weapon
@@ -110,7 +110,7 @@ public class LootBox : MonoBehaviour
 
 			int rand = Random.Range(0, twoStar.Count);
 
-			WeaponData wd = data.FindWeapon(weps[rand].WeaponName);
+			WeaponData wd = data.FindWeapon(twoStar[rand].ID);
 
 			if(wd.unlocked != true)
 			{
@@ -121,7 +121,7 @@ public class LootBox : MonoBehaviour
 				print("refund 2 star");
 			}
 
-			print("[2]" + twoStar[rand].WeaponName);
+			print("[2]" + wd.weaponName);
 		}
 
 		//3 star weapon
@@ -139,7 +139,7 @@ public class LootBox : MonoBehaviour
 
 			int rand = Random.Range(0, threeStar.Count);
 
-			WeaponData wd = data.FindWeapon(weps[rand].WeaponName);
+			WeaponData wd = data.FindWeapon(threeStar[rand].ID);
 
 			if(wd.unlocked != true)
 			{
@@ -150,7 +150,7 @@ public class LootBox : MonoBehaviour
 				print("refund 3 star");
 			}
 
-			print("[3]" + threeStar[rand].WeaponName);
+			print("[3]" + wd.weaponName);
 		}
 
 		//character
@@ -158,7 +158,7 @@ public class LootBox : MonoBehaviour
 		{
 			int rand = Random.Range(0, chars.Length);
 
-			CharacterData cd = data.FindCharacter(chars[rand].CharacterName);
+			CharacterData cd = data.FindCharacter(chars[rand].ID);
 
 			if(cd.unlocked != true)
 			{
