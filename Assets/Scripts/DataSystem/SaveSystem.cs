@@ -4,28 +4,27 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem
 {
-	static string path = Application.persistentDataPath + "/RiceData/Rice.Data";
-
-	public static void SaveData(LootBox box)
+	public static void SaveData(DataContainer box)
 	{
+		string path = Application.dataPath + "/Rice.Data";
 		BinaryFormatter formatter = new BinaryFormatter();
 
 		FileStream stream = new FileStream(path, FileMode.Create);
 
-		PlayerData data = new DataContainer(player);
-
-		formatter.Serialize(stream, data);
+		formatter.Serialize(stream, box);
 		stream.Close();
 	}
 
-	public static PlayerData loadPlayer()
+	public static DataContainer loadData()
 	{
+		string path = Application.dataPath + "/Rice.Data";
+
 		if(File.Exists(path))
 		{
 			BinaryFormatter formatter = new BinaryFormatter();
 			FileStream stream = new FileStream(path, FileMode.Open);
 
-			PlayerData data = (PlayerData)formatter.Deserialize(stream);
+			DataContainer data = (DataContainer)formatter.Deserialize(stream);
 			stream.Close();
 
 			return data;
@@ -33,7 +32,6 @@ public static class SaveSystem
 		else
 		{
 			return null;
-			//nothing found error!
 		}
 	}
 }

@@ -6,15 +6,29 @@ using UnityEngine.UI;
 public class LootBox : MonoBehaviour
 {
 	public Text text;
+	DataContainer data;
 
     void Start()
     {
 		text.text = "";
+
+		if(SaveSystem.loadData() != null)
+		{
+			data = SaveSystem.loadData();
+		}
+		else
+		{
+			data = new DataContainer();
+		}
     }
 
 	public void Roll()
 	{
 		int roll = Random.Range(1, 101);
+
+		data.free++;
+
+		print(data.free);
 
 		//1 Star weapon
 		if(roll > 30 && roll <= 100)
@@ -39,5 +53,7 @@ public class LootBox : MonoBehaviour
 		{
 			text.text += roll + ": Character \n";
 		}
+
+		SaveSystem.SaveData(data);
 	}
 }
