@@ -17,42 +17,7 @@ public class DataContainer
 	//selected party
 	public CharacterParty[] party = new CharacterParty[3];
 
-	////unlocked characters
-	//public bool jesseN;     //added
-	//public bool jacob;      //added
-	//public bool william;    //added
-	//public bool jeffry;     //added
-	//public bool jesseS;
-	//public bool louis;
-	//public bool jack;
-	//public bool thomasC;    //added
-	//public bool thomasL;
-	//public bool brandon;
-	//public bool lorenzo;
-	//public bool steven;
-
-	////unlocked weapons
-	//public bool ropehookL;
-	//public bool punchM3;
-	//public bool grapplinghookL;
-	//public bool minigunH1;
-	//public bool punchL;
-	//public bool punchM;
-	//public bool punchH;
-	//public bool punchM2;
-	//public bool pistolL;
-	//public bool pistolL1;
-	//public bool burstrifleM3;
-	//public bool punchL3;
-	//public bool rifleM;
-	//public bool burstrifleL2;
-	//public bool ropehookM;
-	//public bool minigunH3;
-	//public bool mac10L2;
-	//public bool ropehookH;
-	//public bool punchH2;
-	//public bool lmgH;
-
+	//weapon and character data
 	public List<CharacterData> unlockedCharacters = new List<CharacterData>();
 	public List<WeaponData> unlockedWeapons = new List<WeaponData>();
 
@@ -129,5 +94,10 @@ public class CharacterParty
 		weaponID = wep;
 		classID = clas;
 		traversalID = trav;
+	}
+
+	public CharacterParty(int id)
+	{
+		playerID = id;
 	}
 }
