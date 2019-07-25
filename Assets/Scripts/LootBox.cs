@@ -8,8 +8,8 @@ public class LootBox : MonoBehaviour
 	Weapon[] weps = new Weapon[0];
 	Actor[] chars = new Actor[0];
 
-	public Text actor;
-	public Text weapon;
+	//public Text actor;
+	//public Text weapon;
 
 	public DataContainer data;
 
@@ -23,40 +23,66 @@ public class LootBox : MonoBehaviour
 
 	private void Update()
 	{
-		weapon.text = "";
+		//weapon.text = "";
 
-		foreach(Weapon w in weps)
+		//foreach(Weapon w in weps)
+		//{
+		//	WeaponData wd = data.FindWeapon(w.ID);
+
+		//	if(wd.unlocked)
+		//	{
+		//		weapon.text += "<color=green>[Y] ";
+		//	}
+		//	else
+		//	{
+		//		weapon.text += "<color=red>[N] ";
+		//	}
+
+		//	weapon.text += wd.weaponName + "\n</color>";
+		//}
+
+		//actor.text = "";
+
+		//foreach(Actor w in chars)
+		//{
+		//	CharacterData wd = data.FindCharacter(w.ID);
+
+		//	if(wd.unlocked)
+		//	{
+		//		actor.text += "<color=green>[Y] ";
+		//	}
+		//	else
+		//	{
+		//		actor.text += "<color=red>[N] ";
+		//	}
+
+		//	actor.text += wd.characterName + "\n</color>";
+		//}
+	}
+
+	public void MultiRoll()
+	{
+		CharacterRoll();
+		for(int x = 0; x < 9; x++)
 		{
-			WeaponData wd = data.FindWeapon(w.ID);
-
-			if(wd.unlocked)
-			{
-				weapon.text += "<color=green>[Y] ";
-			}
-			else
-			{
-				weapon.text += "<color=red>[N] ";
-			}
-
-			weapon.text += wd.weaponName + "\n</color>";
+			Roll();
 		}
+	}
 
-		actor.text = "";
+	void CharacterRoll()
+	{
+		int rand = Random.Range(0, chars.Length);
 
-		foreach(Actor w in chars)
+		CharacterData cd = data.FindCharacter(chars[rand].ID);
+
+		if(cd.unlocked != true)
 		{
-			CharacterData wd = data.FindCharacter(w.ID);
-
-			if(wd.unlocked)
-			{
-				actor.text += "<color=green>[Y] ";
-			}
-			else
-			{
-				actor.text += "<color=red>[N] ";
-			}
-
-			actor.text += wd.characterName + "\n</color>";
+			cd.unlocked = true;
+			print("[C]" + chars[rand].CharacterName);
+		}
+		else
+		{
+			print("[C]" + chars[rand].CharacterName + "refund character credits!");
 		}
 	}
 
@@ -86,13 +112,13 @@ public class LootBox : MonoBehaviour
 			if(wd.unlocked != true)
 			{
 				wd.unlocked = true;
+				print("[1]" + wd.weaponName);
+				GenerateNotification(oneStar[rand].Icon, oneStar[rand].WeaponName);
 			}
 			else
 			{
-				print("refund 1 star");
+				print("[1]" + wd.weaponName + "refund 1 star");
 			}
-
-			print("[1]" + wd.weaponName);
 		}
 
 		//2 Star weapon
@@ -115,13 +141,14 @@ public class LootBox : MonoBehaviour
 			if(wd.unlocked != true)
 			{
 				wd.unlocked = true;
+				print("[2]" + wd.weaponName);
+				GenerateNotification(twoStar[rand].Icon, twoStar[rand].WeaponName);
 			}
 			else
 			{
-				print("refund 2 star");
+				print("[2]" + wd.weaponName + "refund 2 star");
 			}
 
-			print("[2]" + wd.weaponName);
 		}
 
 		//3 star weapon
@@ -144,13 +171,14 @@ public class LootBox : MonoBehaviour
 			if(wd.unlocked != true)
 			{
 				wd.unlocked = true;
+				GenerateNotification(threeStar[rand].Icon, threeStar[rand].WeaponName);
+				print("[3]" + wd.weaponName);
 			}
 			else
 			{
-				print("refund 3 star");
+				print("[3]" + wd.weaponName + "refund 3 star");
 			}
 
-			print("[3]" + wd.weaponName);
 		}
 
 		//character
@@ -163,15 +191,27 @@ public class LootBox : MonoBehaviour
 			if(cd.unlocked != true)
 			{
 				cd.unlocked = true;
+				GenerateNotification(chars[rand].Icon, chars[rand].CharacterName);
+				print("[C]" + chars[rand].CharacterName);
 			}
 			else
 			{
-				print("refund character credits!");
+				print("[C]" + chars[rand].CharacterName + "refund character credits!");
 			}
-
-			print("[C]" + chars[rand].CharacterName);
 		}
 
 		SaveSystem.SaveData(data);
+	}
+
+	public void GenerateNotification(Sprite icon, string text)
+	{
+		GameObject noti = (GameObject)GameObject.Instantiate(Resources.Load("Notification"), transform.parent);
+		noti.GetComponent<NotificationData>().Init(icon, text);
+	}
+
+	public void GenerateRefund(Sprite icon, string text)
+	{
+		GameObject noti = (GameObject)GameObject.Instantiate(Resources.Load("Notification_Refund"), transform.parent);
+		noti.GetComponent<NotificationData>().Init(icon, text);
 	}
 }
