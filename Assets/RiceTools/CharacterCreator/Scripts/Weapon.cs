@@ -4,7 +4,7 @@ public class Weapon : ScriptableObject
 {
 	[SerializeField]public int id;
 
-	[SerializeField]Sprite icon;
+	[SerializeField] Sprite icon;
 	[SerializeField] string weaponName;
 	[SerializeField] WeightClass weight;
 	[SerializeField] int rarity;
@@ -13,6 +13,7 @@ public class Weapon : ScriptableObject
 	[SerializeField] int accuracy;
 	[SerializeField] int knockback;
 	[SerializeField] bool traversal;
+	[SerializeField] bool special;
 	[SerializeField] bool usesTurn;
 	[SerializeField] bool passive;
 
@@ -81,6 +82,12 @@ public class Weapon : ScriptableObject
 	{
 		get { return traversal; }
 		set { traversal = value; }
+	}
+
+	public bool Special
+	{
+		get { return special; }
+		set { special = value; }
 	}
 
 	public bool UsesTurn

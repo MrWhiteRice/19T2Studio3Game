@@ -10,4 +10,9 @@ public class PlayerButtonData : MonoBehaviour
 	{
 		FindObjectOfType<PartySelector>().SelectCharacter(id);
 	}
+
+	public void ClickWep()
+	{
+		FindObjectOfType<PartySelector>().SelectWeapon(id);
+	}
 }

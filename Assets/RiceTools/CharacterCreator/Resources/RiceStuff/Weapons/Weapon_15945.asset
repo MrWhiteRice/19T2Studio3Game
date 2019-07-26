@@ -22,5 +22,6 @@ MonoBehaviour:
   accuracy: 1
   knockback: 4
   traversal: 0
+  special: 0
   usesTurn: 1
   passive: 0

@@ -19,6 +19,11 @@ public class LootBox : MonoBehaviour
 		chars = Resources.LoadAll<Actor>("RiceStuff/Actors/");
 	}
 
+	public void Save()
+	{
+		SaveSystem.SaveData(data);
+	}
+
 	public void MultiRoll()
 	{
 		CharacterRoll();
@@ -58,7 +63,7 @@ public class LootBox : MonoBehaviour
 			}
 		}
 
-		SaveSystem.SaveData(data);
+		Save();
 	}
 
 	void CharacterRoll()
@@ -78,6 +83,8 @@ public class LootBox : MonoBehaviour
 			GenerateRefund(chars[rand].Icon, chars[rand].CharacterName);
 			//print("[C]" + chars[rand].CharacterName + "refund character credits!");
 		}
+
+		Save();
 	}
 
 	void ItemRoll(int rarity)

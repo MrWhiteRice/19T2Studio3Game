@@ -14,10 +14,4 @@ public class MenuController : MonoBehaviour
 			obj.SetActive(false);
 		}
 	}
-
-	public void PartySelector(int player)
-	{
-		GameObject p = (GameObject)Instantiate(Resources.Load("PartySelector"), menu[3].transform);
-		p.GetComponent<PartySelector>().selected = player;
-	}
 }
