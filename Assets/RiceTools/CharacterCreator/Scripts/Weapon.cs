@@ -13,6 +13,7 @@ public class Weapon : ScriptableObject
 	[SerializeField] int accuracy;
 	[SerializeField] int knockback;
 	[SerializeField] bool traversal;
+	[SerializeField] bool melee;
 	[SerializeField] bool special;
 	[SerializeField] bool usesTurn;
 	[SerializeField] bool passive;
@@ -88,6 +89,12 @@ public class Weapon : ScriptableObject
 	{
 		get { return special; }
 		set { special = value; }
+	}
+
+	public bool Melee
+	{
+		get { return melee; }
+		set { melee = value; }
 	}
 
 	public bool UsesTurn

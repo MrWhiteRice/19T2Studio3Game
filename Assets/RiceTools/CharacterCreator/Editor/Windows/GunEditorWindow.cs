@@ -105,6 +105,7 @@ public class GunEditorWindow : EditorWindow
 
 		SO.FindProperty("traversal").boolValue = EditorGUILayout.Toggle("Traversal Item", weapons[id].Traversal);
 		SO.FindProperty("special").boolValue = EditorGUILayout.Toggle("Special Item", weapons[id].Special);
+		SO.FindProperty("melee").boolValue = EditorGUILayout.Toggle("Melee Item", weapons[id].Melee);
 		SO.FindProperty("usesTurn").boolValue = EditorGUILayout.Toggle("Uses turn", weapons[id].UsesTurn);
 		SO.FindProperty("passive").boolValue = EditorGUILayout.Toggle("Passive", weapons[id].Passive);
 

@@ -14,8 +14,19 @@ public class PlayerDataSP : MonoBehaviour
 
 	RigidbodyConstraints rbc;
 
+	public CharacterParty character;
+
 	void Start()
 	{
+		if(ID < 3)
+		{
+			character = FindObjectOfType<GameManager>().data.party[ID];
+		}
+		else
+		{
+			character = FindObjectOfType<GameManager>().data.party[ID-3];
+		}
+
 		healthText = GetComponentInChildren<UnityEngine.UI.Text>();
 		staminaSlider = GetComponentInChildren<UnityEngine.UI.Slider>();
 

@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 4509498357264000476}
   - component: {fileID: 1528622023238944646}
   m_Layer: 0
-  m_Name: TGUY_Default_Stance_Torso
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3759496237089085562}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1528622023238944646
 SpriteRenderer:
@@ -103,8 +103,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0c6ac059bac381940a4ca1991465a3fb, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: e5525f2389af1aa43b62c28dd4d46237, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 8191212199171931294}
   - component: {fileID: 5006672023324131334}
   m_Layer: 0
-  m_Name: TGUY_Default_Stance_BArm
+  m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,7 +144,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3759496237089085562}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5006672023324131334
 SpriteRenderer:
@@ -183,7 +183,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 32bca6c042aa20f4ab68854f58e421b7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5f9ff149eb7270840b3f3b955cedebcb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 5956290347940952827}
   - component: {fileID: 7122791389879739780}
   m_Layer: 0
-  m_Name: TGUY_Default_Stance_Legs
+  m_Name: Legs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +223,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3759496237089085562}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7122791389879739780
 SpriteRenderer:
@@ -261,8 +261,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 52c49d6fa24c02142b509a4b0cc440ab, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: e06fe015565027842b1f546a39a5e549, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -365,6 +365,11 @@ MonoBehaviour:
   stamina: 100
   ID: 0
   team: 0
+  character:
+    playerID: 0
+    weaponID: 0
+    classID: 0
+    traversalID: 0
 --- !u!54 &-1740766124022386151
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -598,7 +603,7 @@ GameObject:
   - component: {fileID: 5579710980261154651}
   - component: {fileID: 1351896489421350368}
   m_Layer: 0
-  m_Name: TGUY_Default_Stance_FArm
+  m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -616,7 +621,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3759496237089085562}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1351896489421350368
 SpriteRenderer:
@@ -654,8 +659,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f1c4e2e02e0ef5144a4473639c391efb, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 21300000, guid: a29a9527dd7de0142b13a481482e89f6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -936,10 +941,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.84, z: 0}
   m_LocalScale: {x: -4, y: 4, z: 4}
   m_Children:
+  - {fileID: 4509498357264000476}
   - {fileID: 8191212199171931294}
   - {fileID: 5579710980261154651}
   - {fileID: 5956290347940952827}
-  - {fileID: 4509498357264000476}
   m_Father: {fileID: 4372908342781098891}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

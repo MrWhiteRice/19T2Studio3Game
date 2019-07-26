@@ -14,7 +14,7 @@ public class PartyMenu : MonoBehaviour
 	void Update()
 	{
 		player = FindObjectOfType<LootBox>().data.party[memberSelected];
-
+		
 		partyDetails.text = "";
 		partyDetails.text += "Name: " + FindObjectOfType<LootBox>().data.FindCharacter(player.playerID).characterName + "\n";
 		partyDetails.text += "Class: " + FindObjectOfType<LootBox>().data.FindWeapon(player.classID).weaponName + "\n";

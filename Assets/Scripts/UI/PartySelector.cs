@@ -79,7 +79,7 @@ public class PartySelector : MonoBehaviour
 						{
 							b = Instantiate(button, panel);
 						}
-						else if(!a.Traversal && !a.Special && type == PartyMenu.Selector.Class)
+						else if(!a.Traversal && !a.Special && type == PartyMenu.Selector.Class && !a.Melee)
 						{
 							b = Instantiate(button, panel);
 						}

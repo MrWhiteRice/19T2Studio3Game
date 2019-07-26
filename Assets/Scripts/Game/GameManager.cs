@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 	bool gameStart = false;
 	int selectedLevel = 0;
 
+	public DataContainer data;
+
 	public enum TurnPhase
 	{
 		Move = 0,
@@ -22,6 +24,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+		data = SaveSystem.loadData();
+
 		turn = Random.Range(0, 6);
 		SpawnPlayers();
 		NumberPlayers();
