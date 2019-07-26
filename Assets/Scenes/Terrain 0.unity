@@ -1569,6 +1569,27 @@ MonoBehaviour:
   turn: 0
   redPlayers: []
   bluePlayers: []
+  data:
+    free: 0
+    paid: 0
+    matchesWon: 0
+    mathcesLost: 0
+    tutorialComplete: 0
+    party:
+    - playerID: 0
+      weaponID: 0
+      classID: 0
+      traversalID: 0
+    - playerID: 0
+      weaponID: 0
+      classID: 0
+      traversalID: 0
+    - playerID: 0
+      weaponID: 0
+      classID: 0
+      traversalID: 0
+    unlockedCharacters: []
+    unlockedWeapons: []
   phase: 3
 --- !u!1 &1778223326
 GameObject:

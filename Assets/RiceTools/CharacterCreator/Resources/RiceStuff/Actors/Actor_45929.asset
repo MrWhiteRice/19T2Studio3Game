@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 46929
   icon: {fileID: 21300000, guid: 5e921bb30928eba4faeaeba7b3fb0eee, type: 3}
-  characterName: Jacob
+  characterName: Jacob K
   weight: 0
   rarity: 1
   initiative: 51

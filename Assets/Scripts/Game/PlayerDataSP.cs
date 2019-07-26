@@ -16,6 +16,10 @@ public class PlayerDataSP : MonoBehaviour
 
 	public CharacterParty character;
 
+	public SpriteRenderer[] sprites;
+	public Sprite[] idle;
+	public Sprite[] moving;
+
 	void Start()
 	{
 		if(ID < 3)
@@ -24,7 +28,7 @@ public class PlayerDataSP : MonoBehaviour
 		}
 		else
 		{
-			character = FindObjectOfType<GameManager>().data.party[ID-3];
+			character = FindObjectOfType<GameManager>().data.party[ID - 3];
 		}
 
 		healthText = GetComponentInChildren<UnityEngine.UI.Text>();
@@ -40,6 +44,23 @@ public class PlayerDataSP : MonoBehaviour
 		}
 
 		rbc = GetComponent<Rigidbody>().constraints;
+
+		string nameSearch = "";
+		foreach(Actor a in Resources.LoadAll<Actor>("RiceStuff/Actors"))
+		{
+			if(character.playerID == a.ID)
+			{
+				nameSearch = a.CharacterName;
+			}
+		}
+
+		//print("Characters/" + nameSearch + "/Default_Stance");
+		GetComponent<SpriteAnim>().Idle_Sprites.Torso = Resources.LoadAll<Sprite>("Characters/" + nameSearch + "/Default_Stance/" + nameSearch + "_Default_Torso");
+		GetComponent<SpriteAnim>().Idle_Sprites.Legs = Resources.LoadAll<Sprite>("Characters/" + nameSearch + "/Default_Stance/" + nameSearch + "_Default_Legs");
+		GetComponent<SpriteAnim>().Idle_Sprites.Left = Resources.LoadAll<Sprite>("Characters/" + nameSearch + "/Default_Stance/" + nameSearch + "_Default_FArm");
+		GetComponent<SpriteAnim>().Idle_Sprites.Right = Resources.LoadAll<Sprite>("Characters/" + nameSearch + "/Default_Stance/" + nameSearch + "_Default_BArm");
+
+
 	}
 
 	private void Update()
