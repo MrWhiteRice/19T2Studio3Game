@@ -1,0 +1,1225 @@
+fileFormatVersion: 2
+guid: 4ebc8d368dfec854b93fe24bededfc60
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4590114590554736559
+    second: chest open2_0
+  - first:
+      213: 4367920909122019018
+    second: chest open2_1
+  - first:
+      213: -6365315324532523328
+    second: chest open2_2
+  - first:
+      213: 7230324808871802892
+    second: chest open2_3
+  - first:
+      213: 8812207651654772421
+    second: chest open2_4
+  - first:
+      213: -5668045758388115636
+    second: chest open2_5
+  - first:
+      213: 6023702285721741439
+    second: chest open2_6
+  - first:
+      213: 1455232168942293974
+    second: chest open2_7
+  - first:
+      213: 1180728673979484528
+    second: chest open2_8
+  - first:
+      213: 5375350979578018501
+    second: chest open2_9
+  - first:
+      213: -8009113697841997067
+    second: chest open2_10
+  - first:
+      213: 5692047444261050
+    second: chest open2_11
+  - first:
+      213: 7163451985892506744
+    second: chest open2_12
+  - first:
+      213: -2999029302861416318
+    second: chest open2_13
+  - first:
+      213: 708498256595034232
+    second: chest open2_14
+  - first:
+      213: -3028335865007597962
+    second: chest open2_15
+  - first:
+      213: -5211612832462289820
+    second: chest open2_16
+  - first:
+      213: 4066070942393620547
+    second: chest open2_17
+  - first:
+      213: 7556457534487014342
+    second: chest open2_18
+  - first:
+      213: 2999540113380519339
+    second: chest open2_19
+  - first:
+      213: 4519205591293774595
+    second: chest open2_20
+  - first:
+      213: 6010652834589820198
+    second: chest open2_21
+  - first:
+      213: 7806499619106221800
+    second: chest open2_22
+  - first:
+      213: -2540251274311245724
+    second: chest open2_23
+  - first:
+      213: -2435239673456967832
+    second: chest open2_24
+  - first:
+      213: -4228202758808000248
+    second: chest open2_25
+  - first:
+      213: -5362602802496826485
+    second: chest open2_26
+  - first:
+      213: -1551091013969103162
+    second: chest open2_27
+  - first:
+      213: -3710169276122816837
+    second: chest open2_28
+  - first:
+      213: -3796139744096434462
+    second: chest open2_29
+  - first:
+      213: -3004775006745161120
+    second: chest open2_30
+  - first:
+      213: -7551409726646698890
+    second: chest open2_31
+  - first:
+      213: -2956725228380342545
+    second: chest open2_32
+  - first:
+      213: -1314311716090704396
+    second: chest open2_33
+  - first:
+      213: -2169349785093334715
+    second: chest open2_34
+  - first:
+      213: -1156816640836049875
+    second: chest open2_35
+  - first:
+      213: 3012789728150988371
+    second: chest open2_36
+  - first:
+      213: -4511694873578475630
+    second: chest open2_37
+  - first:
+      213: -9165989295824959741
+    second: chest open2_38
+  - first:
+      213: 4048743910082349353
+    second: chest open2_39
+  - first:
+      213: -6010247913213192421
+    second: chest open2_40
+  - first:
+      213: 8893106181494529870
+    second: chest open2_41
+  - first:
+      213: 6762047522147945157
+    second: chest open2_42
+  - first:
+      213: 4341071335867568124
+    second: chest open2_43
+  - first:
+      213: 4092545887685479044
+    second: chest open2_44
+  - first:
+      213: 7136986980404573758
+    second: chest open2_45
+  - first:
+      213: 2785733241971078215
+    second: chest open2_46
+  - first:
+      213: -2746217630989765247
+    second: chest open2_47
+  - first:
+      213: 8460395285957022357
+    second: chest open2_48
+  - first:
+      213: -5939814251177243298
+    second: chest open2_49
+  - first:
+      213: -6916020663434448191
+    second: chest open2_50
+  - first:
+      213: -891820272664541484
+    second: chest open2_51
+  - first:
+      213: -6488987958331584106
+    second: chest open2_52
+  - first:
+      213: -893043571957082746
+    second: chest open2_53
+  - first:
+      213: 8458906855348904832
+    second: chest open2_54
+  - first:
+      213: 4003290784723502740
+    second: chest open2_55
+  - first:
+      213: 5492266717103092534
+    second: chest open2_56
+  - first:
+      213: 1541898761780601193
+    second: chest open2_57
+  - first:
+      213: 4794380537014561766
+    second: chest open2_58
+  - first:
+      213: 4157722491415174368
+    second: chest open2_59
+  - first:
+      213: -8141950419002506380
+    second: chest open2_60
+  - first:
+      213: -4090750852047219741
+    second: chest open2_61
+  - first:
+      213: -2257716921085114125
+    second: chest open2_62
+  - first:
+      213: -1636062356371070688
+    second: chest open2_63
+  - first:
+      213: -497330688921739124
+    second: chest open2_64
+  - first:
+      213: 5997748026920152363
+    second: chest open2_65
+  - first:
+      213: -5601987087357501747
+    second: chest open2_66
+  - first:
+      213: -4721890595947559261
+    second: chest open2_67
+  - first:
+      213: -8884139843982440542
+    second: chest open2_68
+  - first:
+      213: -6357191288381201918
+    second: chest open2_69
+  - first:
+      213: -9096987459382087901
+    second: chest open2_70
+  - first:
+      213: 6894430208486095878
+    second: chest open2_71
+  - first:
+      213: 1422502949327048570
+    second: chest open2_72
+  - first:
+      213: 910086327311044616
+    second: chest open2_73
+  - first:
+      213: -7285368813535190541
+    second: chest open2_74
+  - first:
+      213: -3825629491050235837
+    second: chest open2_75
+  - first:
+      213: 8656050277254531001
+    second: chest open2_76
+  - first:
+      213: -4651747016081185423
+    second: chest open2_77
+  - first:
+      213: 1178333712308596290
+    second: chest open2_78
+  - first:
+      213: 19241914869130686
+    second: chest open2_79
+  - first:
+      213: -5405698496067909055
+    second: chest open2_80
+  - first:
+      213: 8405613106930632269
+    second: chest open2_81
+  - first:
+      213: -7205506069896191111
+    second: chest open2_82
+  - first:
+      213: -6279695659479598442
+    second: chest open2_83
+  - first:
+      213: 700638135551642337
+    second: chest open2_84
+  - first:
+      213: -604798400773684032
+    second: chest open2_85
+  - first:
+      213: 3211369518217004657
+    second: chest open2_86
+  - first:
+      213: 614724663829232265
+    second: chest open2_87
+  - first:
+      213: -1598313812203811873
+    second: chest open2_88
+  - first:
+      213: 8458552311089464651
+    second: chest open2_89
+  - first:
+      213: -2075026106959516691
+    second: chest open2_90
+  - first:
+      213: 4930288063899894075
+    second: chest open2_91
+  - first:
+      213: -1089206056486268363
+    second: chest open2_92
+  - first:
+      213: -8891206447735165901
+    second: chest open2_93
+  - first:
+      213: 2123764831468629859
+    second: chest open2_94
+  - first:
+      213: 1435773300530986738
+    second: chest open2_95
+  - first:
+      213: -176609140342639334
+    second: chest open2_96
+  - first:
+      213: 1734363453097689089
+    second: chest open2_97
+  - first:
+      213: 1532489079946152679
+    second: chest open2_98
+  - first:
+      213: -2782734193134965906
+    second: chest open2_99
+  - first:
+      213: 2710797451468021150
+    second: chest open2_100
+  - first:
+      213: -6718935792283969692
+    second: chest open2_101
+  - first:
+      213: 5554189876130200755
+    second: chest open2_102
+  - first:
+      213: 868627966982405957
+    second: chest open2_103
+  - first:
+      213: -6542294503607896821
+    second: chest open2_104
+  - first:
+      213: 2848397621623982078
+    second: chest open2_105
+  - first:
+      213: 9012252914085388760
+    second: chest open2_106
+  - first:
+      213: 4644061780895309210
+    second: chest open2_107
+  - first:
+      213: -6480289949482717453
+    second: chest open2_108
+  - first:
+      213: 5439717076053290767
+    second: chest open2_109
+  - first:
+      213: -8658418266772071617
+    second: chest open2_110
+  - first:
+      213: 7569333891427853942
+    second: chest open2_111
+  - first:
+      213: 5483999294368761386
+    second: chest open2_112
+  - first:
+      213: -5181312194864588397
+    second: chest open2_113
+  - first:
+      213: 6135505171806274942
+    second: chest open2_114
+  - first:
+      213: -809686957485541977
+    second: chest open2_115
+  - first:
+      213: 5024842305102091463
+    second: chest open2_116
+  - first:
+      213: -6007696281361197418
+    second: chest open2_117
+  - first:
+      213: 6884404526157933619
+    second: chest open2_118
+  - first:
+      213: -3411688251565886579
+    second: chest open2_119
+  - first:
+      213: -5762990489982465556
+    second: chest open2_120
+  - first:
+      213: -7361633098425284188
+    second: chest open2_121
+  - first:
+      213: -1607667034593898094
+    second: chest open2_122
+  - first:
+      213: -5480653313293980798
+    second: chest open2_123
+  - first:
+      213: 4799420132624838937
+    second: chest open2_124
+  - first:
+      213: -4694833690525255972
+    second: chest open2_125
+  - first:
+      213: 111098052032193638
+    second: chest open2_126
+  - first:
+      213: 988911522652303102
+    second: chest open2_127
+  - first:
+      213: 757754500863833400
+    second: chest open2_128
+  - first:
+      213: 7755507338031176327
+    second: chest open2_129
+  - first:
+      213: 1991167045158950508
+    second: chest open2_130
+  - first:
+      213: 2269274902101924714
+    second: chest open2_131
+  - first:
+      213: 3688451906595043164
+    second: chest open2_132
+  - first:
+      213: -2813162812792693963
+    second: chest open2_133
+  - first:
+      213: 6551563844625034850
+    second: chest open2_134
+  - first:
+      213: -4590005804598318150
+    second: chest open2_135
+  - first:
+      213: -3762490169172553790
+    second: chest open2_136
+  - first:
+      213: -6584001321663906494
+    second: chest open2_137
+  - first:
+      213: 435523516382591742
+    second: chest open2_138
+  - first:
+      213: -1559272622990175092
+    second: chest open2_139
+  - first:
+      213: -2779039668810583001
+    second: chest open2_140
+  - first:
+      213: -8421428567782261598
+    second: chest open2_141
+  - first:
+      213: 1778280300559614230
+    second: chest open2_142
+  - first:
+      213: 5491384926590373478
+    second: chest open2_143
+  - first:
+      213: 2192208058322047216
+    second: chest open2_144
+  - first:
+      213: -2385042016013573522
+    second: chest open2_145
+  - first:
+      213: -9117244340920607830
+    second: chest open2_146
+  - first:
+      213: -7748662360000216662
+    second: chest open2_147
+  - first:
+      213: -4734084888094716101
+    second: chest open2_148
+  - first:
+      213: -3233841949971686084
+    second: chest open2_149
+  - first:
+      213: -7781985391730989256
+    second: chest open2_150
+  - first:
+      213: -9010292754989778239
+    second: chest open2_151
+  - first:
+      213: 5398642566096637383
+    second: chest open2_152
+  - first:
+      213: 3491804729394875663
+    second: chest open2_153
+  - first:
+      213: 2163074744442834221
+    second: chest open2_154
+  - first:
+      213: 7134854949662154686
+    second: chest open2_155
+  - first:
+      213: -2174482826629478747
+    second: chest open2_156
+  - first:
+      213: 3700702021620039450
+    second: chest open2_157
+  - first:
+      213: 5022589577103407620
+    second: chest open2_158
+  - first:
+      213: -4159463044256702960
+    second: chest open2_159
+  - first:
+      213: 7673680670775379880
+    second: chest open2_160
+  - first:
+      213: 5215661240511287377
+    second: chest open2_161
+  - first:
+      213: -72492207849335801
+    second: chest open2_162
+  - first:
+      213: -4854872330335815831
+    second: chest open2_163
+  - first:
+      213: -7990076402164438176
+    second: chest open2_164
+  - first:
+      213: 6644339378561598624
+    second: chest open2_165
+  - first:
+      213: -4910786332702569595
+    second: chest open2_166
+  - first:
+      213: 7991303254142495136
+    second: chest open2_167
+  - first:
+      213: -2455308893646306449
+    second: chest open2_168
+  - first:
+      213: -5347254801130935007
+    second: chest open2_169
+  - first:
+      213: 5290911967449084487
+    second: chest open2_170
+  - first:
+      213: -7666518559400489371
+    second: chest open2_171
+  - first:
+      213: -5480077034515497226
+    second: chest open2_172
+  - first:
+      213: 3193303270519258185
+    second: chest open2_173
+  - first:
+      213: -1174490284084609493
+    second: chest open2_174
+  - first:
+      213: 1395153719316773439
+    second: chest open2_175
+  - first:
+      213: -673491022586991107
+    second: chest open2_176
+  - first:
+      213: -973692396500571299
+    second: chest open2_177
+  - first:
+      213: 7396864110056140662
+    second: chest open2_178
+  - first:
+      213: 9048715473850127313
+    second: chest open2_179
+  - first:
+      213: 2748607992157571622
+    second: chest open2_180
+  - first:
+      213: 3945527769811964054
+    second: chest open2_181
+  - first:
+      213: 4763086641643051089
+    second: chest open2_182
+  - first:
+      213: 1879112263630195860
+    second: chest open2_183
+  - first:
+      213: 4879224363909534373
+    second: chest open2_184
+  - first:
+      213: -861195709591046697
+    second: chest open2_185
+  - first:
+      213: 867236520369386893
+    second: chest open2_186
+  - first:
+      213: -1469969977746352389
+    second: chest open2_187
+  - first:
+      213: -647934279942156677
+    second: chest open2_188
+  - first:
+      213: -2654359343041672655
+    second: chest open2_189
+  - first:
+      213: -2371014427131570296
+    second: chest open2_190
+  - first:
+      213: 7189304178537100430
+    second: chest open2_191
+  - first:
+      213: -2381016341246757229
+    second: chest open2_192
+  - first:
+      213: 6334602396998136342
+    second: chest open2_193
+  - first:
+      213: 8271107436877130627
+    second: chest open2_194
+  - first:
+      213: 8403776082018326494
+    second: chest open2_195
+  - first:
+      213: 5449987068705141414
+    second: chest open2_196
+  - first:
+      213: 3797444565187338243
+    second: chest open2_197
+  - first:
+      213: -909901047113879407
+    second: chest open2_198
+  - first:
+      213: -563700515635364710
+    second: chest open2_199
+  - first:
+      213: 377579046388541558
+    second: chest open2_200
+  - first:
+      213: -8220358529566270345
+    second: chest open2_201
+  - first:
+      213: 5488504239731033996
+    second: chest open2_202
+  - first:
+      213: 731908823519831836
+    second: chest open2_203
+  - first:
+      213: -1415242874723671641
+    second: chest open2_204
+  - first:
+      213: 8270638493529272940
+    second: chest open2_205
+  - first:
+      213: 6309067133427303938
+    second: chest open2_206
+  - first:
+      213: 4452595513279652340
+    second: chest open2_207
+  - first:
+      213: 1745011617818876886
+    second: chest open2_208
+  - first:
+      213: 7749028134401002974
+    second: chest open2_209
+  - first:
+      213: 8668512086629945041
+    second: chest open2_210
+  - first:
+      213: 2471845340412947572
+    second: chest open2_211
+  - first:
+      213: 5968472864120062726
+    second: chest open2_212
+  - first:
+      213: -4638329546199281524
+    second: chest open2_213
+  - first:
+      213: 5903627209735916977
+    second: chest open2_214
+  - first:
+      213: 1175415800203475801
+    second: chest open2_215
+  - first:
+      213: -5563867633600740005
+    second: chest open2_216
+  - first:
+      213: 4618772610761466285
+    second: chest open2_217
+  - first:
+      213: -2520871163492646431
+    second: chest open2_218
+  - first:
+      213: 1853090173052444660
+    second: chest open2_219
+  - first:
+      213: -3259293682625456414
+    second: chest open2_220
+  - first:
+      213: -3026472592181637955
+    second: chest open2_221
+  - first:
+      213: 293459830290319987
+    second: chest open2_222
+  - first:
+      213: 5178620642829885754
+    second: chest open2_223
+  - first:
+      213: 2549890502881649050
+    second: chest open2_224
+  - first:
+      213: 1555847732905117618
+    second: chest open2_225
+  - first:
+      213: 6395074998065621676
+    second: chest open2_226
+  - first:
+      213: -6581206273229281829
+    second: chest open2_227
+  - first:
+      213: 7409168643669350190
+    second: chest open2_228
+  - first:
+      213: 2251230982911611882
+    second: chest open2_229
+  - first:
+      213: 7851294462438604371
+    second: chest open2_230
+  - first:
+      213: -686841922548222214
+    second: chest open2_231
+  - first:
+      213: 8784387802890986232
+    second: chest open2_232
+  - first:
+      213: 3238540799287927224
+    second: chest open2_233
+  - first:
+      213: -4550643733497183370
+    second: chest open2_234
+  - first:
+      213: 8248995149335564047
+    second: chest open2_235
+  - first:
+      213: 182534513065187285
+    second: chest open2_236
+  - first:
+      213: -5753773733417928450
+    second: chest open2_237
+  - first:
+      213: -4034789974581293920
+    second: chest open2_238
+  - first:
+      213: 239758554916866543
+    second: chest open2_239
+  - first:
+      213: -7939460910696575464
+    second: chest open2_240
+  - first:
+      213: 6101244771360955388
+    second: chest open2_241
+  - first:
+      213: 6751252457972746101
+    second: chest open2_242
+  - first:
+      213: 989321905849751670
+    second: chest open2_243
+  - first:
+      213: -2277555282659294389
+    second: chest open2_244
+  - first:
+      213: -5698705782951308845
+    second: chest open2_245
+  - first:
+      213: -2463277201854011452
+    second: chest open2_246
+  - first:
+      213: 8671737084027918033
+    second: chest open2_247
+  - first:
+      213: 4514358026705335601
+    second: chest open2_248
+  - first:
+      213: 8905247952531005122
+    second: chest open2_249
+  - first:
+      213: -882176064946662634
+    second: chest open2_250
+  - first:
+      213: 7873205049872497963
+    second: chest open2_251
+  - first:
+      213: -1233026693426032350
+    second: chest open2_252
+  - first:
+      213: 5795456147832304486
+    second: chest open2_253
+  - first:
+      213: -7220197476934305925
+    second: chest open2_254
+  - first:
+      213: -7414556805155715149
+    second: chest open2_255
+  - first:
+      213: 5040202354257375325
+    second: chest open2_256
+  - first:
+      213: -2304661125362755541
+    second: chest open2_257
+  - first:
+      213: 702573538652091334
+    second: chest open2_258
+  - first:
+      213: 3249766640390342392
+    second: chest open2_259
+  - first:
+      213: -7763046998683665006
+    second: chest open2_260
+  - first:
+      213: -7138520317714969776
+    second: chest open2_261
+  - first:
+      213: 4058340886080733933
+    second: chest open2_262
+  - first:
+      213: -6046252008477126272
+    second: chest open2_263
+  - first:
+      213: -1604350588702987384
+    second: chest open2_264
+  - first:
+      213: -6379401401084544264
+    second: chest open2_265
+  - first:
+      213: -8558459594892691832
+    second: chest open2_266
+  - first:
+      213: -4185956041700608371
+    second: chest open2_267
+  - first:
+      213: 2960257247888087376
+    second: chest open2_268
+  - first:
+      213: -2441734654459667863
+    second: chest open2_269
+  - first:
+      213: 2870432240349144888
+    second: chest open2_270
+  - first:
+      213: -2687603973009447872
+    second: chest open2_271
+  - first:
+      213: -7705974462717277498
+    second: chest open2_272
+  - first:
+      213: -2264761117440504628
+    second: chest open2_273
+  - first:
+      213: -5003055021583813629
+    second: chest open2_274
+  - first:
+      213: 8450890188657656147
+    second: chest open2_275
+  - first:
+      213: 7686656739403388218
+    second: chest open2_276
+  - first:
+      213: -5728236181729738565
+    second: chest open2_277
+  - first:
+      213: 2189284163549978862
+    second: chest open2_278
+  - first:
+      213: 4852788268522036789
+    second: chest open2_279
+  - first:
+      213: -8072277435883526544
+    second: chest open2_280
+  - first:
+      213: 4408184344989592830
+    second: chest open2_281
+  - first:
+      213: -4675661801631613667
+    second: chest open2_282
+  - first:
+      213: -7356687989629682696
+    second: chest open2_283
+  - first:
+      213: 1060011452962379889
+    second: chest open2_284
+  - first:
+      213: 6509144809814525005
+    second: chest open2_285
+  - first:
+      213: 6799156725595146962
+    second: chest open2_286
+  - first:
+      213: 3614017360359145526
+    second: chest open2_287
+  - first:
+      213: 6642772730602726182
+    second: chest open2_288
+  - first:
+      213: 259817901122590846
+    second: chest open2_289
+  - first:
+      213: -2707099985831267808
+    second: chest open2_290
+  - first:
+      213: -9013060383398558078
+    second: chest open2_291
+  - first:
+      213: -764105883728825096
+    second: chest open2_292
+  - first:
+      213: -4236340794463150915
+    second: chest open2_293
+  - first:
+      213: 8827049572481847303
+    second: chest open2_294
+  - first:
+      213: -850378498090594656
+    second: chest open2_295
+  - first:
+      213: 2144804403270471414
+    second: chest open2_296
+  - first:
+      213: 8931004158719894597
+    second: chest open2_297
+  - first:
+      213: 5395837476737809416
+    second: chest open2_298
+  - first:
+      213: 9071202456852932933
+    second: chest open2_299
+  - first:
+      213: -6017233127733264643
+    second: chest open2_300
+  - first:
+      213: 7396003713812684263
+    second: chest open2_301
+  - first:
+      213: 8861005726964125002
+    second: chest open2_302
+  - first:
+      213: 6966788622842907575
+    second: chest open2_303
+  - first:
+      213: 9068510563163593117
+    second: chest open2_304
+  - first:
+      213: 5479423081399625332
+    second: chest open2_305
+  - first:
+      213: 8513014469189394095
+    second: chest open2_306
+  - first:
+      213: 4352332360234363248
+    second: chest open2_307
+  - first:
+      213: -5374027027850572774
+    second: chest open2_308
+  - first:
+      213: 49206816016615295
+    second: chest open2_309
+  - first:
+      213: 7171593314475732346
+    second: chest open2_310
+  - first:
+      213: -5714826825326411788
+    second: chest open2_311
+  - first:
+      213: -1615648082379417606
+    second: chest open2_312
+  - first:
+      213: 3544630952452425312
+    second: chest open2_313
+  - first:
+      213: -2133346430477010937
+    second: chest open2_314
+  - first:
+      213: 5848696996518741794
+    second: chest open2_315
+  - first:
+      213: 8471474065565715343
+    second: chest open2_316
+  - first:
+      213: -4942874138128662704
+    second: chest open2_317
+  - first:
+      213: -7379488695726350573
+    second: chest open2_318
+  - first:
+      213: -6260843510536484577
+    second: chest open2_319
+  - first:
+      213: -5039926159077900348
+    second: chest open2_320
+  - first:
+      213: -8196132496424326818
+    second: chest open2_321
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: chest open2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 224
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2ddcb2524728a74cac43a00958f92b9
+      internalID: 4590114590554736559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chest open2_1
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 224
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7bcb4deb3536ad449e4abb6968f0008
+      internalID: 4367920909122019018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chest open2_2
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 224
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24203582d52956344bc18559a5286671
+      internalID: -6365315324532523328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chest open2_3
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 0
+        width: 224
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3eb870695773fed42ace5e9dd083044e
+      internalID: 7230324808871802892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chest open2_4
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 224
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f680cb64dc60ee745aac0a3c1dbc506f
+      internalID: 8812207651654772421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chest open2_5
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 0
+        width: 224
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 452e9ab9bb8b96242a3f13e1d772f9c9
+      internalID: -5668045758388115636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chest open2_6
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 0
+        width: 224
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2362cdeb24f7ed448cfe0b490c68637
+      internalID: 6023702285721741439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 39eac14be83e3034e966729ed7610a22
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
