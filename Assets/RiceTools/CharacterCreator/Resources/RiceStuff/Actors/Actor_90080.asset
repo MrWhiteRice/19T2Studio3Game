@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Actor_90080
   m_EditorClassIdentifier: 
   id: 90080
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 0fe1c1d386d382841b715ad82972a96d, type: 3}
   characterName: Brandon
   weight: 2
   rarity: 5

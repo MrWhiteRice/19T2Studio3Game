@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Actor_90471
   m_EditorClassIdentifier: 
   id: 90471
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 062067063362eb24b838d779e88702da, type: 3}
   characterName: Lorenzo
   weight: 1
   rarity: 5

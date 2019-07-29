@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Actor_72429
   m_EditorClassIdentifier: 
   id: 72429
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 4f3ca491f1479ed4e8580b32dae66480, type: 3}
   characterName: Louis
   weight: 2
   rarity: 5

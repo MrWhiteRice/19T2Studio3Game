@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Actor_72323
   m_EditorClassIdentifier: 
   id: 72323
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: b0ce5e71ca89f744b9b2f9a3cabe5e96, type: 3}
   characterName: Jesse S
   weight: 1
   rarity: 5
