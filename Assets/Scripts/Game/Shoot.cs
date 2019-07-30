@@ -28,6 +28,7 @@ public class Shoot : MonoBehaviour
 	void Update()
     {
 		InputWeapon();
+		AnimWeapon();
 
 		Aim();
 		TryShoot();
@@ -55,12 +56,20 @@ public class Shoot : MonoBehaviour
 			//Special Weapon
 			case "4":
 				selectedWeapon = Gun.Special;
-				break;
+				break;*/
 
 			//Melee
 			case "5":
 				selectedWeapon = Gun.Melee;
-				break;*/
+				break;
+		}
+	}
+
+	void AnimWeapon()
+	{
+		if(selectedWeapon == Gun.Melee)
+		{
+			GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Idle_Sprites, SpriteAnim.State.Idle, true);
 		}
 	}
 
@@ -126,6 +135,7 @@ public class Shoot : MonoBehaviour
 						break;
 
 					case Gun.Melee:
+						GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Melee_Sprites, SpriteAnim.State.Melee, false);
 						break;
 				}
 			}

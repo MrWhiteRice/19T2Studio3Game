@@ -16,10 +16,6 @@ public class PlayerDataSP : MonoBehaviour
 
 	public CharacterParty character;
 
-	public SpriteRenderer[] sprites;
-	public Sprite[] idle;
-	public Sprite[] moving;
-
 	public LayerMask player;
 	public LayerMask ground;
 
