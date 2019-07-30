@@ -4,84 +4,84 @@ using UnityEngine.UI;
 
 public class SpriteAnim : MonoBehaviour
 {
+	//0 = torso, 1 = f/l arm, 2 = b/r arm, 3 = legs
 	public SpriteRenderer[] spriteObjects;
 
 	public SpriteList Idle_Sprites;
 	public SpriteList Walk_Sprites;
 
+	SpriteList playingSprites;
+
+	//currentstate of the animation
 	public enum State
 	{
 		Idle,
-		Walk
+		Walk,
+		Null
 	}
 	public State state;
-	public State lastState;
 
-	private int Cur_Frame = 0;
-	private float SecsPerFrame = 1;
+	public Sprite[] sprites;
+	int currentFrame;
 
-	void Awake()
+	public void PlayAnimation(SpriteList sprites, State s)
 	{
-		PlayAnimation(Idle_Sprites, Time.deltaTime);
+		if(s != state)
+		{
+			CancelInvoke("Animate");
+			currentFrame = 0;
+			playingSprites = sprites;
+			state = s;
+
+			Invoke("Animate", 0);
+		}
 	}
 
 	private void Update()
 	{
-		if(Input.GetAxisRaw("Horizontal") != 0)
-		{
-			if(GetComponent<PlayerDataSP>().IsTurn() && GetComponent<Movement>().enabled)
-			{
-				state = State.Walk;
-			}
-		}
-		else
-		{
-			state = State.Idle;
-		}
+		//if(Input.GetAxisRaw("Horizontal") != 0)
+		//{
+		//	if(GetComponent<PlayerDataSP>().IsTurn() && GetComponent<Movement>().enabled)
+		//	{
+		//		state = State.Walk;
+		//	}
+		//}
+		//else
+		//{
+		//	state = State.Idle;
+		//}
 
-		if(lastState != state)
-		{
-			switch(state)
-			{
-				case State.Idle:
-					PlayAnimation(Idle_Sprites, Time.deltaTime);
-					break;
+		//if(lastState != state)
+		//{
+		//	switch(state)
+		//	{
+		//		case State.Idle:
+		//			PlayAnimation(Idle_Sprites, Time.deltaTime);
+		//			break;
 
-				case State.Walk:
-					PlayAnimation(Walk_Sprites, Time.deltaTime);
-					break;
-			}
-		}
+		//		case State.Walk:
+		//			PlayAnimation(Walk_Sprites, Time.deltaTime);
+		//			break;
+		//	}
+		//}
 
-		lastState = state;
+		//lastState = state;
 	}
 
-	public void PlayAnimation(SpriteList sprites, float secPerFrame)
+	void Animate()
 	{
-		SecsPerFrame = secPerFrame;
-		StopCoroutine("AnimateSprite");
+		spriteObjects[0].sprite = playingSprites.Torso[currentFrame];
+		spriteObjects[1].sprite = playingSprites.Left[currentFrame];
+		spriteObjects[2].sprite = playingSprites.Right[currentFrame];
+		spriteObjects[3].sprite = playingSprites.Legs[currentFrame];
 
-		Cur_Frame = 0;
-		StartCoroutine("AnimateSprite", sprites);
-	}
-
-	IEnumerator AnimateSprite(SpriteList sprites)
-	{
-		yield return new WaitForSeconds(SecsPerFrame);
-
-		spriteObjects[0].sprite = sprites.Torso[Cur_Frame];
-		spriteObjects[1].sprite = sprites.Left[Cur_Frame];
-		spriteObjects[2].sprite = sprites.Right[Cur_Frame];
-		spriteObjects[3].sprite = sprites.Legs[Cur_Frame];
-
-		Cur_Frame++;
-
-		if(Cur_Frame > sprites.Legs.Length-1)
+		currentFrame++;
+		if(currentFrame > playingSprites.Torso.Length - 1)
 		{
-			Cur_Frame = 0;
+			currentFrame = 0;
 		}
 
-		StartCoroutine("AnimateSprite", sprites);
+		Invoke("Animate", Time.deltaTime*2);
 	}
 }
 

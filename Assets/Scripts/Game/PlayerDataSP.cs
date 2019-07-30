@@ -20,6 +20,9 @@ public class PlayerDataSP : MonoBehaviour
 	public Sprite[] idle;
 	public Sprite[] moving;
 
+	public LayerMask player;
+	public LayerMask ground;
+
 	void Start()
 	{
 		if(ID < 3)
@@ -54,19 +57,23 @@ public class PlayerDataSP : MonoBehaviour
 			}
 		}
 
-		//print("Characters/" + nameSearch + "/Default_Stance");
 		GetComponent<SpriteAnim>().Idle_Sprites.Torso = Resources.LoadAll<Sprite>("Characters/" + nameSearch + "/Default_Stance/" + nameSearch + "_Default_Torso");
 		GetComponent<SpriteAnim>().Idle_Sprites.Legs = Resources.LoadAll<Sprite>("Characters/" + nameSearch + "/Default_Stance/" + nameSearch + "_Default_Legs");
 		GetComponent<SpriteAnim>().Idle_Sprites.Left = Resources.LoadAll<Sprite>("Characters/" + nameSearch + "/Default_Stance/" + nameSearch + "_Default_FArm");
 		GetComponent<SpriteAnim>().Idle_Sprites.Right = Resources.LoadAll<Sprite>("Characters/" + nameSearch + "/Default_Stance/" + nameSearch + "_Default_BArm");
 
+		GetComponent<SpriteAnim>().Walk_Sprites.Torso = Resources.LoadAll<Sprite>("Characters/" + nameSearch + "/Walk/" + nameSearch + "_Walk_Torso");
+		GetComponent<SpriteAnim>().Walk_Sprites.Legs = Resources.LoadAll<Sprite>("Characters/" + nameSearch + "/Walk/" + nameSearch + "_Walk_Legs");
+		GetComponent<SpriteAnim>().Walk_Sprites.Left = Resources.LoadAll<Sprite>("Characters/" + nameSearch + "/Walk/" + nameSearch + "_Walk_FArm");
+		GetComponent<SpriteAnim>().Walk_Sprites.Right = Resources.LoadAll<Sprite>("Characters/" + nameSearch + "/Walk/" + nameSearch + "_Walk_BArm");
 
+		GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Idle_Sprites, SpriteAnim.State.Idle);
 	}
 
 	private void Update()
 	{
 		//TODO: Add controller support
-		//print(Input.GetKey("joystick button 0")); 
+		//print(Input.GetKey("joystick button 0"));
 		//1 b
 
 		//TODO: update death to actual death
@@ -130,6 +137,10 @@ public class PlayerDataSP : MonoBehaviour
 		{
 			FindObjectOfType<GameManager>().phase++;
 		}
+
+		SpriteAnim.State str = Input.GetAxisRaw("Horizontal") != 0 ? SpriteAnim.State.Walk : SpriteAnim.State.Idle;
+		SpriteList spr = Input.GetAxisRaw("Horizontal") != 0 ? GetComponent<SpriteAnim>().Walk_Sprites : GetComponent<SpriteAnim>().Idle_Sprites;
+		GetComponent<SpriteAnim>().PlayAnimation(spr, str);
 
 		GetComponent<Rigidbody>().constraints = rbc;
 

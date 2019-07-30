@@ -378,6 +378,12 @@ MonoBehaviour:
   - {fileID: 1528622023238944646}
   idle: []
   moving: []
+  player:
+    serializedVersion: 2
+    m_Bits: 512
+  ground:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!54 &-1740766124022386151
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -448,8 +454,8 @@ MonoBehaviour:
     Legs: []
     Left: []
     Right: []
-  state: 0
-  lastState: 0
+  state: 2
+  sprites: []
 --- !u!1 &4372908344435783071
 GameObject:
   m_ObjectHideFlags: 0
