@@ -46,28 +46,40 @@ public class PlayerDataSP : MonoBehaviour
 			healthText.color = Color.blue;
 		}
 
+		//rigidbody constraints
 		rbc = GetComponent<Rigidbody>().constraints;
 
+		//find correct character to load
 		string nameSearch = "";
 		foreach(Actor a in Resources.LoadAll<Actor>("RiceStuff/Actors"))
 		{
 			if(character.playerID == a.ID)
 			{
 				nameSearch = a.CharacterName;
+				print(nameSearch + "," + a.CharacterName);
 			}
 		}
 
-		GetComponent<SpriteAnim>().Idle_Sprites.Torso = Resources.LoadAll<Sprite>("Characters/" + nameSearch + "/Default_Stance/" + nameSearch + "_Default_Torso");
-		GetComponent<SpriteAnim>().Idle_Sprites.Legs = Resources.LoadAll<Sprite>("Characters/" + nameSearch + "/Default_Stance/" + nameSearch + "_Default_Legs");
-		GetComponent<SpriteAnim>().Idle_Sprites.Left = Resources.LoadAll<Sprite>("Characters/" + nameSearch + "/Default_Stance/" + nameSearch + "_Default_FArm");
-		GetComponent<SpriteAnim>().Idle_Sprites.Right = Resources.LoadAll<Sprite>("Characters/" + nameSearch + "/Default_Stance/" + nameSearch + "_Default_BArm");
+		//load animator
+		SpriteAnim anim = GetComponent<SpriteAnim>();
 
-		GetComponent<SpriteAnim>().Walk_Sprites.Torso = Resources.LoadAll<Sprite>("Characters/" + nameSearch + "/Walk/" + nameSearch + "_Walk_Torso");
-		GetComponent<SpriteAnim>().Walk_Sprites.Legs = Resources.LoadAll<Sprite>("Characters/" + nameSearch + "/Walk/" + nameSearch + "_Walk_Legs");
-		GetComponent<SpriteAnim>().Walk_Sprites.Left = Resources.LoadAll<Sprite>("Characters/" + nameSearch + "/Walk/" + nameSearch + "_Walk_FArm");
-		GetComponent<SpriteAnim>().Walk_Sprites.Right = Resources.LoadAll<Sprite>("Characters/" + nameSearch + "/Walk/" + nameSearch + "_Walk_BArm");
+		//Loading Animations
+		LoadSprites(anim.Idle_Sprites, nameSearch, "Default"); //Idle
+		LoadSprites(anim.Walk_Sprites, nameSearch, "Walk"); //Walk
+		LoadSprites(anim.Melee_Sprites, nameSearch, "Unarmed_Attack"); //Melee
 
-		GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Idle_Sprites, SpriteAnim.State.Idle);
+		//Start idle anim
+		anim.PlayAnimation(GetComponent<SpriteAnim>().Idle_Sprites, SpriteAnim.State.Idle, true);
+	}
+
+	void LoadSprites(SpriteList list, string charName, string animName)
+	{
+		//Access the correct anim in the path and load the anim to the character
+		print("Characters/" + charName + "/" + animName + "/" + charName + "_" + animName);
+		list.Torso = Resources.LoadAll<Sprite>("Characters/" + charName + "/" + animName + "/" + charName + "_" + animName + "_Torso");
+		list.Legs = Resources.LoadAll<Sprite>("Characters/" + charName + "/" + animName + "/" + charName + "_" + animName + "_Legs");
+		list.Left = Resources.LoadAll<Sprite>("Characters/" + charName + "/" + animName + "/" + charName + "_" + animName + "_FArm");
+		list.Right = Resources.LoadAll<Sprite>("Characters/" + charName + "/" + animName + "/" + charName + "_" + animName + "_BArm");
 	}
 
 	private void Update()

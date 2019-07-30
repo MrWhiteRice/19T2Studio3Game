@@ -9,15 +9,19 @@ public class SpriteAnim : MonoBehaviour
 
 	public SpriteList Idle_Sprites;
 	public SpriteList Walk_Sprites;
+	public SpriteList Melee_Sprites;
 
 	SpriteList playingSprites;
+
+	bool loop = true;
 
 	//currentstate of the animation
 	public enum State
 	{
 		Idle,
 		Walk,
-		Null
+		Null,
+		Melee
 	}
 	public State state;
 
@@ -37,35 +41,19 @@ public class SpriteAnim : MonoBehaviour
 		}
 	}
 
-	private void Update()
+	public void PlayAnimation(SpriteList sprites, State s, bool set)
 	{
-		//if(Input.GetAxisRaw("Horizontal") != 0)
-		//{
-		//	if(GetComponent<PlayerDataSP>().IsTurn() && GetComponent<Movement>().enabled)
-		//	{
-		//		state = State.Walk;
-		//	}
-		//}
-		//else
-		//{
-		//	state = State.Idle;
-		//}
+		loop = set;
 
-		//if(lastState != state)
-		//{
-		//	switch(state)
-		//	{
-		//		case State.Idle:
-		//			PlayAnimation(Idle_Sprites, Time.deltaTime);
-		//			break;
+		if(s != state)
+		{
+			CancelInvoke("Animate");
+			currentFrame = 0;
+			playingSprites = sprites;
+			state = s;
 
-		//		case State.Walk:
-		//			PlayAnimation(Walk_Sprites, Time.deltaTime);
-		//			break;
-		//	}
-		//}
-
-		//lastState = state;
+			Invoke("Animate", 0);
+		}
 	}
 
 	void Animate()
@@ -80,7 +68,8 @@ public class SpriteAnim : MonoBehaviour
 		{
 			currentFrame = 0;
 		}
-
+		
+		if(loop)
 		Invoke("Animate", Time.deltaTime*2);
 	}
 }

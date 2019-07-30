@@ -42,7 +42,7 @@ public class PartySelector : MonoBehaviour
 
 				foreach(Actor a in list)
 				{
-					if(a.CharacterName == FindObjectOfType<LootBox>().data.unlockedCharacters[x].characterName)
+					if(a.ID == FindObjectOfType<LootBox>().data.unlockedCharacters[x].ID)
 					{
 						b.GetComponent<Image>().sprite = a.Icon;
 					}
