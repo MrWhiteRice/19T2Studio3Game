@@ -30,19 +30,18 @@ public class SpriteAnim : MonoBehaviour
 
 	public void PlayAnimation(SpriteList sprites, State s)
 	{
-		if(s != state)
-		{
-			CancelInvoke("Animate");
-			currentFrame = 0;
-			playingSprites = sprites;
-			state = s;
-
-			Invoke("Animate", 0);
-		}
+		PlayAnim(sprites, s, true);
 	}
 
 	public void PlayAnimation(SpriteList sprites, State s, bool set)
 	{
+		PlayAnim(sprites, s, set);
+	}
+
+	void PlayAnim(SpriteList sprites, State s, bool set)
+	{
+		//currentFrame = 0;
+
 		loop = set;
 
 		if(s != state)
@@ -66,10 +65,17 @@ public class SpriteAnim : MonoBehaviour
 		currentFrame++;
 		if(currentFrame > playingSprites.Torso.Length - 1)
 		{
-			currentFrame = 0;
+			if(loop)
+			{
+				currentFrame = 0;
+			}
+			else
+			{
+				currentFrame = 0;
+				PlayAnimation(Idle_Sprites, State.Idle, false);
+			}
 		}
 		
-		if(loop)
 		Invoke("Animate", Time.deltaTime*2);
 	}
 }

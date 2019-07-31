@@ -24,6 +24,11 @@ public class LootBox : MonoBehaviour
 		SaveSystem.SaveData(data);
 	}
 
+	private void OnDisable()
+	{
+		Save();
+	}
+
 	public void MultiRoll()
 	{
 		CharacterRoll();

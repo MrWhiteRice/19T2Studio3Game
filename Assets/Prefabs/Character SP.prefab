@@ -349,6 +349,7 @@ MonoBehaviour:
   gun: {fileID: 3209082044903046955}
   shoot: {fileID: 6296523901645681565, guid: 0bc9b591ba533a44d94fb27ff78ecce9, type: 3}
   grenade: {fileID: 6076532265113867400, guid: 06b6aa93528bff54dbc9db7424642cad, type: 3}
+  melee: {fileID: 6076532265113867400, guid: 43717d91a9955b849b8370e2efc6f4c9, type: 3}
   selectedWeapon: 1
 --- !u!114 &6524276184389340516
 MonoBehaviour:
@@ -371,13 +372,6 @@ MonoBehaviour:
     weaponID: 0
     classID: 0
     traversalID: 0
-  sprites:
-  - {fileID: 1351896489421350368}
-  - {fileID: 5006672023324131334}
-  - {fileID: 7122791389879739780}
-  - {fileID: 1528622023238944646}
-  idle: []
-  moving: []
   player:
     serializedVersion: 2
     m_Bits: 512
@@ -450,6 +444,11 @@ MonoBehaviour:
     Left: []
     Right: []
   Walk_Sprites:
+    Torso: []
+    Legs: []
+    Left: []
+    Right: []
+  Melee_Sprites:
     Torso: []
     Legs: []
     Left: []
@@ -1002,7 +1001,7 @@ Animator:
   m_GameObject: {fileID: 6193192228104032191}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: dec541ae40d2fe743b4bed2d015644f2, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
 
 		if(phase == TurnPhase.Damage)
 		{
-			if(FindObjectsOfType<Grenade>().Length == 0)
+			if(GameObject.FindGameObjectsWithTag("Weapon").Length == 0)
 			{
 				NextPhase();
 			}

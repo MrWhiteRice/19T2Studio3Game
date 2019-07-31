@@ -52,7 +52,7 @@ public class PlayerDataSP : MonoBehaviour
 			if(character.playerID == a.ID)
 			{
 				nameSearch = a.CharacterName;
-				print(nameSearch + "," + a.CharacterName);
+				//REMOVE print(nameSearch + "," + a.CharacterName);
 			}
 		}
 
@@ -60,22 +60,40 @@ public class PlayerDataSP : MonoBehaviour
 		SpriteAnim anim = GetComponent<SpriteAnim>();
 
 		//Loading Animations
-		LoadSprites(anim.Idle_Sprites, nameSearch, "Default"); //Idle
-		LoadSprites(anim.Walk_Sprites, nameSearch, "Walk"); //Walk
-		LoadSprites(anim.Melee_Sprites, nameSearch, "Unarmed_Attack"); //Melee
+		LoadSprites(anim.Idle_Sprites, nameSearch, "Default", 1); //Idle
+		LoadSprites(anim.Walk_Sprites, nameSearch, "Walk", 8); //Walk
+		LoadSprites(anim.Melee_Sprites, nameSearch, "Unarmed_Attack", 5); //Melee
 
 		//Start idle anim
 		anim.PlayAnimation(GetComponent<SpriteAnim>().Idle_Sprites, SpriteAnim.State.Idle, true);
 	}
 
-	void LoadSprites(SpriteList list, string charName, string animName)
+	void LoadSprites(SpriteList list, string charName, string animName, int frames)
 	{
 		//Access the correct anim in the path and load the anim to the character
 		print("Characters/" + charName + "/" + animName + "/" + charName + "_" + animName);
-		list.Torso = Resources.LoadAll<Sprite>("Characters/" + charName + "/" + animName + "/" + charName + "_" + animName + "_Torso");
-		list.Legs = Resources.LoadAll<Sprite>("Characters/" + charName + "/" + animName + "/" + charName + "_" + animName + "_Legs");
-		list.Left = Resources.LoadAll<Sprite>("Characters/" + charName + "/" + animName + "/" + charName + "_" + animName + "_FArm");
-		list.Right = Resources.LoadAll<Sprite>("Characters/" + charName + "/" + animName + "/" + charName + "_" + animName + "_BArm");
+		list.Torso = PrepareSprites(Resources.Load<Texture2D>("Characters/" + charName + "/" + animName + "/" + charName + "_" + animName + "_Torso"), frames);
+		list.Legs = PrepareSprites(Resources.Load<Texture2D>("Characters/" + charName + "/" + animName + "/" + charName + "_" + animName + "_Legs"), frames);
+		list.Left = PrepareSprites(Resources.Load<Texture2D>("Characters/" + charName + "/" + animName + "/" + charName + "_" + animName + "_FArm"), frames);
+		list.Right = PrepareSprites(Resources.Load<Texture2D>("Characters/" + charName + "/" + animName + "/" + charName + "_" + animName + "_BArm"), frames);
+	}
+
+	Sprite[] PrepareSprites(Texture2D spr, int frames)
+	{
+		//make temp array that we can return
+		Sprite[] filtered = new Sprite[frames];
+
+		//set filter mode to point so we dont get blurring
+		spr.filterMode = FilterMode.Point;
+
+		//slice sprite into frames
+		for(int x = 0; x < frames; x++)
+		{
+			//create a sprite from the texture using the frame length provided
+			filtered[x] = Sprite.Create(spr, new Rect(x * (spr.width / frames), 0, (spr.width / frames), spr.height), Vector2.one*0.5f);
+		}
+
+		return filtered;
 	}
 
 	private void Update()
@@ -93,26 +111,31 @@ public class PlayerDataSP : MonoBehaviour
 			}
 		}
 
+		//check if its my turn
 		if(IsTurn())
 		{
+			//Check what phase we're in
 			switch(FindObjectOfType<GameManager>().phase)
 			{
+				//movement phase
 				case GameManager.TurnPhase.Move:
 					MovePhase();
 					break;
 
+				//attack phase
 				case GameManager.TurnPhase.Shoot:
 					ShootPhase();
 					break;
 			}
 
+			//disable if not in a "controllable" phase
 			if((int)FindObjectOfType<GameManager>().phase > 1)
 			{
 				GetComponent<Movement>().enabled = false;
 				GetComponent<Shoot>().enabled = false;
 			}
 
-			//check death | skip turn
+			//check death || skip turn
 			if(health <= 0)
 			{
 				FindObjectOfType<GameManager>().NextTurn();

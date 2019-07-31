@@ -8,6 +8,7 @@ public class Shoot : MonoBehaviour
 	Movement move;
 	public GameObject shoot;
 	public GameObject grenade;
+	public GameObject melee;
 
 	public enum Gun
 	{
@@ -135,12 +136,18 @@ public class Shoot : MonoBehaviour
 						break;
 
 					case Gun.Melee:
+						b = Instantiate(melee);
+
+						b.transform.position = gun.transform.GetChild(0).transform.position;
+						b.transform.rotation = gun.transform.rotation;
+
 						GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Melee_Sprites, SpriteAnim.State.Melee, false);
 						break;
 				}
 			}
 
 			FindObjectOfType<GameManager>().phase++;
+			enabled = false;
 		}
 	}
 }
