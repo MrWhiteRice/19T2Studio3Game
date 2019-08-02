@@ -14,7 +14,7 @@ public class Grenade : MonoBehaviour
 
 		if(timer <= 0)
 		{
-			FindObjectOfType<QuadtreeComponent>().Quadtree.InsertCircle(false, transform.position, explosionRadius);
+			FindObjectOfType<QuadtreeComponent>().Quadtree.InsertCircle(0, transform.position, explosionRadius);
 			Destroy(gameObject);
 
 			foreach(Collider hit in Physics.OverlapSphere(transform.position, explosionRadius, player))

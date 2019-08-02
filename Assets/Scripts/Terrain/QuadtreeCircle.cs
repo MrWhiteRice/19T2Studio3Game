@@ -12,11 +12,11 @@ public class QuadtreeCircle : MonoBehaviour
 
 		if(Input.GetMouseButtonDown(0))
 		{
-			quadtree.Quadtree.InsertCircle(true, pos, .5f);
+			quadtree.Quadtree.InsertCircle(1, pos, .5f);
 		}
 		else if(Input.GetMouseButtonDown(1))
 		{
-			quadtree.Quadtree.InsertCircle(false, pos, .5f);
+			quadtree.Quadtree.InsertCircle(0, pos, .5f);
 		}
     }
 }

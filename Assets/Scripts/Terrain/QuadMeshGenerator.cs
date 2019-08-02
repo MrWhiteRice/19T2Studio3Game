@@ -7,6 +7,7 @@ public class QuadMeshGenerator : MonoBehaviour
 	public bool generate = false;
 	public QuadtreeComponent quadtree;
 	public Material mat;
+	public Material mat2;
 
 	private GameObject lastMesh;
 
@@ -39,10 +40,12 @@ public class QuadMeshGenerator : MonoBehaviour
 		List<Vector3> verts = new List<Vector3>();
 		List<int> tris = new List<int>();
 		List<Vector2> uvs = new List<Vector2>();
+		List<Vector2> uvsGrass = new List<Vector2>();
 
 		foreach(var leaf in quadtree.Quadtree.GetLeafNodes())
 		{
-			if(leaf.Type)
+			//change to switch
+			if(leaf.Type != 0)//type 1
 			{
 				Vector3 ul = new Vector3(leaf.Position.x - leaf.Size * 0.5f, leaf.Position.y + leaf.Size * 0.5f);
 				var initialIndex = verts.Count;
@@ -53,11 +56,32 @@ public class QuadMeshGenerator : MonoBehaviour
 				verts.Add(ul + Vector3.down * leaf.Size);
 				verts.Add(ul + Vector3.down * leaf.Size + Vector3.right * leaf.Size);
 
-				//setting uvs - these are the same as the verts
-				uvs.Add(ul);
-				uvs.Add(ul + Vector3.right * leaf.Size);
-				uvs.Add(ul + Vector3.down * leaf.Size);
-				uvs.Add(ul + Vector3.down * leaf.Size + Vector3.right * leaf.Size);
+				if(leaf.Type == 1)
+				{
+					//setting uvs - these are the same as the verts
+					uvs.Add(ul);
+					uvs.Add(ul + Vector3.right * leaf.Size);
+					uvs.Add(ul + Vector3.down * leaf.Size);
+					uvs.Add(ul + Vector3.down * leaf.Size + Vector3.right * leaf.Size);
+
+					uvsGrass.Add(Vector2.one * .035f);
+					uvsGrass.Add(Vector2.one * .035f);
+					uvsGrass.Add(Vector2.one * .035f);
+					uvsGrass.Add(Vector2.one * .035f);
+				}
+				else if(leaf.Type == 2)
+				{
+					//setting uvs - these are the same as the verts
+					uvsGrass.Add(ul);
+					uvsGrass.Add(ul + Vector3.right * leaf.Size);
+					uvsGrass.Add(ul + Vector3.down * leaf.Size);
+					uvsGrass.Add(ul + Vector3.down * leaf.Size + Vector3.right * leaf.Size);
+
+					uvs.Add(Vector2.one * .035f);
+					uvs.Add(Vector2.one * .035f);
+					uvs.Add(Vector2.one * .035f);
+					uvs.Add(Vector2.one * .035f);
+				}
 
 				//tri 1
 				tris.Add(initialIndex);
@@ -74,13 +98,15 @@ public class QuadMeshGenerator : MonoBehaviour
 		mesh.SetVertices(verts);
 		mesh.SetTriangles(tris, 0);
 		mesh.SetUVs(0, uvs);
+		mesh.SetUVs(1, uvsGrass);
 
 		MeshFilter filter = terrain.AddComponent<MeshFilter>();
 		MeshRenderer renderer = terrain.AddComponent<MeshRenderer>();
 		MeshCollider col = terrain.AddComponent<MeshCollider>();
 		col.sharedMesh = mesh;
 
-		renderer.material = mat;
+		renderer.materials = new Material[] {mat, mat2};
+
 		filter.mesh = mesh;
 
 		lastMesh = terrain;
