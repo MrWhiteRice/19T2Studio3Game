@@ -63,11 +63,6 @@ public class QuadMeshGenerator : MonoBehaviour
 					uvs.Add(ul + Vector3.right * leaf.Size);
 					uvs.Add(ul + Vector3.down * leaf.Size);
 					uvs.Add(ul + Vector3.down * leaf.Size + Vector3.right * leaf.Size);
-
-					uvsGrass.Add(Vector2.one * .035f);
-					uvsGrass.Add(Vector2.one * .035f);
-					uvsGrass.Add(Vector2.one * .035f);
-					uvsGrass.Add(Vector2.one * .035f);
 				}
 				else if(leaf.Type == 2)
 				{
@@ -76,11 +71,6 @@ public class QuadMeshGenerator : MonoBehaviour
 					uvsGrass.Add(ul + Vector3.right * leaf.Size);
 					uvsGrass.Add(ul + Vector3.down * leaf.Size);
 					uvsGrass.Add(ul + Vector3.down * leaf.Size + Vector3.right * leaf.Size);
-
-					uvs.Add(Vector2.one * .035f);
-					uvs.Add(Vector2.one * .035f);
-					uvs.Add(Vector2.one * .035f);
-					uvs.Add(Vector2.one * .035f);
 				}
 
 				//tri 1
