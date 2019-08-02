@@ -9,16 +9,16 @@ public class QuadtreeComponent : MonoBehaviour
 	public float size = 5;
 	public int depth = 1;
 
-	Quadtree<bool> quadtree;
+	Quadtree<int> quadtree;
 
-	public Quadtree<bool> Quadtree
+	public Quadtree<int> Quadtree
 	{
 		get { return quadtree; }
 	}
 
 	private void Start()
 	{
-		quadtree = new Quadtree<bool>(this.transform.position, size, depth);
+		quadtree = new Quadtree<int>(this.transform.position, size, depth);
 	}
 
 	//private void OnDrawGizmos()

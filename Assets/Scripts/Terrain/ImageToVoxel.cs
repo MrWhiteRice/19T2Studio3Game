@@ -6,7 +6,7 @@ public class ImageToVoxel : MonoBehaviour
 {
 	public Texture2D image;
 	public QuadtreeComponent quadtree;
-	public float threshold = 0.5f;
+	float threshold = 1f;
 
     void Start()
     {
@@ -26,9 +26,13 @@ public class ImageToVoxel : MonoBehaviour
 				pos.y += (y - cells / 2) / (float)cells * quadtree.size;
 
 				Color pixel = image.GetPixelBilinear(x / (float)cells, y / (float)cells);
-				if(pixel.r > threshold)
+				if(pixel.r == threshold)
 				{
-					quadtree.Quadtree.InsertCircle(true, pos, 0.0001f);
+					quadtree.Quadtree.InsertCircle(1, pos, 0.0001f);
+				}
+				else if(pixel.g == 1)
+				{
+					quadtree.Quadtree.InsertCircle(2, pos, 0.0001f);
 				}
 			}
 		}
