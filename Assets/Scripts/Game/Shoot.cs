@@ -72,6 +72,10 @@ public class Shoot : MonoBehaviour
 		{
 			GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Idle_Sprites, SpriteAnim.State.Idle, true);
 		}
+		else
+		{
+			GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Aim, SpriteAnim.State.Aim, true);
+		}
 	}
 
 	void Aim()

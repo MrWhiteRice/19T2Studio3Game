@@ -63,6 +63,7 @@ public class PlayerDataSP : MonoBehaviour
 		LoadSprites(anim.Idle_Sprites, nameSearch, "Default", 1); //Idle
 		LoadSprites(anim.Walk_Sprites, nameSearch, "Walk", 8); //Walk
 		LoadSprites(anim.Melee_Sprites, nameSearch, "Unarmed_Attack", 5); //Melee
+		LoadSprites(anim.Aim, nameSearch, "Rifle_Aim_1", 1); //Gun Aim
 
 		//Start idle anim
 		anim.PlayAnimation(GetComponent<SpriteAnim>().Idle_Sprites, SpriteAnim.State.Idle, true);

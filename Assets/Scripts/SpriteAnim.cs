@@ -10,6 +10,9 @@ public class SpriteAnim : MonoBehaviour
 	public SpriteList Idle_Sprites;
 	public SpriteList Walk_Sprites;
 	public SpriteList Melee_Sprites;
+	public SpriteList Hurt; //implement
+	public SpriteList Jump; //implement
+	public SpriteList Aim; //implement
 
 	SpriteList playingSprites;
 
@@ -21,7 +24,8 @@ public class SpriteAnim : MonoBehaviour
 		Idle,
 		Walk,
 		Null,
-		Melee
+		Melee,
+		Aim
 	}
 	public State state;
 
