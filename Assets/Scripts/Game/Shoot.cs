@@ -57,12 +57,12 @@ public class Shoot : MonoBehaviour
 			//Special Weapon
 			case "4":
 				selectedWeapon = Gun.Special;
-				break;*/
+				break;
 
 			//Melee
 			case "5":
 				selectedWeapon = Gun.Melee;
-				break;
+				break;*/
 		}
 	}
 
@@ -101,7 +101,8 @@ public class Shoot : MonoBehaviour
 
 	void TryShoot()
 	{
-		if(Input.GetKeyDown(KeyCode.Space))
+		//if(Input.GetKeyDown(KeyCode.Space))
+		if(Input.GetMouseButtonDown(0))
 		{
 			int flip = move.facingRight ? -1 : 1;
 

@@ -11,7 +11,7 @@ public class Movement : MonoBehaviour
 	Rigidbody rb;
 	public GameObject playerSpr;
 
-	bool grounded;
+	public bool grounded;
 	bool jump;
 	bool upJump;
 	public bool facingRight = true;

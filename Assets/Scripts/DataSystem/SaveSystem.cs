@@ -6,7 +6,7 @@ public static class SaveSystem
 {
 	public static void SaveData(DataContainer box)
 	{
-		string path = Application.dataPath + "/RiceData1.Data";
+		string path = Application.persistentDataPath + "/RiceData1.Data";
 		BinaryFormatter formatter = new BinaryFormatter();
 
 		FileStream stream = new FileStream(path, FileMode.Create);
@@ -17,8 +17,8 @@ public static class SaveSystem
 
 	public static DataContainer loadData()
 	{
-		string path = Application.dataPath + "/RiceData1.Data";
-
+		string path = Application.persistentDataPath+ "/RiceData1.Data";
+		Debug.Log(Application.persistentDataPath);
 		if(File.Exists(path))
 		{
 			BinaryFormatter formatter = new BinaryFormatter();

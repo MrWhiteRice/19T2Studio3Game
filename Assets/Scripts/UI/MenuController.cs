@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
@@ -11,7 +12,18 @@ public class MenuController : MonoBehaviour
 	{
 		foreach(GameObject obj in menu)
 		{
+			if(obj != null)
 			obj.SetActive(false);
 		}
+	}
+
+	public void PlayGame()
+	{
+		SceneManager.LoadScene("Terrain 0");
+	}
+
+	public void Quit()
+	{
+		Application.Quit();
 	}
 }

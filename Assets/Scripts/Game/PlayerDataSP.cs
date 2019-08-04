@@ -110,6 +110,11 @@ public class PlayerDataSP : MonoBehaviour
 			{
 				spr.flipY = true;
 			}
+
+			if(FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.Move)
+			{
+				Destroy(gameObject);
+			}
 		}
 
 		//check if its my turn
@@ -172,7 +177,11 @@ public class PlayerDataSP : MonoBehaviour
 
 		SpriteAnim.State str = Input.GetAxisRaw("Horizontal") != 0 ? SpriteAnim.State.Walk : SpriteAnim.State.Idle;
 		SpriteList spr = Input.GetAxisRaw("Horizontal") != 0 ? GetComponent<SpriteAnim>().Walk_Sprites : GetComponent<SpriteAnim>().Idle_Sprites;
-		GetComponent<SpriteAnim>().PlayAnimation(spr, str);
+
+		if(GetComponent<Movement>().grounded)
+		{
+			GetComponent<SpriteAnim>().PlayAnimation(spr, str);
+		}
 
 		GetComponent<Rigidbody>().constraints = rbc;
 
