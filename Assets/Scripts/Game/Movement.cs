@@ -121,16 +121,19 @@ public class Movement : MonoBehaviour
 
 	void Flip()
 	{
-		//calc which dir we're facing based on movement speed
-		if(horizontal != 0)
+		if(grounded)
 		{
-			facingRight = horizontal < 0 ? true : false;
-		}
+			//calc which dir we're facing based on movement speed
+			if(horizontal != 0)
+			{
+				facingRight = horizontal < 0 ? true : false;
+			}
 
-		//set movement dir
-		foreach(SpriteRenderer spr in playerSpr.GetComponentsInChildren<SpriteRenderer>())
-		{
-			spr.flipX = facingRight;
+			//set movement dir
+			foreach(SpriteRenderer spr in playerSpr.GetComponentsInChildren<SpriteRenderer>())
+			{
+				spr.flipX = facingRight;
+			}
 		}
 	}
 }

@@ -18,6 +18,10 @@ public class GameUI : MonoBehaviour
 
 	GameObject win;
 
+	public Image gun;
+	public Image melee;
+	public Image grenade;
+
 	private void Update()
 	{
 		int red = 0;
@@ -123,6 +127,7 @@ public class GameUI : MonoBehaviour
 		}
 
 		ControlsText();
+		WeaponSelected();
 	}
 
 	public void ControlsText()
@@ -152,6 +157,55 @@ public class GameUI : MonoBehaviour
 		{
 			FindObjectOfType<GameManager>().NextPhase();
 		}
+	}
+
+	void WeaponSelected()
+	{
+		if(FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.Shoot)
+		{
+			if(!gun.enabled)
+			{
+				gun.enabled = true;
+				melee.enabled = true;
+				grenade.enabled = true;
+			}
+
+			foreach(PlayerDataSP player in FindObjectsOfType<PlayerDataSP>())
+			{
+				if(player.IsTurn())
+				{
+					switch(player.GetComponent<Shoot>().selectedWeapon)
+					{
+						case Shoot.Gun.Class:
+							SetColor(gun);
+							break;
+
+						case Shoot.Gun.Melee:
+							SetColor(melee);
+							break;
+
+						case Shoot.Gun.Grenade:
+							SetColor(grenade);
+							break;
+					}
+				}
+			}
+		}
+		else
+		{
+			gun.enabled = false;
+			melee.enabled = false;
+			grenade.enabled = false;
+		}
+	}
+
+	void SetColor(Image img)
+	{
+		gun.color = Color.white;
+		melee.color = Color.white;
+		grenade.color = Color.white;
+
+		img.color = Color.yellow;
 	}
 
 	//public void SkipTurn()

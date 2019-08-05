@@ -62,7 +62,15 @@ public class PlayerDataSP : MonoBehaviour
 		//Loading Animations
 		LoadSprites(anim.Idle_Sprites, nameSearch, "Default", 1); //Idle
 		LoadSprites(anim.Walk_Sprites, nameSearch, "Walk", 8); //Walk
+
 		LoadSprites(anim.Melee_Sprites, nameSearch, "Unarmed_Attack", 5); //Melee
+		LoadSprites(anim.Melee_Idle_Sprites, nameSearch, "Melee_Stance_1", 1); //Melee Idle
+
+		LoadSprites(anim.Grenade_Sprites, nameSearch, "Grenade", 5); //Grenade
+
+		LoadSprites(anim.Hurt_Sprites, nameSearch, "Hurt", 3); //Hurt
+		LoadSprites(anim.Jump_Sprites, nameSearch, "Jump", 4); //Jump
+
 		LoadSprites(anim.Aim, nameSearch, "Rifle_Aim_1", 1); //Gun Aim
 
 		//Start idle anim
@@ -153,6 +161,9 @@ public class PlayerDataSP : MonoBehaviour
 		}
 		else
 		{
+			GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Idle_Sprites, SpriteAnim.State.Idle);
+			GetComponent<SpriteAnim>().weaponSlot.sprite = null;
+
 			if(FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.End || FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.Damage)
 			{
 				GetComponent<Rigidbody>().constraints = rbc;
@@ -170,6 +181,7 @@ public class PlayerDataSP : MonoBehaviour
 
 	void MovePhase()
 	{
+		//force shoot phase
 		if(stamina <= 0)
 		{
 			FindObjectOfType<GameManager>().phase++;

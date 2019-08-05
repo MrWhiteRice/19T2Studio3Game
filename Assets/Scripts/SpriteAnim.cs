@@ -1,22 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
 public class SpriteAnim : MonoBehaviour
 {
 	//0 = torso, 1 = f/l arm, 2 = b/r arm, 3 = legs
 	public SpriteRenderer[] spriteObjects;
 
-	public SpriteList Idle_Sprites;
-	public SpriteList Walk_Sprites;
-	public SpriteList Melee_Sprites;
-	public SpriteList Hurt; //implement
-	public SpriteList Jump; //implement
-	public SpriteList Aim; //implement
+	[HideInInspector] public SpriteList Idle_Sprites;
+	[HideInInspector] public SpriteList Walk_Sprites;
+
+	[HideInInspector] public SpriteList Melee_Sprites;
+	[HideInInspector] public SpriteList Melee_Idle_Sprites;
+
+	[HideInInspector] public SpriteList Grenade_Sprites;
+
+	[HideInInspector] public SpriteList Hurt_Sprites;
+	[HideInInspector] public SpriteList Jump_Sprites;
+	[HideInInspector] public SpriteList Aim;
+
+	public Sprite weapon;
+	public SpriteRenderer weaponSlot;
 
 	SpriteList playingSprites;
 
 	bool loop = true;
+	bool lockAnim;
 
 	//currentstate of the animation
 	public enum State
@@ -25,28 +33,33 @@ public class SpriteAnim : MonoBehaviour
 		Walk,
 		Null,
 		Melee,
-		Aim
+		Aim,
+		Grenade
 	}
-	public State state;
+	[HideInInspector]public State state = State.Null;
 
-	public Sprite[] sprites;
+	[HideInInspector]public Sprite[] sprites;
 	int currentFrame;
 
 	public void PlayAnimation(SpriteList sprites, State s)
 	{
-		PlayAnim(sprites, s, true);
+		PlayAnim(sprites, s, true, false);
 	}
 
 	public void PlayAnimation(SpriteList sprites, State s, bool set)
 	{
-		PlayAnim(sprites, s, set);
+		PlayAnim(sprites, s, set, false);
 	}
 
-	void PlayAnim(SpriteList sprites, State s, bool set)
+	public void PlayAnimation(SpriteList sprites, State s, bool set, bool lockAnim)
 	{
-		//currentFrame = 0;
+		PlayAnim(sprites, s, set, lockAnim);
+	}
 
+	void PlayAnim(SpriteList sprites, State s, bool set, bool lockAnim)
+	{
 		loop = set;
+		this.lockAnim = lockAnim;
 
 		if(s != state)
 		{
@@ -65,6 +78,12 @@ public class SpriteAnim : MonoBehaviour
 		spriteObjects[1].sprite = playingSprites.Left[currentFrame];
 		spriteObjects[2].sprite = playingSprites.Right[currentFrame];
 		spriteObjects[3].sprite = playingSprites.Legs[currentFrame];
+
+		if(lockAnim)
+		{
+			CancelInvoke("Animate");
+			return;
+		}
 
 		currentFrame++;
 		if(currentFrame > playingSprites.Torso.Length - 1)

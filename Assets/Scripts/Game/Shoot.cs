@@ -10,6 +10,8 @@ public class Shoot : MonoBehaviour
 	public GameObject grenade;
 	public GameObject melee;
 
+	bool attack;
+
 	public enum Gun
 	{
 		Class,
@@ -20,6 +22,7 @@ public class Shoot : MonoBehaviour
 	}
 
 	public Gun selectedWeapon;
+	public GameObject character;
 
 	void Start()
 	{
@@ -57,24 +60,36 @@ public class Shoot : MonoBehaviour
 			//Special Weapon
 			case "4":
 				selectedWeapon = Gun.Special;
-				break;
+				break;*/
 
 			//Melee
-			case "5":
+			case "3":
 				selectedWeapon = Gun.Melee;
-				break;*/
+				break;
 		}
 	}
 
 	void AnimWeapon()
 	{
+		if(attack)
+		{
+			return;
+		}
+
+		GetComponent<SpriteAnim>().weaponSlot.sprite = null;
+
 		if(selectedWeapon == Gun.Melee)
 		{
 			GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Idle_Sprites, SpriteAnim.State.Idle, true);
 		}
-		else
+		else if(selectedWeapon == Gun.Class)
 		{
 			GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Aim, SpriteAnim.State.Aim, true);
+			GetComponent<SpriteAnim>().weaponSlot.sprite = GetComponent<SpriteAnim>().weapon;
+		}
+		else if(selectedWeapon == Gun.Grenade)
+		{
+			GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Grenade_Sprites, SpriteAnim.State.Grenade, false, true);
 		}
 	}
 
@@ -84,7 +99,18 @@ public class Shoot : MonoBehaviour
 		Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
 		//check if dir is right or left, 1 = right, -1 = left
-		int flip = dir.x > 0 ? 1 : -1;
+		bool flip = dir.x < 0 ? true : false;
+
+		//move gun sprite depending on face'd direction
+		Vector3 tra = GetComponent<SpriteAnim>().weaponSlot.transform.localPosition;
+		tra.x = dir.x > 0 ? -0.075f : 0.075f;
+		GetComponent<SpriteAnim>().weaponSlot.transform.localPosition = tra;
+
+		//set movement dir
+		foreach(SpriteRenderer spr in character.GetComponentsInChildren<SpriteRenderer>())
+		{
+			spr.flipX = flip;
+		}
 
 		//convert gunpos to screenpos && zero out z axis
 		Vector3 mousePos = Input.mousePosition;
@@ -104,7 +130,7 @@ public class Shoot : MonoBehaviour
 		//if(Input.GetKeyDown(KeyCode.Space))
 		if(Input.GetMouseButtonDown(0))
 		{
-			int flip = move.facingRight ? -1 : 1;
+			attack = true;
 
 			//TODO: UPDATE TO MP
 			if(!GetComponent<PlayerDataSP>())
@@ -114,6 +140,7 @@ public class Shoot : MonoBehaviour
 			else
 			{
 				GameObject b;
+				GetComponent<SpriteAnim>().state = SpriteAnim.State.Null;
 
 				//Test which weapon
 				switch(selectedWeapon)
@@ -127,11 +154,7 @@ public class Shoot : MonoBehaviour
 						break;
 
 					case Gun.Grenade:
-						b = Instantiate(grenade);
-
-						b.transform.position = gun.transform.GetChild(0).transform.position;
-						b.transform.rotation = gun.transform.rotation;
-						b.GetComponent<Rigidbody>().velocity = b.transform.right * 5;
+						ThrowGrenade();
 						break;
 
 					case Gun.Utility:
@@ -154,5 +177,17 @@ public class Shoot : MonoBehaviour
 			FindObjectOfType<GameManager>().phase++;
 			enabled = false;
 		}
+	}
+
+	void ThrowGrenade()
+	{
+		GetComponent<SpriteAnim>().state = SpriteAnim.State.Null;
+		GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Grenade_Sprites, SpriteAnim.State.Grenade, false);
+
+		GameObject b = Instantiate(grenade);
+
+		b.transform.position = gun.transform.GetChild(0).transform.position;
+		b.transform.rotation = gun.transform.rotation;
+		b.GetComponent<Rigidbody>().velocity = b.transform.right * 5;
 	}
 }
