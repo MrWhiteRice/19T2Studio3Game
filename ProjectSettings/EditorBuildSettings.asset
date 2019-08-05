@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/LootMenu Beta.unity
     guid: e82420cac5ab7ec428c0093c0e17c53a
   - enabled: 1
-    path: Assets/Scenes/Terrain 0.unity
-    guid: 1f9016127d281954cbaa51927fc3bf3c
+    path: Assets/Scenes/Terrain 2.unity
+    guid: 6f9c468d5070be740b79cf28c65918f7
   m_configObjects: {}
