@@ -19,7 +19,7 @@ public class MenuController : MonoBehaviour
 
 	public void PlayGame()
 	{
-		SceneManager.LoadScene("Terrain 0");
+		SceneManager.LoadScene("Terrain 2");
 	}
 
 	public void Quit()

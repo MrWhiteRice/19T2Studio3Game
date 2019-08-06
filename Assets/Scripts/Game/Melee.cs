@@ -4,14 +4,27 @@ using UnityEngine;
 
 public class Melee : MonoBehaviour
 {
-	float offset = 1;
+	float offset = .15f;
+	public LayerMask player;
 
     void Update()
     {
 		if(offset <= 0)
 		{
+			foreach(Collider hit in Physics.OverlapSphere(transform.position, 0.125f, player))
+			{
+				if(hit is CapsuleCollider == false)
+				{
+					continue;
+				}
 
-			print("Damage Step!");
+				Vector3 forceDir = hit.transform.position - transform.position;
+				hit.GetComponent<Rigidbody>().velocity = (forceDir + Vector3.up) * 5;
+
+				float damageMod = 20;
+				hit.GetComponent<PlayerDataSP>().health -= (Mathf.Abs(damageMod));
+			}
+
 			Destroy(gameObject);
 		}
 		else

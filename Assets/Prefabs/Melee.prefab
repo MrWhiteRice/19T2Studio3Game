@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6076532265113867412}
   - component: {fileID: 6076532265113867413}
   - component: {fileID: 6465566510279412218}
-  - component: {fileID: 8520021261510941049}
   - component: {fileID: 6664085219480978775}
   m_Layer: 0
   m_Name: Melee
@@ -115,19 +114,6 @@ MonoBehaviour:
     i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
---- !u!135 &8520021261510941049
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6076532265113867400}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.125
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6664085219480978775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,3 +126,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ebf148cc9a7f94e8a070ef1791befb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player:
+    serializedVersion: 2
+    m_Bits: 512

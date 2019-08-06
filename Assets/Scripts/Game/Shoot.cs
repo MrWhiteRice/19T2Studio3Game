@@ -29,6 +29,16 @@ public class Shoot : MonoBehaviour
 		move = GetComponent<Movement>();
 	}
 
+	private void OnEnable()
+	{
+		gun.gameObject.SetActive(true);
+	}
+
+	private void OnDisable()
+	{
+		gun.gameObject.SetActive(false);
+	}
+
 	void Update()
     {
 		InputWeapon();
