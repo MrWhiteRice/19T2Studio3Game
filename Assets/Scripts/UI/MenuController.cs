@@ -26,4 +26,10 @@ public class MenuController : MonoBehaviour
 	{
 		Application.Quit();
 	}
+
+	public void Payment(int amount)
+	{
+		print("adding " + amount + " to account!");
+		Application.OpenURL("https://cdn.cultofmac.com/wp-content/uploads/2014/12/apple-store-online-paypal-payment-screen-780x502.jpg");
+	}
 }
