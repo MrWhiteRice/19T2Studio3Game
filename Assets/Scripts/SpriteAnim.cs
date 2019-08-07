@@ -24,7 +24,8 @@ public class SpriteAnim : MonoBehaviour
 	SpriteList playingSprites;
 
 	bool loop = true;
-	bool lockAnim;
+	bool lockAnim = false;
+	bool pause = false;
 
 	//currentstate of the animation
 	public enum State
@@ -34,39 +35,47 @@ public class SpriteAnim : MonoBehaviour
 		Null,
 		Melee,
 		Aim,
-		Grenade
+		Grenade,
+		Jump
 	}
-	[HideInInspector]public State state = State.Null;
+	public State state = State.Null;
 
 	[HideInInspector]public Sprite[] sprites;
 	int currentFrame;
 
 	public void PlayAnimation(SpriteList sprites, State s)
 	{
-		PlayAnim(sprites, s, true, false);
+		PlayAnim(sprites, s, true, false, false);
 	}
 
-	public void PlayAnimation(SpriteList sprites, State s, bool set)
+	public void PlayAnimation(SpriteList sprites, State s, bool loopAnim)
 	{
-		PlayAnim(sprites, s, set, false);
+		PlayAnim(sprites, s, loopAnim, false, false);
 	}
 
-	public void PlayAnimation(SpriteList sprites, State s, bool set, bool lockAnim)
+	public void PlayAnimation(SpriteList sprites, State s, bool loopAnim, bool lockAnim)
 	{
-		PlayAnim(sprites, s, set, lockAnim);
+		PlayAnim(sprites, s, loopAnim, lockAnim, false);
 	}
 
-	void PlayAnim(SpriteList sprites, State s, bool set, bool lockAnim)
+	public void PlayAnimation(SpriteList sprites, State s, bool loopAnim, bool lockAnim, bool pauseEnd)
 	{
-		loop = set;
-		this.lockAnim = lockAnim;
+		PlayAnim(sprites, s, loopAnim, lockAnim, pauseEnd);
+	}
 
+	void PlayAnim(SpriteList sprites, State s, bool loopAnim, bool lockAnim, bool pauseEnd)
+	{
 		if(s != state)
 		{
 			CancelInvoke("Animate");
+
 			currentFrame = 0;
+
 			playingSprites = sprites;
 			state = s;
+			loop = loopAnim;
+			this.lockAnim = lockAnim;
+			pause = pauseEnd;
 
 			Invoke("Animate", 0);
 		}
@@ -86,15 +95,26 @@ public class SpriteAnim : MonoBehaviour
 		}
 
 		currentFrame++;
+
+		//test loop
 		if(currentFrame > playingSprites.Torso.Length - 1)
 		{
+			//loop
 			if(loop)
 			{
 				currentFrame = 0;
 			}
+			//else reset and play idle
 			else
 			{
 				currentFrame = 0;
+
+				if(pause)
+				{
+					CancelInvoke("Animate");
+					return;
+				}
+
 				PlayAnimation(Idle_Sprites, State.Idle, false);
 			}
 		}

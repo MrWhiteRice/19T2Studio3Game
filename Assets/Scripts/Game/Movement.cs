@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour
 	public GameObject playerSpr;
 
 	public bool grounded;
+	public bool jumping;
 	bool jump;
 	bool upJump;
 	public bool facingRight = true;
@@ -47,6 +48,7 @@ public class Movement : MonoBehaviour
 			{
 				grounded = true;
 				upJump = false;
+				jumping = false;
 			}
 		}
 	}
@@ -117,6 +119,10 @@ public class Movement : MonoBehaviour
 		yield return new WaitForSeconds(0.05f);
 
 		rb.AddForce(forward);
+
+		yield return new WaitForEndOfFrame();
+
+		jumping = true;
 	}
 
 	void Flip()

@@ -80,7 +80,7 @@ public class PlayerDataSP : MonoBehaviour
 	void LoadSprites(SpriteList list, string charName, string animName, int frames)
 	{
 		//Access the correct anim in the path and load the anim to the character
-		print("Characters/" + charName + "/" + animName + "/" + charName + "_" + animName);
+		//REMOVE: print("Characters/" + charName + "/" + animName + "/" + charName + "_" + animName);
 		list.Torso = PrepareSprites(Resources.Load<Texture2D>("Characters/" + charName + "/" + animName + "/" + charName + "_" + animName + "_Torso"), frames);
 		list.Legs = PrepareSprites(Resources.Load<Texture2D>("Characters/" + charName + "/" + animName + "/" + charName + "_" + animName + "_Legs"), frames);
 		list.Left = PrepareSprites(Resources.Load<Texture2D>("Characters/" + charName + "/" + animName + "/" + charName + "_" + animName + "_FArm"), frames);
@@ -187,12 +187,18 @@ public class PlayerDataSP : MonoBehaviour
 			FindObjectOfType<GameManager>().phase++;
 		}
 
-		SpriteAnim.State str = Input.GetAxisRaw("Horizontal") != 0 ? SpriteAnim.State.Walk : SpriteAnim.State.Idle;
-		SpriteList spr = Input.GetAxisRaw("Horizontal") != 0 ? GetComponent<SpriteAnim>().Walk_Sprites : GetComponent<SpriteAnim>().Idle_Sprites;
-
 		if(GetComponent<Movement>().grounded)
 		{
+			SpriteAnim.State str = Input.GetAxisRaw("Horizontal") != 0 ? SpriteAnim.State.Walk : SpriteAnim.State.Idle;
+			SpriteList spr = Input.GetAxisRaw("Horizontal") != 0 ? GetComponent<SpriteAnim>().Walk_Sprites : GetComponent<SpriteAnim>().Idle_Sprites;
 			GetComponent<SpriteAnim>().PlayAnimation(spr, str);
+		}
+		else
+		{
+			if(GetComponent<Movement>().jumping)
+			{
+				GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Jump_Sprites, SpriteAnim.State.Jump, false, false, true);
+			}
 		}
 
 		GetComponent<Rigidbody>().constraints = rbc;
