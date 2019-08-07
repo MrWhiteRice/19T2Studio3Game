@@ -36,7 +36,8 @@ public class SpriteAnim : MonoBehaviour
 		Melee,
 		Aim,
 		Grenade,
-		Jump
+		Jump,
+		Hurt
 	}
 	public State state = State.Null;
 

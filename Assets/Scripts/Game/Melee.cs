@@ -23,6 +23,8 @@ public class Melee : MonoBehaviour
 
 				float damageMod = 20;
 				hit.GetComponent<PlayerDataSP>().health -= (Mathf.Abs(damageMod));
+
+				hit.GetComponent<PlayerDataSP>().hurt = true;
 			}
 
 			Destroy(gameObject);

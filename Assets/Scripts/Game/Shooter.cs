@@ -41,6 +41,8 @@ public class Shooter : MonoBehaviour
 				hit.transform.GetComponent<Rigidbody>().velocity = (forceDir.normalized + Vector3.up) * knockback;
 
 				hit.transform.GetComponent<PlayerDataSP>().health -= damage;
+
+				hit.transform.GetComponent<PlayerDataSP>().hurt = true;
 			}
 		}
 		else

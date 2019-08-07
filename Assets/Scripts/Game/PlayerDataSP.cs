@@ -19,6 +19,8 @@ public class PlayerDataSP : MonoBehaviour
 	public LayerMask player;
 	public LayerMask ground;
 
+	public bool hurt;
+
 	void Start()
 	{
 		if(ID < 3)
@@ -158,11 +160,31 @@ public class PlayerDataSP : MonoBehaviour
 			healthText.text = "Me: " + health.ToString("f0");
 			staminaSlider.value = stamina;
 			//GetComponent<Rigidbody>().constraints = rbc;
+
+			if((int)FindObjectOfType<GameManager>().phase > 2)
+			{
+				if(hurt)
+				{
+					GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Hurt_Sprites, SpriteAnim.State.Hurt, false, false, true);
+				}
+				else
+				{
+					GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Idle_Sprites, SpriteAnim.State.Idle);
+				}
+			}
 		}
 		else
 		{
-			GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Idle_Sprites, SpriteAnim.State.Idle);
 			GetComponent<SpriteAnim>().weaponSlot.sprite = null;
+
+			if(hurt)
+			{
+				GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Hurt_Sprites, SpriteAnim.State.Hurt, false, false, true);
+			}
+			else
+			{
+				GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Idle_Sprites, SpriteAnim.State.Idle);
+			}
 
 			if(FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.End || FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.Damage)
 			{

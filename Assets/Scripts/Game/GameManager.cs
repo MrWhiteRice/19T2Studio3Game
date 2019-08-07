@@ -39,23 +39,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-		if(Input.GetKeyDown(KeyCode.Keypad0))
-		{
-			selectedLevel = 0;
-		}
-		if(Input.GetKeyDown(KeyCode.Keypad1))
-		{
-			selectedLevel = 1;
-		}
-		if(Input.GetKeyDown(KeyCode.Keypad2))
-		{
-			selectedLevel = 2;
-		}
-		if(Input.GetKeyDown(KeyCode.Backspace))
-		{
-			UnityEngine.SceneManagement.SceneManager.LoadScene("Terrain " + selectedLevel);
-		}
-
 		if(phase == TurnPhase.Damage)
 		{
 			if(GameObject.FindGameObjectsWithTag("Weapon").Length == 0)
@@ -107,6 +90,11 @@ public class GameManager : MonoBehaviour
 		{
 			NextTurn();
 			FindObjectOfType<GameManager>().phase = GameManager.TurnPhase.Move;
+
+			foreach(PlayerDataSP player in FindObjectsOfType<PlayerDataSP>())
+			{
+				player.hurt = false;
+			}
 		}
 	}
 
