@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-		data = SaveSystem.loadData();
+		data = SaveSystem.loadData(PlayerPrefs.GetInt("ActivePlayer"));
 
 		turn = Random.Range(0, 6);
 		SpawnPlayers();

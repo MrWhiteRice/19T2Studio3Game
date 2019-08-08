@@ -13,10 +13,16 @@ public class LootBox : MonoBehaviour
 
     void Start()
     {
-		data = SaveSystem.loadData();
+		//data = SaveSystem.loadData();
 
 		weps = Resources.LoadAll<Weapon>("RiceStuff/Weapons/");
 		chars = Resources.LoadAll<Actor>("RiceStuff/Actors/");
+	}
+
+	public void LoadData(int player)
+	{
+		PlayerPrefs.SetInt("ActivePlay", player);
+		data = SaveSystem.loadData(player);
 	}
 
 	public void Save()
