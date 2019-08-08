@@ -70,16 +70,16 @@ public class PartySelector : MonoBehaviour
 					{
 						GameObject b = null;
 
-						//check traversal weapon
-						//if(a.Traversal && type == PartyMenu.Selector.Traversal)
-						//{
-						//	b = Instantiate(button, panel);
-						//}
-						//else if(a.Special && type == PartyMenu.Selector.Special)
-						//{
-						//	b = Instantiate(button, panel);
-						//}
-						//else if(!a.Traversal && !a.Special && type == PartyMenu.Selector.Class && !a.Melee)
+						if(a.WeapType == Weapon.WeaponType.Class && type == PartyMenu.Selector.Class)
+						{
+							b = Instantiate(button, panel);
+						}
+						else if(a.WeapType == Weapon.WeaponType.Special && type == PartyMenu.Selector.Special)
+						{
+							b = Instantiate(button, panel);
+						}
+						//TODO: Traversal update
+						//else if(a.WeapType == Weapon.WeaponType.Traversal && type == PartyMenu.Selector.Traversal)
 						//{
 						//	b = Instantiate(button, panel);
 						//}
@@ -99,7 +99,13 @@ public class PartySelector : MonoBehaviour
 
 	public void SelectCharacter(int id)
 	{
+		//set player
 		FindObjectOfType<LootBox>().data.party[selected].playerID = id;
+
+		//reset loadout
+		FindObjectOfType<LootBox>().data.party[selected].classID = -1;
+		FindObjectOfType<LootBox>().data.party[selected].weaponID = -1;
+
 		print("selected: " + id);
 		Destroy(gameObject);
 	}

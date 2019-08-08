@@ -47,7 +47,7 @@ public class DataContainer
 			}
 		}
 
-		Debug.LogError("oit wahsd");
+		Debug.LogError("Weapon Not Found: " + id);
 		return null;
 	}
 }

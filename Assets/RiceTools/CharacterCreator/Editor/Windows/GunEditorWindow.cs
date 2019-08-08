@@ -108,6 +108,8 @@ public class GunEditorWindow : EditorWindow
 		Weapon.WeaponType weapon = (Weapon.WeaponType)EditorGUILayout.EnumPopup("Weapon Type", weapons[id].WeapType);
 		SO.FindProperty("weaponType").enumValueIndex = (int)weapon;
 
+		SO.FindProperty("starter").boolValue = EditorGUILayout.Toggle("Starter Weapon", weapons[id].Starter);
+
 		Color c = GUI.color;
 		GUI.color = Color.red;
 

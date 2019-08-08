@@ -14,6 +14,7 @@ public class Weapon : ScriptableObject
 	[SerializeField] int knockback;
 	[SerializeField] bool usesTurn;
 	[SerializeField] WeaponType weaponType;
+	[SerializeField] bool starter;
 
 	public enum WeaponType
 	{
@@ -95,6 +96,12 @@ public class Weapon : ScriptableObject
 	{
 		get { return usesTurn; }
 		set { usesTurn = value; }
+	}
+
+	public bool Starter
+	{
+		get { return starter; }
+		set { starter = value; }
 	}
 
 

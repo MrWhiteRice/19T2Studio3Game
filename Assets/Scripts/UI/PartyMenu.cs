@@ -15,11 +15,30 @@ public class PartyMenu : MonoBehaviour
 	{
 		player = FindObjectOfType<LootBox>().data.party[memberSelected];
 		
+		//name
 		partyDetails.text = "";
 		partyDetails.text += "Name: " + FindObjectOfType<LootBox>().data.FindCharacter(player.playerID).characterName + "\n";
-		partyDetails.text += "Class: " + FindObjectOfType<LootBox>().data.FindWeapon(player.classID).weaponName + "\n";
-		partyDetails.text += "Special: " + FindObjectOfType<LootBox>().data.FindWeapon(player.weaponID).weaponName + "\n";
-		partyDetails.text += "Traversal: " + FindObjectOfType<LootBox>().data.FindWeapon(player.traversalID).weaponName;
+
+		//class weapon
+		if(player.classID != -1)
+		{
+			partyDetails.text += "Class: " + FindObjectOfType<LootBox>().data.FindWeapon(player.classID).weaponName + "\n";
+		}
+		else
+		{
+			partyDetails.text += "Class: Empty\n";
+		}
+
+		//special weapon
+		if(player.weaponID != -1)
+		{
+			partyDetails.text += "Special: " + FindObjectOfType<LootBox>().data.FindWeapon(player.weaponID).weaponName + "\n";
+		}
+		else
+		{
+			partyDetails.text += "Special: Empty\n";
+		}
+		//partyDetails.text += "Traversal: " + FindObjectOfType<LootBox>().data.FindWeapon(player.traversalID).weaponName;
 
 		Actor a = null;
 		foreach(Actor actor in Resources.LoadAll<Actor>("RiceStuff/Actors"))
