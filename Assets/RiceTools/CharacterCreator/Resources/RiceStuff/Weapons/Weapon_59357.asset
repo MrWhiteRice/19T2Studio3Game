@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 59357
   icon: {fileID: 8271715202566429118, guid: a912c94482e2afa459e8b511f6f7a633, type: 3}
   weaponName: Burst Rifle
-  weight: 0
+  weight: 1
   rarity: 2
   damage: 30
   shots: 3

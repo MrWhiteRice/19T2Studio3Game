@@ -14,15 +14,21 @@ public class PartySelector : MonoBehaviour
 	public int traversalID;
 	public int weaponID;
 
+	[SerializeField] bool falseButton;
+
 	private void Start()
 	{
-		if(type == 0)
+		if((int)type == 0)
 		{
 			LoadActors();
 		}
-		else
+		else if((int)type == 1)
 		{
 			LoadWeapons();
+		}
+		else if((int)type == 2)
+		{
+			LoadAllWeapons();
 		}
 	}
 
@@ -38,7 +44,7 @@ public class PartySelector : MonoBehaviour
 			{
 				GameObject b = Instantiate(button, panel);
 				b.GetComponent<PlayerButtonData>().id = FindObjectOfType<LootBox>().data.unlockedCharacters[x].ID;
-				b.GetComponent<Button>().onClick.AddListener(b.GetComponent<PlayerButtonData>().Click);
+				if(!falseButton) b.GetComponent<Button>().onClick.AddListener(b.GetComponent<PlayerButtonData>().Click);
 
 				foreach(Actor a in list)
 				{
@@ -50,6 +56,11 @@ public class PartySelector : MonoBehaviour
 			}
 		}
 
+		if(falseButton)
+		{
+			return;
+		}
+		
 		//add null button
 		GameObject cancel = Instantiate(button, panel);
 
@@ -115,13 +126,18 @@ public class PartySelector : MonoBehaviour
 						if(b != null)
 						{
 							b.GetComponent<PlayerButtonData>().id = FindObjectOfType<LootBox>().data.unlockedWeapons[x].ID;
-							b.GetComponent<Button>().onClick.AddListener(b.GetComponent<PlayerButtonData>().ClickWep);
+							if(!falseButton) b.GetComponent<Button>().onClick.AddListener(b.GetComponent<PlayerButtonData>().ClickWep);
 
 							b.GetComponent<Image>().sprite = a.Icon;
 						}
 					}
 				}
 			}
+		}
+
+		if(falseButton)
+		{
+			return;
 		}
 
 		//add null button
@@ -133,6 +149,34 @@ public class PartySelector : MonoBehaviour
 		cancel.GetComponent<Image>().sprite = Resources.Load<Sprite>("Cancel");
 	}
 
+	void LoadAllWeapons()
+	{
+		GameObject button = (GameObject)Resources.Load("PlayerButton");
+
+		Weapon[] list = Resources.LoadAll<Weapon>("RiceStuff/Weapons");
+
+		//cycle through all weapons
+		for(int x = 0; x < FindObjectOfType<LootBox>().data.unlockedWeapons.Count; x++)
+		{
+			//checked if theyre unlocked
+			if(FindObjectOfType<LootBox>().data.unlockedWeapons[x].unlocked)
+			{
+				foreach(Weapon a in list)
+				{
+					//check correct weapon
+					if(a.ID == FindObjectOfType<LootBox>().data.unlockedWeapons[x].ID)
+					{
+						GameObject b = null;
+						b = Instantiate(button, panel);
+
+						b.GetComponent<PlayerButtonData>().id = FindObjectOfType<LootBox>().data.unlockedWeapons[x].ID;
+						b.GetComponent<Image>().sprite = a.Icon;
+					}
+				}
+			}
+		}
+	}
+
 	public void SelectCharacter(int id)
 	{
 		//set player
@@ -142,7 +186,6 @@ public class PartySelector : MonoBehaviour
 		FindObjectOfType<LootBox>().data.party[selected].classID = -1;
 		FindObjectOfType<LootBox>().data.party[selected].weaponID = -1;
 
-		print("selected: " + id);
 		Destroy(gameObject);
 	}
 
@@ -163,7 +206,6 @@ public class PartySelector : MonoBehaviour
 				break;
 		}
 
-		print("selected: " + id);
 		Destroy(gameObject);
 	}
 }

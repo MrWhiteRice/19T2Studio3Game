@@ -23,10 +23,9 @@ public static class SaveSystem
 	public static DataContainer loadData(int player)
 	{
 		string path = Application.persistentDataPath + "/RiceData" + player + ".Data";
-		Debug.Log(Application.persistentDataPath);
+		//Debug.Log(Application.persistentDataPath);
 		if(File.Exists(path))
 		{
-			Debug.Log("found: " + player);
 			BinaryFormatter formatter = new BinaryFormatter();
 			FileStream stream = new FileStream(path, FileMode.Open);
 
@@ -37,7 +36,6 @@ public static class SaveSystem
 		}
 		else
 		{
-			Debug.Log("no data found" + player);
 			DataContainer dataContainer = new DataContainer();
 
 			foreach(Weapon wep in Resources.LoadAll<Weapon>("RiceStuff/Weapons/"))
@@ -54,7 +52,7 @@ public static class SaveSystem
 
 			foreach(Actor cha in Resources.LoadAll<Actor>("RiceStuff/Actors/"))
 			{
-				bool locked = true;
+				bool locked = false;
 
 				if(cha.CharacterName == "Jacob" || cha.CharacterName == "Jesse N" || cha.CharacterName == "William")
 				{
