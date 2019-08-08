@@ -42,11 +42,11 @@ public static class SaveSystem
 
 			foreach(Weapon wep in Resources.LoadAll<Weapon>("RiceStuff/Weapons/"))
 			{
-				bool locked = true;
+				bool locked = false;
 
-				if(wep.WeaponName == "" || wep.WeaponName == "" || wep.WeaponName == "")
+				if(wep.Starter)
 				{
-
+					locked = true;
 				}
 
 				dataContainer.unlockedWeapons.Add(new WeaponData(wep.WeaponName, locked, wep.ID));

@@ -49,6 +49,14 @@ public class PartySelector : MonoBehaviour
 				}
 			}
 		}
+
+		//add null button
+		GameObject cancel = Instantiate(button, panel);
+
+		cancel.GetComponent<PlayerButtonData>().id = -1;
+		cancel.GetComponent<Button>().onClick.AddListener(cancel.GetComponent<PlayerButtonData>().ClickWep);
+
+		cancel.GetComponent<Image>().sprite = Resources.Load<Sprite>("Cancel");
 	}
 
 	void LoadWeapons()
@@ -95,6 +103,14 @@ public class PartySelector : MonoBehaviour
 				}
 			}
 		}
+
+		//add null button
+		GameObject cancel = Instantiate(button, panel);
+
+		cancel.GetComponent<PlayerButtonData>().id = -1;
+		cancel.GetComponent<Button>().onClick.AddListener(cancel.GetComponent<PlayerButtonData>().ClickWep);
+
+		cancel.GetComponent<Image>().sprite = Resources.Load<Sprite>("Cancel");
 	}
 
 	public void SelectCharacter(int id)
