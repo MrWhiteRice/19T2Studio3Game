@@ -14,6 +14,8 @@ public class DataContainer
 
 	public bool tutorialComplete;
 
+	public bool created;
+
 	//selected party
 	public CharacterParty[] party = new CharacterParty[3] { new CharacterParty(46929, 1468, 1468, 1468), new CharacterParty(49880, 1468, 1468, 1468), new CharacterParty(25073, 1468, 1468, 1468) };
 

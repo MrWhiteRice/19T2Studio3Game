@@ -6,6 +6,11 @@ public static class SaveSystem
 {
 	public static void SaveData(DataContainer box)
 	{
+		if(PlayerPrefs.GetInt("ActivePlayer", -1) == -1)
+		{
+			return;
+		}
+
 		string path = Application.persistentDataPath + "/RiceData" + PlayerPrefs.GetInt("ActivePlayer") + ".Data";
 		BinaryFormatter formatter = new BinaryFormatter();
 
@@ -21,6 +26,7 @@ public static class SaveSystem
 		Debug.Log(Application.persistentDataPath);
 		if(File.Exists(path))
 		{
+			Debug.Log("found: " + player);
 			BinaryFormatter formatter = new BinaryFormatter();
 			FileStream stream = new FileStream(path, FileMode.Open);
 
@@ -31,11 +37,12 @@ public static class SaveSystem
 		}
 		else
 		{
+			Debug.Log("no data found" + player);
 			DataContainer dataContainer = new DataContainer();
 
 			foreach(Weapon wep in Resources.LoadAll<Weapon>("RiceStuff/Weapons/"))
 			{
-				bool locked = false;
+				bool locked = true;
 
 				if(wep.WeaponName == "" || wep.WeaponName == "" || wep.WeaponName == "")
 				{
@@ -47,7 +54,14 @@ public static class SaveSystem
 
 			foreach(Actor cha in Resources.LoadAll<Actor>("RiceStuff/Actors/"))
 			{
-				dataContainer.unlockedCharacters.Add(new CharacterData(cha.CharacterName, false, cha.ID));
+				bool locked = true;
+
+				if(cha.CharacterName == "Jacob" || cha.CharacterName == "Jesse N" || cha.CharacterName == "William")
+				{
+					locked = true;
+				}
+
+				dataContainer.unlockedCharacters.Add(new CharacterData(cha.CharacterName, locked, cha.ID));
 			}
 
 			return dataContainer;

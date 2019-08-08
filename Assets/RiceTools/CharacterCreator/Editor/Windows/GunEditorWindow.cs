@@ -103,11 +103,10 @@ public class GunEditorWindow : EditorWindow
 		SO.FindProperty("accuracy").intValue = EditorGUILayout.IntSlider("Accuracy", weapons[id].Accuracy, 1, 5);
 		SO.FindProperty("knockback").intValue = EditorGUILayout.IntSlider("Knockback", weapons[id].Knockback, 1, 5);
 
-		SO.FindProperty("traversal").boolValue = EditorGUILayout.Toggle("Traversal Item", weapons[id].Traversal);
-		SO.FindProperty("special").boolValue = EditorGUILayout.Toggle("Special Item", weapons[id].Special);
-		SO.FindProperty("melee").boolValue = EditorGUILayout.Toggle("Melee Item", weapons[id].Melee);
 		SO.FindProperty("usesTurn").boolValue = EditorGUILayout.Toggle("Uses turn", weapons[id].UsesTurn);
-		SO.FindProperty("passive").boolValue = EditorGUILayout.Toggle("Passive", weapons[id].Passive);
+
+		Weapon.WeaponType weapon = (Weapon.WeaponType)EditorGUILayout.EnumPopup("Weapon Type", weapons[id].WeapType);
+		SO.FindProperty("weaponType").enumValueIndex = (int)weapon;
 
 		Color c = GUI.color;
 		GUI.color = Color.red;

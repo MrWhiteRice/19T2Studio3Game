@@ -71,18 +71,18 @@ public class PartySelector : MonoBehaviour
 						GameObject b = null;
 
 						//check traversal weapon
-						if(a.Traversal && type == PartyMenu.Selector.Traversal)
-						{
-							b = Instantiate(button, panel);
-						}
-						else if(a.Special && type == PartyMenu.Selector.Special)
-						{
-							b = Instantiate(button, panel);
-						}
-						else if(!a.Traversal && !a.Special && type == PartyMenu.Selector.Class && !a.Melee)
-						{
-							b = Instantiate(button, panel);
-						}
+						//if(a.Traversal && type == PartyMenu.Selector.Traversal)
+						//{
+						//	b = Instantiate(button, panel);
+						//}
+						//else if(a.Special && type == PartyMenu.Selector.Special)
+						//{
+						//	b = Instantiate(button, panel);
+						//}
+						//else if(!a.Traversal && !a.Special && type == PartyMenu.Selector.Class && !a.Melee)
+						//{
+						//	b = Instantiate(button, panel);
+						//}
 
 						if(b != null)
 						{

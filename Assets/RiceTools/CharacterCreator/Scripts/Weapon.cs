@@ -12,11 +12,17 @@ public class Weapon : ScriptableObject
 	[SerializeField] int shots;
 	[SerializeField] int accuracy;
 	[SerializeField] int knockback;
-	[SerializeField] bool traversal;
-	[SerializeField] bool melee;
-	[SerializeField] bool special;
 	[SerializeField] bool usesTurn;
-	[SerializeField] bool passive;
+	[SerializeField] WeaponType weaponType;
+
+	public enum WeaponType
+	{
+		Class,
+		Special,
+		Traversal,
+		Melee,
+		Passive
+	}
 
 	public enum WeightClass
 	{
@@ -79,22 +85,10 @@ public class Weapon : ScriptableObject
 		set { knockback = value; }
 	}
 
-	public bool Traversal
+	public WeaponType WeapType
 	{
-		get { return traversal; }
-		set { traversal = value; }
-	}
-
-	public bool Special
-	{
-		get { return special; }
-		set { special = value; }
-	}
-
-	public bool Melee
-	{
-		get { return melee; }
-		set { melee = value; }
+		get { return weaponType; }
+		set { weaponType = value; }
 	}
 
 	public bool UsesTurn
@@ -103,11 +97,6 @@ public class Weapon : ScriptableObject
 		set { usesTurn = value; }
 	}
 
-	public bool Passive
-	{
-		get { return passive; }
-		set { passive = value; }
-	}
 
 	public static Weapon FindActor(string actorName)
 	{

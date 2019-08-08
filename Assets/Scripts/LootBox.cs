@@ -13,7 +13,7 @@ public class LootBox : MonoBehaviour
 
     void Start()
     {
-		//data = SaveSystem.loadData();
+		PlayerPrefs.DeleteKey("ActivePlayer");
 
 		weps = Resources.LoadAll<Weapon>("RiceStuff/Weapons/");
 		chars = Resources.LoadAll<Actor>("RiceStuff/Actors/");
@@ -21,8 +21,9 @@ public class LootBox : MonoBehaviour
 
 	public void LoadData(int player)
 	{
-		PlayerPrefs.SetInt("ActivePlay", player);
+		PlayerPrefs.SetInt("ActivePlayer", player);
 		data = SaveSystem.loadData(player);
+		data.created = true;
 	}
 
 	public void Save()
@@ -31,6 +32,11 @@ public class LootBox : MonoBehaviour
 	}
 
 	private void OnDisable()
+	{
+		Save();
+	}
+
+	private void OnApplicationQuit()
 	{
 		Save();
 	}
@@ -47,6 +53,7 @@ public class LootBox : MonoBehaviour
 
 	public void Roll()
 	{
+		data.created = true;
 		int roll = Random.Range(1, 101);
 		data.free++;
 

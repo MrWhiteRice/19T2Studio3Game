@@ -21,7 +21,5 @@ MonoBehaviour:
   shots: 1
   accuracy: 5
   knockback: 1
-  traversal: 0
-  special: 1
   usesTurn: 1
-  passive: 0
+  weaponType: 1
