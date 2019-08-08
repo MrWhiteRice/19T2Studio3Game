@@ -54,7 +54,7 @@ public class PartySelector : MonoBehaviour
 		GameObject cancel = Instantiate(button, panel);
 
 		cancel.GetComponent<PlayerButtonData>().id = -1;
-		cancel.GetComponent<Button>().onClick.AddListener(cancel.GetComponent<PlayerButtonData>().ClickWep);
+		cancel.GetComponent<Button>().onClick.AddListener(cancel.GetComponent<PlayerButtonData>().Click);
 
 		cancel.GetComponent<Image>().sprite = Resources.Load<Sprite>("Cancel");
 	}
@@ -76,6 +76,26 @@ public class PartySelector : MonoBehaviour
 					//check correct weapon
 					if(a.ID == FindObjectOfType<LootBox>().data.unlockedWeapons[x].ID)
 					{
+						Actor actor = null;
+
+						foreach(Actor act in Resources.LoadAll<Actor>("RiceStuff/Actors"))
+						{
+							if(act.ID == FindObjectOfType<LootBox>().data.party[selected].playerID)
+							{
+								actor = act;
+							}
+						}
+
+						if(actor == null)
+						{
+							continue;
+						}
+
+						if((int)a.Weight != (int)actor.Weight)
+						{
+							continue;
+						}
+
 						GameObject b = null;
 
 						if(a.WeapType == Weapon.WeaponType.Class && type == PartyMenu.Selector.Class)

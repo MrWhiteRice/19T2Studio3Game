@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Weapon_42000
   m_EditorClassIdentifier: 
   id: 42000
-  icon: {fileID: 0}
+  icon: {fileID: 3054902045012169129, guid: d06b18bdcc012e543a21f1af96548c8a, type: 3}
   weaponName: LMG
   weight: 2
   rarity: 1

@@ -55,7 +55,6 @@ public class LootBox : MonoBehaviour
 	{
 		data.created = true;
 		int roll = Random.Range(1, 101);
-		data.free++;
 
 		int count = weights[0];
 		for(int x = 1; x <= weights.Length; x++)

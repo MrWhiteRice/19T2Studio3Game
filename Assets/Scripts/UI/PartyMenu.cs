@@ -15,31 +15,22 @@ public class PartyMenu : MonoBehaviour
 	{
 		player = FindObjectOfType<LootBox>().data.party[memberSelected];
 		
-		//name
+		//null text
 		partyDetails.text = "";
-		partyDetails.text += "Name: " + FindObjectOfType<LootBox>().data.FindCharacter(player.playerID).characterName + "\n";
+
+		//Name
+		partyDetails.text += player.playerID != -1 ? "Name: " + FindObjectOfType<LootBox>().data.FindCharacter(player.playerID).characterName + "\n" : "Name: Empty\n";
 
 		//class weapon
-		if(player.classID != -1)
-		{
-			partyDetails.text += "Class: " + FindObjectOfType<LootBox>().data.FindWeapon(player.classID).weaponName + "\n";
-		}
-		else
-		{
-			partyDetails.text += "Class: Empty\n";
-		}
+		partyDetails.text += player.classID	!= -1 ? "Class: " + FindObjectOfType<LootBox>().data.FindWeapon(player.classID).weaponName + "\n" : "Class: Empty\n";
 
 		//special weapon
-		if(player.weaponID != -1)
-		{
-			partyDetails.text += "Special: " + FindObjectOfType<LootBox>().data.FindWeapon(player.weaponID).weaponName + "\n";
-		}
-		else
-		{
-			partyDetails.text += "Special: Empty\n";
-		}
+		partyDetails.text += player.weaponID != -1 ? "Special: " + FindObjectOfType<LootBox>().data.FindWeapon(player.weaponID).weaponName + "\n" : "Special: Empty\n";
+
+		//Traversal - Update
 		//partyDetails.text += "Traversal: " + FindObjectOfType<LootBox>().data.FindWeapon(player.traversalID).weaponName;
 
+		//find correct player
 		Actor a = null;
 		foreach(Actor actor in Resources.LoadAll<Actor>("RiceStuff/Actors"))
 		{
@@ -49,7 +40,29 @@ public class PartyMenu : MonoBehaviour
 			}
 		}
 
-		buttons[0].GetComponent<Image>().sprite = a.Icon;
+		//find correct weapon
+		Weapon classWeapon = null;
+		Weapon specialWeapon = null;
+		foreach(Weapon weapon in Resources.LoadAll<Weapon>("RiceStuff/Weapons"))
+		{
+			if(weapon.ID == player.classID)
+			{
+				classWeapon = weapon;
+			}
+			else if(weapon.ID == player.weaponID)
+			{
+				specialWeapon = weapon;
+			}
+		}
+
+		//set select player sprite
+		buttons[0].GetComponent<Image>().sprite = a != null ? a.Icon : null;
+
+		//set select weapon sprite
+		buttons[1].GetComponent<Image>().sprite = classWeapon != null ? classWeapon.Icon : null;
+
+		//set select special weapon sprite
+		buttons[2].GetComponent<Image>().sprite = specialWeapon != null ? specialWeapon.Icon : null;
 	}
 
 	public void ChangeMember(int id)

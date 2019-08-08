@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Weapon_25947
   m_EditorClassIdentifier: 
   id: 25947
-  icon: {fileID: 0}
+  icon: {fileID: -973813329046930543, guid: 5faec278bbdc1c94ea7e5aa722d488aa, type: 3}
   weaponName: Pistol
   weight: 0
   rarity: 1
