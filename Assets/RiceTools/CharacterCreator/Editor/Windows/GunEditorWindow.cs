@@ -56,7 +56,7 @@ public class GunEditorWindow : EditorWindow
 	{
 		Weapon asset = ScriptableObject.CreateInstance<Weapon>();
 
-		int id = Random.Range(0, 99999);
+		int id = Resources.LoadAll<Weapon>("RiceStuff/Weapons").Length;
 
 		asset.WeaponName = "Weapon_" + id;
 		asset.Icon = null;
@@ -123,6 +123,7 @@ public class GunEditorWindow : EditorWindow
 
 		GUILayout.EndHorizontal();
 
+		if(SO.targetObject != null)
 		SO.ApplyModifiedProperties();
 	}
 }

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcd2830bcfd3b5c47972fcb00b5cd731, type: 3}
+  m_Name: Weapon_1
+  m_EditorClassIdentifier: 
+  id: 1
+  icon: {fileID: 8271715202566429118, guid: a912c94482e2afa459e8b511f6f7a633, type: 3}
+  weaponName: Rifle
+  weight: 1
+  rarity: 1
+  damage: 20
+  shots: 3
+  accuracy: 3
+  knockback: 1
+  usesTurn: 1
+  weaponType: 0
+  starter: 1

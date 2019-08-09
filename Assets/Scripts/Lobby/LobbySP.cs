@@ -18,7 +18,6 @@ public class LobbySP : MonoBehaviour
 		for(int x = 0; x < players.Length; x++)
 		{
 			int playerSelect = x % 3;
-			print(playerSelect);
 
 			foreach(Actor a in characters)
 			{
@@ -29,8 +28,11 @@ public class LobbySP : MonoBehaviour
 				}
 				else
 				{
-					players[x].transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Cancel");
-					noGo = true;
+					if(FindObjectOfType<LootBox>().data.party[playerSelect].playerID == -1)
+					{
+						players[x].transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Cancel");
+						noGo = true;
+					}
 				}
 			}
 
