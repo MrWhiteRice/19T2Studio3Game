@@ -23,13 +23,14 @@ public class PlayerDataSP : MonoBehaviour
 
 	void Start()
 	{
-		if(ID < 3)
+		character = FindObjectOfType<GameManager>().data.party[ID%3];
+
+		foreach(Weapon w in Resources.LoadAll<Weapon>("RiceStuff/Weapons"))
 		{
-			character = FindObjectOfType<GameManager>().data.party[ID];
-		}
-		else
-		{
-			character = FindObjectOfType<GameManager>().data.party[ID - 3];
+			if(w.ID == character.classID)
+			{
+				GetComponent<SpriteAnim>().weapon = w.Icon;
+			}
 		}
 
 		healthText = GetComponentInChildren<UnityEngine.UI.Text>();

@@ -7,7 +7,7 @@ public class LootBox : MonoBehaviour
 	Weapon[] weps = new Weapon[0];
 	Actor[] chars = new Actor[0];
 
-	[HideInInspector]public DataContainer data;
+	public DataContainer data;
 
 	//int[] weights = { 1, 4, 25, 70};
 	public float[] normalWeights = { 1, 4, 25, 70};
