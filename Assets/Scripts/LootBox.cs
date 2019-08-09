@@ -10,9 +10,9 @@ public class LootBox : MonoBehaviour
 	[HideInInspector]public DataContainer data;
 
 	//int[] weights = { 1, 4, 25, 70};
-	public int[] normalWeights = { 1, 4, 25, 70};
-	public int[] premiumWeights = { 0, 0, 0, 0};
-	public int[] eventWeights = { 0, 0, 0, 0};
+	public float[] normalWeights = { 1, 4, 25, 70};
+	public float[] premiumWeights = { 0, 0, 0, 0};
+	public float[] eventWeights = { 0, 0, 0, 0};
 
     void Start()
     {
@@ -59,7 +59,7 @@ public class LootBox : MonoBehaviour
 	public void Roll(string weightSet)
 	{
 		//initialise weights
-		int[] weights = new int[4];
+		float[] weights = new float[4];
 
 		//find which weight to use
 		switch(weightSet)
@@ -83,7 +83,7 @@ public class LootBox : MonoBehaviour
 		int roll = Random.Range(1, 101);
 
 		//initialise weight roll
-		int count = weights[0];
+		float count = weights[0];
 		for(int x = 1; x <= weights.Length; x++)
 		{
 			if(roll <= count)
