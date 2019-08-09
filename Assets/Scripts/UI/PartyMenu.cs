@@ -56,13 +56,13 @@ public class PartyMenu : MonoBehaviour
 		}
 
 		//set select player sprite
-		buttons[0].GetComponent<Image>().sprite = a != null ? a.Icon : null;
+		buttons[0].GetComponent<Image>().sprite = a != null ? a.Icon : Resources.Load<Sprite>("Cancel");
 
 		//set select weapon sprite
-		buttons[1].GetComponent<Image>().sprite = classWeapon != null ? classWeapon.Icon : null;
+		buttons[1].GetComponent<Image>().sprite = classWeapon != null ? classWeapon.Icon : Resources.Load<Sprite>("Cancel");
 
 		//set select special weapon sprite
-		buttons[2].GetComponent<Image>().sprite = specialWeapon != null ? specialWeapon.Icon : null;
+		buttons[2].GetComponent<Image>().sprite = specialWeapon != null ? specialWeapon.Icon : Resources.Load<Sprite>("Cancel");
 	}
 
 	public void ChangeMember(int id)

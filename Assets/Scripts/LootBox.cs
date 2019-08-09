@@ -27,6 +27,8 @@ public class LootBox : MonoBehaviour
 		PlayerPrefs.SetInt("ActivePlayer", player);
 		data = SaveSystem.loadData(player);
 		data.created = true;
+
+		SaveSystem.SaveData(data);
 	}
 
 	public void Save()

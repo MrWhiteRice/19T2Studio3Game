@@ -28,7 +28,14 @@ public class PartySelector : MonoBehaviour
 		}
 		else if((int)type == 2)
 		{
-			LoadAllWeapons();
+			if(falseButton)
+			{
+				LoadAllWeapons();
+			}
+			else
+			{
+				LoadWeapons();
+			}
 		}
 	}
 
@@ -111,10 +118,12 @@ public class PartySelector : MonoBehaviour
 
 						if(a.WeapType == Weapon.WeaponType.Class && type == PartyMenu.Selector.Class)
 						{
+							print("class");
 							b = Instantiate(button, panel);
 						}
 						else if(a.WeapType == Weapon.WeaponType.Special && type == PartyMenu.Selector.Special)
 						{
+							print("special");
 							b = Instantiate(button, panel);
 						}
 						//TODO: Traversal update

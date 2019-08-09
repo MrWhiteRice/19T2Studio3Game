@@ -6,9 +6,12 @@ using UnityEngine.UI;
 public class LobbySP : MonoBehaviour
 {
 	public GameObject[] players;
+	public bool noGo;
 
-    void Start()
+    void Update()
     {
+		noGo = false;
+
 		Weapon[] weapons = Resources.LoadAll<Weapon>("RiceStuff/Weapons");
 		Actor[] characters = Resources.LoadAll<Actor>("RiceStuff/Actors");
 
@@ -22,6 +25,12 @@ public class LobbySP : MonoBehaviour
 				if(a.ID == FindObjectOfType<LootBox>().data.party[playerSelect].playerID)
 				{
 					players[x].transform.GetChild(0).GetComponent<Image>().sprite = a.Icon; //player
+					break;
+				}
+				else
+				{
+					players[x].transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Cancel");
+					noGo = true;
 				}
 			}
 
@@ -30,15 +39,29 @@ public class LobbySP : MonoBehaviour
 				if(w.ID == FindObjectOfType<LootBox>().data.party[playerSelect].classID)
 				{
 					players[x].transform.GetChild(1).GetComponent<Image>().sprite = w.Icon; //gun
+					break;
 				}
-				else if(w.ID == FindObjectOfType<LootBox>().data.party[playerSelect].weaponID)
+				else
+				{
+					players[x].transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Cancel");
+				}
+			}
+
+			foreach(Weapon w in weapons)
+			{
+				if(w.ID == FindObjectOfType<LootBox>().data.party[playerSelect].weaponID)
 				{
 					players[x].transform.GetChild(2).GetComponent<Image>().sprite = w.Icon; //special
+					break;
 				}
-
-				players[x].transform.GetChild(3).GetComponent<Image>().sprite = null; //movement
-				players[x].transform.GetChild(4).GetComponent<Image>().sprite = null; //melee
+				else
+				{
+					players[x].transform.GetChild(2).GetComponent<Image>().sprite = Resources.Load<Sprite>("Cancel");
+				}
 			}
+
+			players[x].transform.GetChild(3).GetComponent<Image>().sprite = null; //movement
+			players[x].transform.GetChild(4).GetComponent<Image>().sprite = null; //melee
 		}
     }
 }
