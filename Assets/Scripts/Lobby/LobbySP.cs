@@ -1,0 +1,44 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class LobbySP : MonoBehaviour
+{
+	public GameObject[] players;
+
+    void Start()
+    {
+		Weapon[] weapons = Resources.LoadAll<Weapon>("RiceStuff/Weapons");
+		Actor[] characters = Resources.LoadAll<Actor>("RiceStuff/Actors");
+
+		for(int x = 0; x < players.Length; x++)
+		{
+			int playerSelect = x % 3;
+			print(playerSelect);
+
+			foreach(Actor a in characters)
+			{
+				if(a.ID == FindObjectOfType<LootBox>().data.party[playerSelect].playerID)
+				{
+					players[x].transform.GetChild(0).GetComponent<Image>().sprite = a.Icon; //player
+				}
+			}
+
+			foreach(Weapon w in weapons)
+			{
+				if(w.ID == FindObjectOfType<LootBox>().data.party[playerSelect].classID)
+				{
+					players[x].transform.GetChild(1).GetComponent<Image>().sprite = w.Icon; //gun
+				}
+				else if(w.ID == FindObjectOfType<LootBox>().data.party[playerSelect].weaponID)
+				{
+					players[x].transform.GetChild(2).GetComponent<Image>().sprite = w.Icon; //special
+				}
+
+				players[x].transform.GetChild(3).GetComponent<Image>().sprite = null; //movement
+				players[x].transform.GetChild(4).GetComponent<Image>().sprite = null; //melee
+			}
+		}
+    }
+}
