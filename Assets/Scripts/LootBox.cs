@@ -80,8 +80,8 @@ public class LootBox : MonoBehaviour
 		//update save file to register actually played
 		data.created = true;
 		//roll dice to see what item you get
-		int roll = Random.Range(1, 101);
-
+		float roll = Random.Range(1.0f, 101.0f);
+		
 		//initialise weight roll
 		float count = weights[0];
 		for(int x = 1; x <= weights.Length; x++)
