@@ -27,6 +27,17 @@ public class GameUI : MonoBehaviour
 	public Image p2health;
 	int fullHp = 670;
 
+	[Space]
+	public Image icon;
+	public Image health;
+	int fullHpActive = -1;
+
+	private void Start()
+	{
+		fullHp = (int)p1health.rectTransform.sizeDelta.x;
+		fullHpActive = (int)health.rectTransform.sizeDelta.x;
+	}
+
 	private void Update()
 	{
 		//init healths
@@ -46,14 +57,17 @@ public class GameUI : MonoBehaviour
 			}
 		}
 
+		//adjust team 1 healthbar
 		Vector2 p1Rect = p1health.rectTransform.sizeDelta;
 		p1Rect.x = (redHealth / 300) * fullHp;
 		p1health.rectTransform.sizeDelta = p1Rect;
 
+		//adjust team 2 healthbar
 		Vector2 p2Rect = p2health.rectTransform.sizeDelta;
 		p2Rect.x = (blueHealth / 300) * fullHp;
 		p2health.rectTransform.sizeDelta = p2Rect;
 
+		//define if button is clickable
 		if(FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.End || FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.Damage)
 		{
 			nextPhaseButton.interactable = false;
@@ -61,6 +75,21 @@ public class GameUI : MonoBehaviour
 		else
 		{
 			nextPhaseButton.interactable = true;
+		}
+
+		//active player icon and health
+		foreach(PlayerDataSP p in FindObjectsOfType<PlayerDataSP>())
+		{
+			if(p.IsTurn())
+			{
+				//set active icon
+				icon.sprite = p.actor.Icon;
+
+				//set active health
+				Vector2 hprect = health.rectTransform.sizeDelta;
+				hprect.x = (p.health / 100) * fullHpActive;
+				health.rectTransform.sizeDelta = hprect;
+			}
 		}
 
 		text.text = "Current Phase\n" + FindObjectOfType<GameManager>().phase.ToString();

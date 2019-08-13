@@ -70,11 +70,11 @@ RectTransform:
   m_Father: {fileID: 714364683}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.11, y: 0.04}
-  m_AnchorMax: {x: 0.4, y: 0.17}
-  m_AnchoredPosition: {x: 283.90414, y: 90.74037}
-  m_SizeDelta: {x: 322.87137, y: 112.34527}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -192.53137, y: 5.740387}
+  m_SizeDelta: {x: 556.87134, y: 140.34528}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &130069798
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2219,6 +2219,8 @@ MonoBehaviour:
   grenade: {fileID: 2901795372440618209}
   p1health: {fileID: 161728646}
   p2health: {fileID: 1783466204}
+  icon: {fileID: 172357709}
+  health: {fileID: 130069797}
 --- !u!1 &5918907368417320170
 GameObject:
   m_ObjectHideFlags: 0
