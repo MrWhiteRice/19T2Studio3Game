@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 86457
   icon: {fileID: 21300000, guid: 50c13838fdcd02940a3d2bc2c3a8ed27, type: 3}
-  characterName: 'Thomas C '
+  characterName: Thomas C
   weight: 0
   rarity: 5
   initiative: 69

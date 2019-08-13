@@ -22,6 +22,11 @@ public class GameUI : MonoBehaviour
 	public Image melee;
 	public Image grenade;
 
+	[Space]
+	public Image p1health;
+	public Image p2health;
+	int fullHp = 670;
+
 	private void Update()
 	{
 		int red = 0;

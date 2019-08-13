@@ -16,9 +16,6 @@ public class PlayerDataSP : MonoBehaviour
 
 	public CharacterParty character;
 
-	public LayerMask player;
-	public LayerMask ground;
-
 	public bool hurt;
 	public bool controllerMode;
 
@@ -154,6 +151,8 @@ public class PlayerDataSP : MonoBehaviour
 		//check if its my turn
 		if(IsTurn())
 		{
+			gameObject.layer = LayerMask.NameToLayer("Player");
+
 			//Check what phase we're in
 			switch(FindObjectOfType<GameManager>().phase)
 			{
@@ -206,6 +205,8 @@ public class PlayerDataSP : MonoBehaviour
 		}
 		else // not my turn
 		{
+			gameObject.layer = LayerMask.NameToLayer("Ground");
+
 			GetComponent<SpriteAnim>().weaponSlot.sprite = null;
 
 			if(hurt)
