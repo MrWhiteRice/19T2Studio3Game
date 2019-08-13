@@ -19,6 +19,8 @@ public class PlayerDataSP : MonoBehaviour
 	public bool hurt;
 	public bool controllerMode;
 
+	public Actor actor;
+
 	void Start()
 	{
 		character = FindObjectOfType<GameManager>().data.party[ID%3];
@@ -53,6 +55,7 @@ public class PlayerDataSP : MonoBehaviour
 			if(character.playerID == a.ID)
 			{
 				nameSearch = a.CharacterName;
+				actor = a;
 				//REMOVE print(nameSearch + "," + a.CharacterName);
 			}
 		}
@@ -161,6 +164,9 @@ public class PlayerDataSP : MonoBehaviour
 				case GameManager.TurnPhase.Shoot:
 					ShootPhase();
 					break;
+
+				case GameManager.TurnPhase.Damage:
+					break;
 			}
 
 			//disable if not in a "controllable" phase
@@ -201,7 +207,6 @@ public class PlayerDataSP : MonoBehaviour
 		}
 		else // not my turn
 		{
-			gameObject.layer = LayerMask.NameToLayer("Ground");
 
 			GetComponent<SpriteAnim>().weaponSlot.sprite = null;
 
@@ -216,6 +221,7 @@ public class PlayerDataSP : MonoBehaviour
 
 			if(FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.End || FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.Damage)
 			{
+				gameObject.layer = LayerMask.NameToLayer("Player");
 				GetComponent<Rigidbody>().constraints = rbc;
 			}
 			else

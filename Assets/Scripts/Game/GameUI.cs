@@ -32,6 +32,8 @@ public class GameUI : MonoBehaviour
 		int red = 0;
 		int blue = 0;
 
+
+
 		if(FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.End || FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.Damage)
 		{
 			nextPhaseButton.interactable = false;
@@ -57,16 +59,11 @@ public class GameUI : MonoBehaviour
 				NextPhase();
 				timer = 3;
 
-				
 				foreach(PlayerDataSP player in FindObjectsOfType<PlayerDataSP>())
 				{
 					if(player.health <= 0)
 					{
 						Destroy(player.gameObject);
-					}
-					else
-					{
-						
 					}
 				}
 			}
