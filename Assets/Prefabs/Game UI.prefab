@@ -2217,8 +2217,8 @@ MonoBehaviour:
   gun: {fileID: 7370809348230743107}
   melee: {fileID: 998683207249669475}
   grenade: {fileID: 2901795372440618209}
-  p1health: {fileID: 0}
-  p2health: {fileID: 0}
+  p1health: {fileID: 161728646}
+  p2health: {fileID: 1783466204}
 --- !u!1 &5918907368417320170
 GameObject:
   m_ObjectHideFlags: 0

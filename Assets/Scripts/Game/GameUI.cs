@@ -29,10 +29,30 @@ public class GameUI : MonoBehaviour
 
 	private void Update()
 	{
-		int red = 0;
-		int blue = 0;
+		//init healths
+		float redHealth = 0;
+		float blueHealth = 0;
 
+		//calc total health per team
+		foreach(PlayerDataSP player in FindObjectsOfType<PlayerDataSP>())
+		{
+			if(player.team == 0)
+			{
+				redHealth += player.health;
+			}
+			else
+			{
+				blueHealth += player.health;
+			}
+		}
 
+		Vector2 p1Rect = p1health.rectTransform.sizeDelta;
+		p1Rect.x = (redHealth / 300) * fullHp;
+		p1health.rectTransform.sizeDelta = p1Rect;
+
+		Vector2 p2Rect = p2health.rectTransform.sizeDelta;
+		p2Rect.x = (blueHealth / 300) * fullHp;
+		p2health.rectTransform.sizeDelta = p2Rect;
 
 		if(FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.End || FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.Damage)
 		{
@@ -74,8 +94,8 @@ public class GameUI : MonoBehaviour
 			endtext.text = "";
 		}
 
-		red = 0;
-		blue = 0;
+		int red = 0;
+		int blue = 0;
 		foreach(PlayerDataSP player in FindObjectsOfType<PlayerDataSP>())
 		{
 			switch(player.team)
