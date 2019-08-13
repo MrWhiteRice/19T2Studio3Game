@@ -958,6 +958,7 @@ MonoBehaviour:
     matchesWon: 0
     mathcesLost: 0
     tutorialComplete: 0
+    created: 0
     party:
     - playerID: 46929
       weaponID: 1468
@@ -1230,6 +1231,11 @@ PrefabInstance:
         type: 3}
       propertyPath: image
       value: 
-      objectReference: {fileID: 2800000, guid: b301dd659b90f3440a40e7ea0456ca11, type: 3}
+      objectReference: {fileID: 2800000, guid: 8ea672340638ea447909788ac7390eba, type: 3}
+    - target: {fileID: 1702287520923086209, guid: 131da29aee356da438260541d028bf17,
+        type: 3}
+      propertyPath: mat2
+      value: 
+      objectReference: {fileID: 2100000, guid: 5fb7a24a9c5964747bcd524e830e04fc, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 131da29aee356da438260541d028bf17, type: 3}
