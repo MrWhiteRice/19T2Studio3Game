@@ -187,7 +187,7 @@ public class Shoot : MonoBehaviour
 
 						b.transform.position = gun.GetChild(0).transform.position;
 						b.transform.rotation = gun.transform.rotation;
-						b.GetComponent<Shooter>().Init(3, 0.1f, 5, 2, 50);
+						b.GetComponent<Shooter>().Init(3, 0.1f, 10, 2, 50);
 						break;
 
 					case Gun.Grenade:

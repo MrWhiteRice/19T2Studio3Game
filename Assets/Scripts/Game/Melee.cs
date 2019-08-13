@@ -13,7 +13,25 @@ public class Melee : MonoBehaviour
 		{
 			foreach(Collider hit in Physics.OverlapSphere(transform.position, 0.125f, player))
 			{
+				bool quit = false;
 				if(hit is CapsuleCollider == false)
+				{
+					continue;
+				}
+
+				foreach(PlayerDataSP p in FindObjectsOfType<PlayerDataSP>())
+				{
+					if(p.IsTurn())
+					{
+						if(p.gameObject == hit.gameObject)
+						{
+							quit = true;
+							break;
+						}
+					}
+				}
+
+				if(quit)
 				{
 					continue;
 				}

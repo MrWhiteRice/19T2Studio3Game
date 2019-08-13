@@ -207,6 +207,7 @@ public class PlayerDataSP : MonoBehaviour
 		}
 		else // not my turn
 		{
+			gameObject.layer = LayerMask.NameToLayer("Ground");
 
 			GetComponent<SpriteAnim>().weaponSlot.sprite = null;
 
