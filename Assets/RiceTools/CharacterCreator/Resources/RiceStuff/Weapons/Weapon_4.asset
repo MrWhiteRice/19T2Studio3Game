@@ -19,7 +19,7 @@ MonoBehaviour:
   rarity: 1
   damage: 30
   shots: 3
-  accuracy: 4
+  accuracy: 5
   knockback: 1
   usesTurn: 1
   weaponType: 0

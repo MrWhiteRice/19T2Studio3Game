@@ -55,20 +55,47 @@ public class Movement : MonoBehaviour
 
 	void GetInput()
 	{
+		int playerNum = (int)GetComponent<PlayerDataSP>().team + 1;
+
 		//check jump
-		if(Input.GetKeyDown(KeyCode.W))
+		if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown("joystick " + playerNum + " button 0") || Input.GetKeyDown("joystick " + playerNum + " button 1"))
 		{
 			upJump = true;
 			jump = true;
 		}
-		else if(Input.GetKeyDown(KeyCode.Space))
+		else if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick " + playerNum + " button 3") || Input.GetKeyDown("joystick " + playerNum + " button 2"))
 		{
 			upJump = false;
 			jump = true;
 		}
 
+
 		//get movement direction
-		horizontal = (int)Input.GetAxisRaw("Horizontal");
+		GetComponent<PlayerDataSP>().controllerMode = false;
+		if(!GetComponent<PlayerDataSP>().controllerMode)
+		{
+			float push = Input.GetAxisRaw("P" + playerNum + "Horizontal");
+
+			if(push != 0)
+			{
+				if(push < 0)
+				{
+					horizontal = -1;
+				}
+				else if(push > 0)
+				{
+					horizontal = 1;
+				}
+			}
+			else
+			{
+				horizontal = 0;
+			}
+		}
+		else
+		{
+			horizontal = (int)Input.GetAxisRaw("Horizontal");
+		}
 	}
 
 	void Move()

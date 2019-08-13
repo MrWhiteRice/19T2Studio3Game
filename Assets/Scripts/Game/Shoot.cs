@@ -10,15 +10,17 @@ public class Shoot : MonoBehaviour
 	public GameObject grenade;
 	public GameObject melee;
 
+	int playerNum;
 	bool attack;
+	Vector2 conDir;
 
 	public enum Gun
 	{
-		Class,
-		Grenade,
-		Utility,
-		Special,
-		Melee
+		Class = 1,
+		Grenade = 2,
+		Utility = 4,
+		Special = 5,
+		Melee = 3,
 	}
 
 	public Gun selectedWeapon;
@@ -27,6 +29,7 @@ public class Shoot : MonoBehaviour
 	void Start()
 	{
 		move = GetComponent<Movement>();
+		playerNum = (int)GetComponent<PlayerDataSP>().team + 1;
 	}
 
 	private void OnEnable()
@@ -50,7 +53,20 @@ public class Shoot : MonoBehaviour
 
 	void InputWeapon()
 	{
-		switch(Input.inputString)
+		int selWep = (int)selectedWeapon;
+		if(Input.GetKeyDown("joystick " + playerNum + " button 4"))//LB
+		{
+			print("left");
+			selWep--;
+		}
+		else if(Input.GetKeyDown("joystick " + playerNum + " button 5"))//RB
+		{
+			print("right");
+			selWep++;
+		}
+
+		//switch(Input.inputString)
+		switch(selWep.ToString())
 		{
 			//Class Gun
 			case "1":
@@ -105,6 +121,12 @@ public class Shoot : MonoBehaviour
 
 	void Aim()
 	{
+		Vector2 testDir = new Vector2(Input.GetAxis("P" + playerNum + "X"), Input.GetAxis("P" + playerNum + "Y"));
+		if(testDir != Vector2.zero)
+		{
+			conDir = testDir;
+		}
+
 		//get mouse direction from player
 		Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
@@ -123,9 +145,14 @@ public class Shoot : MonoBehaviour
 		}
 
 		//convert gunpos to screenpos && zero out z axis
-		Vector3 mousePos = Input.mousePosition;
+		//Vector3 mousePos = Input.mousePosition;
+		//mousePos.z = 0;
+		//Vector3 objectPos = Camera.main.WorldToScreenPoint(gun.transform.position);
+		//objectPos.z = 0;
+
+		Vector3 mousePos = gun.transform.position + (Vector3)conDir;
 		mousePos.z = 0;
-		Vector3 objectPos = Camera.main.WorldToScreenPoint(gun.transform.position);
+		Vector3 objectPos = gun.transform.position;
 		objectPos.z = 0;
 
 		//calc angle between mouse and gun
@@ -138,7 +165,7 @@ public class Shoot : MonoBehaviour
 	void TryShoot()
 	{
 		//if(Input.GetKeyDown(KeyCode.Space))
-		if(Input.GetMouseButtonDown(0))
+		if(Input.GetMouseButtonDown(0) || Input.GetAxis("P" + playerNum + "T") > 0)
 		{
 			attack = true;
 

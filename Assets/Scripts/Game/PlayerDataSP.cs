@@ -20,6 +20,7 @@ public class PlayerDataSP : MonoBehaviour
 	public LayerMask ground;
 
 	public bool hurt;
+	public bool controllerMode;
 
 	void Start()
 	{
@@ -110,6 +111,28 @@ public class PlayerDataSP : MonoBehaviour
 
 	private void Update()
 	{
+		//button0 = a
+		//button1 = b
+		//button2 = x
+		//button3 = y
+		//button4 = LB
+		//button5 = RB
+		//button6 = Back
+		//button7 = Start
+		//button8 = Left Click
+		//button9 = Right Click
+
+		string[] buttons = new string[10] { "Button 0", "Button 1", "Button 2", "Button 3", "Button 4", "Button 5", "Button 6", "Button 7", "Button 8", "Button 9" };
+
+		int t = (int)team + 1;
+		foreach(string b in buttons)
+		{
+			if(Input.GetKeyDown("joystick " + t + " " + b.ToLower()))
+			{
+				controllerMode = true;
+			}
+		}
+		
 		//TODO: Add controller support
 		//print(Input.GetKey("joystick button 0"));
 		//1 b
@@ -173,8 +196,15 @@ public class PlayerDataSP : MonoBehaviour
 					GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Idle_Sprites, SpriteAnim.State.Idle);
 				}
 			}
+
+			//check end turn controller
+			if(Input.GetKeyDown("joystick " + t + " " + "button 7"))
+			{
+				if(FindObjectOfType<GameUI>().nextPhaseButton.interactable)
+				FindObjectOfType<GameUI>().NextPhase();
+			}
 		}
-		else
+		else // not my turn
 		{
 			GetComponent<SpriteAnim>().weaponSlot.sprite = null;
 
