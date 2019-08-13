@@ -129,10 +129,6 @@ public class PlayerDataSP : MonoBehaviour
 				controllerMode = true;
 			}
 		}
-		
-		//TODO: Add controller support
-		//print(Input.GetKey("joystick button 0"));
-		//1 b
 
 		//TODO: update death to actual death
 		if(health <= 0)
