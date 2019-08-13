@@ -69,7 +69,6 @@ public class Movement : MonoBehaviour
 			jump = true;
 		}
 
-
 		//get movement direction
 		GetComponent<PlayerDataSP>().controllerMode = false;
 		if(!GetComponent<PlayerDataSP>().controllerMode)

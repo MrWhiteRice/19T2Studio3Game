@@ -246,8 +246,11 @@ public class PlayerDataSP : MonoBehaviour
 
 		if(GetComponent<Movement>().grounded)
 		{
-			SpriteAnim.State str = Input.GetAxisRaw("Horizontal") != 0 ? SpriteAnim.State.Walk : SpriteAnim.State.Idle;
-			SpriteList spr = Input.GetAxisRaw("Horizontal") != 0 ? GetComponent<SpriteAnim>().Walk_Sprites : GetComponent<SpriteAnim>().Idle_Sprites;
+			int playerNum = (int)GetComponent<PlayerDataSP>().team + 1;
+			SpriteAnim.State str = Input.GetAxis("P" + playerNum + "Horizontal") != 0 ? SpriteAnim.State.Walk : SpriteAnim.State.Idle;
+			SpriteList spr = Input.GetAxis("P" + playerNum + "Horizontal") != 0 ? GetComponent<SpriteAnim>().Walk_Sprites : GetComponent<SpriteAnim>().Idle_Sprites;
+			//SpriteAnim.State str = Input.GetAxisRaw("Horizontal") != 0 ? SpriteAnim.State.Walk : SpriteAnim.State.Idle;
+			//SpriteList spr = Input.GetAxisRaw("Horizontal") != 0 ? GetComponent<SpriteAnim>().Walk_Sprites : GetComponent<SpriteAnim>().Idle_Sprites;
 			GetComponent<SpriteAnim>().PlayAnimation(spr, str);
 		}
 		else
