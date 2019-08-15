@@ -19571,19 +19571,19 @@ MonoBehaviour:
     unlockedWeapons: []
   normalWeights:
   - 1
-  - 75
-  - 25
-  - 4
+  - 70
+  - 24.75
+  - 4.25
   premiumWeights:
-  - 7.5
-  - 50
-  - 22.5
-  - 20
+  - 0
+  - 0
+  - 0
+  - 0
   eventWeights:
-  - 10
-  - 50
-  - 22.5
-  - 17.5
+  - 0
+  - 0
+  - 0
+  - 0
 --- !u!114 &1914174042
 MonoBehaviour:
   m_ObjectHideFlags: 0

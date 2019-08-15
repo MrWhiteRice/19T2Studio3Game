@@ -48,18 +48,20 @@ public class LootBox : MonoBehaviour
 
 	public void MultiRoll(string weightSet)
 	{
-		CharacterRoll();
-
+		//roll 9 weapons
 		for(int x = 0; x < 9; x++)
 		{
 			Roll(weightSet);
 		}
+	
+		//guaranteed character roll
+		CharacterRoll();
 	}
 
 	public void Roll(string weightSet)
 	{
 		//initialise weights
-		float[] weights = new float[4];
+		float[] weights = new float[0];
 
 		//find which weight to use
 		switch(weightSet)
@@ -75,36 +77,39 @@ public class LootBox : MonoBehaviour
 			case "Event":
 				weights = eventWeights;
 				break;
+
+			default:
+				Debug.LogError("RICE_ERROR: No weight set!");
+				break;
 		}
 
 		//update save file to register actually played
 		data.created = true;
+
 		//roll dice to see what item you get
-		float roll = Random.Range(1.0f, 101.0f);
-		
+		float roll = Random.Range(0f, 100.0f);
+
 		//initialise weight roll
 		float count = weights[0];
-		for(int x = 1; x <= weights.Length; x++)
+		for(int x = 0; x <= weights.Length; x++)
 		{
 			if(roll <= count)
 			{
-				//check char roll
-				if(x == 1)
+				if(x == 0) //check char roll
 				{
 					CharacterRoll();
 				}
-				//weapon roll
-				else
+				else //weapon roll
 				{
 					ItemRoll(x);
 				}
 
-				return;
+				break;
 			}
 			else
 			{
 				//add to weight roll and check the next tier
-				count += weights[x];
+				count += weights[x+1];
 			}
 		}
 
@@ -134,6 +139,7 @@ public class LootBox : MonoBehaviour
 
 	void ItemRoll(int rarity)
 	{
+		//print("rolling " + rarity + " star item!");
 		List<Weapon> star = new List<Weapon>();
 
 		foreach(Weapon a in weps)
@@ -144,8 +150,10 @@ public class LootBox : MonoBehaviour
 			}
 		}
 
+		//select an weapon in the star we rolled
 		int rand = Random.Range(0, star.Count);
 
+		//print(rand + "," + star.Count);
 		WeaponData wd = data.FindWeapon(star[rand].ID);
 
 		if(wd.unlocked != true)
