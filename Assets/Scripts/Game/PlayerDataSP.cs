@@ -207,10 +207,13 @@ public class PlayerDataSP : MonoBehaviour
 			}
 
 			//check end turn controller
-			if(Input.GetKeyDown("joystick " + playerNum + " " + "button 7"))
+			if(playerNum > 0)
 			{
-				if(FindObjectOfType<GameUI>().nextPhaseButton.interactable)
-				FindObjectOfType<GameUI>().NextPhase();
+				if(Input.GetKeyDown("joystick " + playerNum + " " + "button 7"))
+				{
+					if(FindObjectOfType<GameUI>().nextPhaseButton.interactable)
+						FindObjectOfType<GameUI>().NextPhase();
+				}
 			}
 		}
 		else // not my turn
