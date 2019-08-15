@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
 	public List<GameObject> redPlayers = new List<GameObject>();
 	public List<GameObject> bluePlayers = new List<GameObject>();
 	bool gameStart = false;
-	int selectedLevel = 0;
 
 	public DataContainer data;
 

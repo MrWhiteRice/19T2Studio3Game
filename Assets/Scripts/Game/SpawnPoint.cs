@@ -13,7 +13,7 @@ public class SpawnPoint : MonoBehaviour
 	}
 
 	[SerializeField]
-	Team team;
+	Team team = Team.Blue;
 
 	bool spawned;
 

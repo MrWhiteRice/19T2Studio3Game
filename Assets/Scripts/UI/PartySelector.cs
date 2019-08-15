@@ -14,7 +14,7 @@ public class PartySelector : MonoBehaviour
 	public int traversalID;
 	public int weaponID;
 
-	[SerializeField] bool falseButton;
+	[SerializeField] bool falseButton = false;
 
 	private void Start()
 	{

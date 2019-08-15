@@ -5,7 +5,6 @@ using UnityEngine;
 public class Shoot : MonoBehaviour
 {
 	public Transform gun;
-	Movement move;
 	public GameObject shoot;
 	public GameObject grenade;
 	public GameObject melee;
@@ -29,7 +28,6 @@ public class Shoot : MonoBehaviour
 	void Start()
 	{
 		playerNum = GetComponent<PlayerDataSP>().playerNum;
-		move = GetComponent<Movement>();
 	}
 
 	private void OnEnable()
@@ -59,19 +57,21 @@ public class Shoot : MonoBehaviour
 		{
 			if(Input.GetKeyDown("joystick " + playerNum + " button 4"))//LB
 			{
-				print("left");
+				//cycle item left
 				selWep--;
 			}
 			else if(Input.GetKeyDown("joystick " + playerNum + " button 5"))//RB
 			{
-				print("right");
+				//cycle item right
 				selWep++;
 			}
 
+			//set selection to variable
 			use = selWep.ToString();
 		}
 		else
 		{
+			//set keyboard input to variable
 			use = Input.inputString;
 		}
 
