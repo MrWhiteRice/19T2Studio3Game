@@ -127,16 +127,18 @@ public class PlayerDataSP : MonoBehaviour
 		//button8 = Left Click
 		//button9 = Right Click
 
-		string[] buttons = new string[10] { "Button 0", "Button 1", "Button 2", "Button 3", "Button 4", "Button 5", "Button 6", "Button 7", "Button 8", "Button 9" };
+		//string[] buttons = new string[10] { "Button 0", "Button 1", "Button 2", "Button 3", "Button 4", "Button 5", "Button 6", "Button 7", "Button 8", "Button 9" };
 
+		//foreach(string b in buttons)
+		//{
+		//	if(Input.GetKeyDown("joystick " + t + " " + b.ToLower()))
+		//	{
+		//		controllerMode = true;
+		//	}
+		//}
+
+		//get team
 		int t = (int)team + 1;
-		foreach(string b in buttons)
-		{
-			if(Input.GetKeyDown("joystick " + t + " " + b.ToLower()))
-			{
-				//controllerMode = true;
-			}
-		}
 
 		//Dying logic
 		if(health <= 0)

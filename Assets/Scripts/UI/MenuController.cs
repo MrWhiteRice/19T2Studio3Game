@@ -39,13 +39,12 @@ public class MenuController : MonoBehaviour
 					}
 				}
 			}
-		}
 
-		if(selectedController)
-		{
-			DisableAll();
-			menu[1].SetActive(true);
-			selectedController = false;
+			if(selectedController)
+			{
+				DisableAll();
+				menu[1].SetActive(true);
+			}
 		}
 
 		//set currency amounts

@@ -12,6 +12,7 @@ public class Shoot : MonoBehaviour
 	int playerNum;
 	bool attack;
 	Vector2 conDir;
+	Vector2 dir;
 
 	public enum Gun
 	{
@@ -32,6 +33,7 @@ public class Shoot : MonoBehaviour
 
 	private void OnEnable()
 	{
+		dir = new Vector2(GetComponentInChildren<SpriteRenderer>().flipX ? 1 : -1, 0);
 		gun.gameObject.SetActive(true);
 	}
 
@@ -131,8 +133,44 @@ public class Shoot : MonoBehaviour
 
 	void Aim()
 	{
-		//get mouse direction from player
-		Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+		//init variables
+		Vector3 mousePos;
+		Vector3 objectPos;
+
+		if(playerNum > 0) // if controller
+		{
+			//set conDir to controllers right stick axis
+			Vector2 testDir = new Vector2(Input.GetAxis("P" + playerNum + "X"), Input.GetAxis("P" + playerNum + "Y"));
+			if(testDir != Vector2.zero)
+			{
+				conDir = testDir;
+			}
+
+			//make a dummy and max directions, this is to prvent any funny business with sprite flipping
+			Vector3 d = Vector2.zero;
+			if(Input.GetAxis("P" + playerNum + "X") != 0)
+			{
+				d.x = Input.GetAxis("P" + playerNum + "X") > 0 ? 1 : -1;
+				dir = d;
+			}
+
+			//zero out position z data
+			mousePos = gun.transform.position + (Vector3)conDir;
+			mousePos.z = 0;
+			objectPos = gun.transform.position;
+			objectPos.z = 0;
+		}
+		else //else its keyboard
+		{
+			//get mouse direction from player
+			dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
+			//convert gunpos to screenpos && zero out z axis
+			mousePos = Input.mousePosition;
+			mousePos.z = 0;
+			objectPos = Camera.main.WorldToScreenPoint(gun.transform.position);
+			objectPos.z = 0;
+		}
 
 		//check if dir is right or left, 1 = right, -1 = left
 		bool flip = dir.x < 0 ? true : false;
@@ -146,33 +184,6 @@ public class Shoot : MonoBehaviour
 		foreach(SpriteRenderer spr in character.GetComponentsInChildren<SpriteRenderer>())
 		{
 			spr.flipX = flip;
-		}
-
-		//init variables
-		Vector3 mousePos = Vector3.zero;
-		Vector3 objectPos = Vector3.zero;
-
-		if(playerNum > 0)
-		{
-			//set conDir to controllers right stick axis
-			Vector2 testDir = new Vector2(Input.GetAxis("P" + playerNum + "X"), Input.GetAxis("P" + playerNum + "Y"));
-			if(testDir != Vector2.zero)
-			{
-				conDir = testDir;
-			}
-
-			mousePos = gun.transform.position + (Vector3)conDir;
-			mousePos.z = 0;
-			objectPos = gun.transform.position;
-			objectPos.z = 0;
-		}
-		else
-		{
-			//convert gunpos to screenpos && zero out z axis
-			mousePos = Input.mousePosition;
-			mousePos.z = 0;
-			objectPos = Camera.main.WorldToScreenPoint(gun.transform.position);
-			objectPos.z = 0;
 		}
 
 		//calc angle between mouse and gun
