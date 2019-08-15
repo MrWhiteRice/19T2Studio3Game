@@ -51,6 +51,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 4190524401028169811}
+  type: 0
+  selected: 0
+  classID: 0
+  traversalID: 0
+  weaponID: 0
+  falseButton: 0
 --- !u!1 &3318971624600020220
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,6 +202,7 @@ GameObject:
   - component: {fileID: 8884031290119704042}
   - component: {fileID: 8978589852421137737}
   - component: {fileID: 6468375736208468665}
+  - component: {fileID: 5127098264409786572}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -245,7 +252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -260,3 +267,24 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!223 &5127098264409786572
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7355503275643482935}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 100
+  m_TargetDisplay: 0
