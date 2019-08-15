@@ -53,20 +53,30 @@ public class Shoot : MonoBehaviour
 
 	void InputWeapon()
 	{
+		string use = "";
 		int selWep = (int)selectedWeapon;
-		if(Input.GetKeyDown("joystick " + playerNum + " button 4"))//LB
+		if(playerNum != 0)
 		{
-			print("left");
-			selWep--;
+			if(Input.GetKeyDown("joystick " + playerNum + " button 4"))//LB
+			{
+				print("left");
+				selWep--;
+			}
+			else if(Input.GetKeyDown("joystick " + playerNum + " button 5"))//RB
+			{
+				print("right");
+				selWep++;
+			}
+
+			use = selWep.ToString();
 		}
-		else if(Input.GetKeyDown("joystick " + playerNum + " button 5"))//RB
+		else
 		{
-			print("right");
-			selWep++;
+			use = Input.inputString;
 		}
 
 		//switch(Input.inputString)
-		switch(selWep.ToString())
+		switch(use)
 		{
 			//Class Gun
 			case "1":
@@ -121,12 +131,6 @@ public class Shoot : MonoBehaviour
 
 	void Aim()
 	{
-		Vector2 testDir = new Vector2(Input.GetAxis("P" + playerNum + "X"), Input.GetAxis("P" + playerNum + "Y"));
-		if(testDir != Vector2.zero)
-		{
-			conDir = testDir;
-		}
-
 		//get mouse direction from player
 		Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
@@ -144,16 +148,32 @@ public class Shoot : MonoBehaviour
 			spr.flipX = flip;
 		}
 
-		//convert gunpos to screenpos && zero out z axis
-		//Vector3 mousePos = Input.mousePosition;
-		//mousePos.z = 0;
-		//Vector3 objectPos = Camera.main.WorldToScreenPoint(gun.transform.position);
-		//objectPos.z = 0;
+		//init variables
+		Vector3 mousePos = Vector3.zero;
+		Vector3 objectPos = Vector3.zero;
 
-		Vector3 mousePos = gun.transform.position + (Vector3)conDir;
-		mousePos.z = 0;
-		Vector3 objectPos = gun.transform.position;
-		objectPos.z = 0;
+		if(playerNum > 0)
+		{
+			//set conDir to controllers right stick axis
+			Vector2 testDir = new Vector2(Input.GetAxis("P" + playerNum + "X"), Input.GetAxis("P" + playerNum + "Y"));
+			if(testDir != Vector2.zero)
+			{
+				conDir = testDir;
+			}
+
+			mousePos = gun.transform.position + (Vector3)conDir;
+			mousePos.z = 0;
+			objectPos = gun.transform.position;
+			objectPos.z = 0;
+		}
+		else
+		{
+			//convert gunpos to screenpos && zero out z axis
+			mousePos = Input.mousePosition;
+			mousePos.z = 0;
+			objectPos = Camera.main.WorldToScreenPoint(gun.transform.position);
+			objectPos.z = 0;
+		}
 
 		//calc angle between mouse and gun
 		float angle = Mathf.Atan2(mousePos.y - objectPos.y, mousePos.x - objectPos.x) * Mathf.Rad2Deg;
@@ -165,7 +185,8 @@ public class Shoot : MonoBehaviour
 	void TryShoot()
 	{
 		//if(Input.GetKeyDown(KeyCode.Space))
-		if(Input.GetMouseButtonDown(0) || Input.GetAxis("P" + playerNum + "T") > 0)
+		var test = playerNum == 0 ? Input.GetMouseButtonDown(0) : Input.GetAxis("P" + playerNum + "T") > 0;
+		if(test)
 		{
 			attack = true;
 

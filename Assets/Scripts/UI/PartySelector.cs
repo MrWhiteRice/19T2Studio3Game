@@ -116,14 +116,12 @@ public class PartySelector : MonoBehaviour
 
 						GameObject b = null;
 
-						if(a.WeapType == Weapon.WeaponType.Class && type == PartyMenu.Selector.Class)
+						if(a.WeapType == Weapon.WeaponType.Class && type == PartyMenu.Selector.Class) //class weapon generate
 						{
-							print("class");
 							b = Instantiate(button, panel);
 						}
-						else if(a.WeapType == Weapon.WeaponType.Special && type == PartyMenu.Selector.Special)
+						else if(a.WeapType == Weapon.WeaponType.Special && type == PartyMenu.Selector.Special) //special weapon generate
 						{
-							print("special");
 							b = Instantiate(button, panel);
 						}
 						//TODO: Traversal update
