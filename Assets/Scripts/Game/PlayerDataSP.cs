@@ -21,8 +21,13 @@ public class PlayerDataSP : MonoBehaviour
 
 	public Actor actor;
 
+	public int playerNum = 0;
+
 	void Start()
 	{
+		int index = (int)team == 0 ? 1 : 2;
+		playerNum = PlayerPrefs.GetInt("Player" + index + "Controller");
+
 		character = FindObjectOfType<GameManager>().data.party[ID%3];
 
 		foreach(Weapon w in Resources.LoadAll<Weapon>("RiceStuff/Weapons"))
@@ -129,11 +134,11 @@ public class PlayerDataSP : MonoBehaviour
 		{
 			if(Input.GetKeyDown("joystick " + t + " " + b.ToLower()))
 			{
-				controllerMode = true;
+				//controllerMode = true;
 			}
 		}
 
-		//TODO: update death to actual death
+		//Dying logic
 		if(health <= 0)
 		{
 			foreach(SpriteRenderer spr in GetComponentsInChildren<SpriteRenderer>())
@@ -164,7 +169,8 @@ public class PlayerDataSP : MonoBehaviour
 				case GameManager.TurnPhase.Shoot:
 					ShootPhase();
 					break;
-
+					
+				//Damage Phase
 				case GameManager.TurnPhase.Damage:
 					break;
 			}
@@ -227,12 +233,11 @@ public class PlayerDataSP : MonoBehaviour
 			}
 			else
 			{
-				//GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 				GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
 			}
+
 			healthText.text = "" + health.ToString("f0");
 			staminaSlider.gameObject.SetActive(false);
-			//GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
 		}
 	}
 
@@ -246,9 +251,10 @@ public class PlayerDataSP : MonoBehaviour
 
 		if(GetComponent<Movement>().grounded)
 		{
-			int playerNum = (int)GetComponent<PlayerDataSP>().team + 1;
-			SpriteAnim.State str = Input.GetAxis("P" + playerNum + "Horizontal") != 0 ? SpriteAnim.State.Walk : SpriteAnim.State.Idle;
-			SpriteList spr = Input.GetAxis("P" + playerNum + "Horizontal") != 0 ? GetComponent<SpriteAnim>().Walk_Sprites : GetComponent<SpriteAnim>().Idle_Sprites;
+			//int playerNum = (int)GetComponent<PlayerDataSP>().team + 1;
+			float input = playerNum == 0 ? Input.GetAxisRaw("Horizontal") : Input.GetAxis("P" + playerNum + "Horizontal");
+			SpriteAnim.State str = input != 0 ? SpriteAnim.State.Walk : SpriteAnim.State.Idle;
+			SpriteList spr = input != 0 ? GetComponent<SpriteAnim>().Walk_Sprites : GetComponent<SpriteAnim>().Idle_Sprites;
 			//SpriteAnim.State str = Input.GetAxisRaw("Horizontal") != 0 ? SpriteAnim.State.Walk : SpriteAnim.State.Idle;
 			//SpriteList spr = Input.GetAxisRaw("Horizontal") != 0 ? GetComponent<SpriteAnim>().Walk_Sprites : GetComponent<SpriteAnim>().Idle_Sprites;
 			GetComponent<SpriteAnim>().PlayAnimation(spr, str);
@@ -272,7 +278,6 @@ public class PlayerDataSP : MonoBehaviour
 	{
 		staminaSlider.gameObject.SetActive(false);
 		GetComponent<Movement>().enabled = false;
-		//GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 		GetComponent<Shoot>().enabled = true;
 	}
 

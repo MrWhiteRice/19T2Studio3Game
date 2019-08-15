@@ -22,8 +22,11 @@ public class Movement : MonoBehaviour
 	public float jumpForce = 400.0f;
 	public float maxSpeed = 10.0f;
 
+	int playerNum;
+
     void Start()
     {
+		playerNum = GetComponent<PlayerDataSP>().playerNum;
 		rb = GetComponent<Rigidbody>();
     }
 
@@ -55,15 +58,13 @@ public class Movement : MonoBehaviour
 
 	void GetInput()
 	{
-		int playerNum = (int)GetComponent<PlayerDataSP>().team + 1;
-
 		//check jump
-		if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown("joystick " + playerNum + " button 0") || Input.GetKeyDown("joystick " + playerNum + " button 1"))
+		if(playerNum == 0 ? Input.GetKeyDown(KeyCode.W) : Input.GetKeyDown("joystick " + playerNum + " button 0") || Input.GetKeyDown("joystick " + playerNum + " button 1"))
 		{
 			upJump = true;
 			jump = true;
 		}
-		else if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown("joystick " + playerNum + " button 3") || Input.GetKeyDown("joystick " + playerNum + " button 2"))
+		else if(playerNum == 0 ? Input.GetKeyDown(KeyCode.Space) : Input.GetKeyDown("joystick " + playerNum + " button 3") || Input.GetKeyDown("joystick " + playerNum + " button 2"))
 		{
 			upJump = false;
 			jump = true;
@@ -73,7 +74,7 @@ public class Movement : MonoBehaviour
 		GetComponent<PlayerDataSP>().controllerMode = false;
 		if(!GetComponent<PlayerDataSP>().controllerMode)
 		{
-			float push = Input.GetAxisRaw("P" + playerNum + "Horizontal");
+			float push = playerNum == 0 ? Input.GetAxisRaw("Horizontal") : Input.GetAxisRaw("P" + playerNum + "Horizontal");
 
 			if(push != 0)
 			{

@@ -28,8 +28,8 @@ public class Shoot : MonoBehaviour
 
 	void Start()
 	{
+		playerNum = GetComponent<PlayerDataSP>().playerNum;
 		move = GetComponent<Movement>();
-		playerNum = (int)GetComponent<PlayerDataSP>().team + 1;
 	}
 
 	private void OnEnable()
