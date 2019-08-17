@@ -55,7 +55,7 @@ public class GunEditorWindow : EditorWindow
 	void CreateWeapon()
 	{
 		Weapon asset = ScriptableObject.CreateInstance<Weapon>();
-
+		
 		int id = Resources.LoadAll<Weapon>("RiceStuff/Weapons").Length;
 
 		asset.WeaponName = "Weapon_" + id;

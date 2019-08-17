@@ -56,7 +56,7 @@ public class CharacterEditorWindow : EditorWindow
 	{
 		Actor asset = ScriptableObject.CreateInstance<Actor>();
 
-		int id = Random.Range(0, 99999);
+		int id = Resources.LoadAll<Actor>("RiceStuff/Actors").Length;
 
 		asset.CharacterName = "Actor_" + id;
 		asset.Icon = null;
@@ -126,6 +126,7 @@ public class CharacterEditorWindow : EditorWindow
 
 		GUILayout.EndHorizontal();
 
+		if(SO.targetObject != null)
 		SO.ApplyModifiedProperties();
 	}
 }
