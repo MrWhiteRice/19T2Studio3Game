@@ -14,6 +14,12 @@ public class MenuController : MonoBehaviour
 	public Text free;
 	public Text paid;
 
+	private void Start()
+	{
+		PlayerPrefs.DeleteKey("Player1Controller");
+		PlayerPrefs.DeleteKey("Player2Controller");
+	}
+
 	private void Update()
 	{
 		//Beginning of the game, check what controller type player 1 is using
