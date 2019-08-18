@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5ed1329858077b4418939e3e788c45d6, type: 3}
-  m_Name: Actor_14
+  m_Name: Actor_16
   m_EditorClassIdentifier: 
-  id: 14
-  icon: {fileID: 21300000, guid: f9359ac6d60f01747bf9b8abff6456e0, type: 3}
-  characterName: Isaac
+  id: 16
+  icon: {fileID: 0}
+  characterName: Nathan
   weight: 0
   rarity: 1
-  initiative: 69
+  initiative: 71
   startingItem: 0
