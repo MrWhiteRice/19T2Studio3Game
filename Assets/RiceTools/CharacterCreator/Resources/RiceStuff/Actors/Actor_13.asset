@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 13
   icon: {fileID: 21300000, guid: 9cf31f59adbed3b42930f117f7386113, type: 3}
   characterName: Adam
-  weight: 0
+  weight: 2
   rarity: 1
-  initiative: 1
-  startingItem: 0
+  initiative: 33
+  startingItem: 2

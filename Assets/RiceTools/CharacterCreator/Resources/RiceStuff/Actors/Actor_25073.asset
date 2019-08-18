@@ -18,4 +18,4 @@ MonoBehaviour:
   weight: 1
   rarity: 1
   initiative: 35
-  startingItem: 0
+  startingItem: 1
