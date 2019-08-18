@@ -23,35 +23,7 @@ public class MenuController : MonoBehaviour
 	private void Update()
 	{
 		//Beginning of the game, check what controller type player 1 is using
-		if(!selectedController)
-		{
-			//Check if keyboard is to be used
-			if(Input.GetKeyDown(KeyCode.Space))
-			{
-				PlayerPrefs.SetInt("Player1Controller", 0);
-				selectedController = true;
-			}
-			else
-			{
-				//check which controller is being used
-				for(int x = 1; x <= 4; x++)
-				{
-					if(Input.GetKeyDown("joystick " + x + " button 0"))
-					{
-						print("selected joystick" + x);
-						PlayerPrefs.SetInt("Player1Controller", x);
-						selectedController = true;
-						break;
-					}
-				}
-			}
-
-			if(selectedController)
-			{
-				DisableAll();
-				menu[1].SetActive(true);
-			}
-		}
+		BeginMenu(false);
 
 		//set currency amounts
 		if(paid.gameObject.activeSelf)
@@ -107,6 +79,40 @@ public class MenuController : MonoBehaviour
 				{
 					profiles[x].GetComponentInChildren<Text>().text = "Create New Profile";
 				}
+			}
+		}
+	}
+
+	public void BeginMenu(bool mobile)
+	{
+		//Beginning of the game, check what controller type player 1 is using
+		if(!selectedController)
+		{
+			//Check if keyboard is to be used
+			if(Input.GetKeyDown(KeyCode.Space) || mobile)
+			{
+				PlayerPrefs.SetInt("Player1Controller", 0);
+				selectedController = true;
+			}
+			else
+			{
+				//check which controller is being used
+				for(int x = 1; x <= 4; x++)
+				{
+					if(Input.GetKeyDown("joystick " + x + " button 0"))
+					{
+						print("selected joystick" + x);
+						PlayerPrefs.SetInt("Player1Controller", x);
+						selectedController = true;
+						break;
+					}
+				}
+			}
+
+			if(selectedController)
+			{
+				DisableAll();
+				menu[1].SetActive(true);
 			}
 		}
 	}
