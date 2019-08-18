@@ -88,8 +88,14 @@ public class MenuController : MonoBehaviour
 		//Beginning of the game, check what controller type player 1 is using
 		if(!selectedController)
 		{
+			//Check if mobile
+			if(mobile)
+			{
+				PlayerPrefs.SetInt("Player1Controller", -1);
+				selectedController = true;
+			}
 			//Check if keyboard is to be used
-			if(Input.GetKeyDown(KeyCode.Space) || mobile)
+			else if(Input.GetKeyDown(KeyCode.Space))
 			{
 				PlayerPrefs.SetInt("Player1Controller", 0);
 				selectedController = true;
