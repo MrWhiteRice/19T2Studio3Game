@@ -195,7 +195,11 @@ public class Shoot : MonoBehaviour
 
 	void TryShoot()
 	{
-		//if(Input.GetKeyDown(KeyCode.Space))
+		if(playerNum == -1)
+		{
+			return;
+		}
+
 		var test = playerNum == 0 ? Input.GetMouseButtonDown(0) : Input.GetAxis("P" + playerNum + "T") > 0;
 		if(test)
 		{
