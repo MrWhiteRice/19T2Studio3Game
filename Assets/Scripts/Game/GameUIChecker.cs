@@ -9,8 +9,7 @@ public class GameUIChecker : MonoBehaviour
 
     void Start()
     {
-		bool set = PlayerPrefs.GetInt("Player" + 0 + "Controller", -1) == -1 ? true : false;
-		Debug.LogError(PlayerPrefs.GetInt("Player" + 0 + "Controller", -1));
+		bool set = PlayerPrefs.GetInt("Player" + 1 + "Controller") == -1 ? true : false;
 		pc.SetActive(!set);
 		mobile.SetActive(set);
     }
