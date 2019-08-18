@@ -66,6 +66,7 @@ public class MenuController : MonoBehaviour
 						}
 					}
 
+					if(profiles.Length > 0)
 					profiles[x].GetComponentInChildren<Text>().text =
 						"Free: " + data[x].free + " " +
 						"Paid: " + data[x].paid + " " +
@@ -77,7 +78,8 @@ public class MenuController : MonoBehaviour
 				}
 				else
 				{
-					profiles[x].GetComponentInChildren<Text>().text = "Create New Profile";
+					if(profiles.Length > 0)
+						profiles[x].GetComponentInChildren<Text>().text = "Create New Profile";
 				}
 			}
 		}
