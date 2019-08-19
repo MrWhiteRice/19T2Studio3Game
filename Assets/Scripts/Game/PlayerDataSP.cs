@@ -256,8 +256,6 @@ public class PlayerDataSP : MonoBehaviour
 
 		if(GetComponent<Movement>().grounded)
 		{
-			//int playerNum = (int)GetComponent<PlayerDataSP>().team + 1;
-			print("ASNDANWLDK" + playerNum);
 			float input = 0;
 
 			if(playerNum != -1)

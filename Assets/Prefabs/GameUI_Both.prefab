@@ -133,6 +133,9 @@ MonoBehaviour:
   p2health: {fileID: 0}
   icon: {fileID: 3075272100445351537}
   health: {fileID: 7817702784119571358}
+  mousePos: {x: 0, y: 0}
+  pressed: 0
+  controller: {fileID: 915300361673028401}
 --- !u!1 &886283550923818255
 GameObject:
   m_ObjectHideFlags: 0
@@ -4312,6 +4315,9 @@ MonoBehaviour:
   p2health: {fileID: 3305277731532881234}
   icon: {fileID: 3305277732070280643}
   health: {fileID: 3305277732296556715}
+  mousePos: {x: 0, y: 0}
+  pressed: 0
+  controller: {fileID: 0}
 --- !u!1 &9221853001053312506
 GameObject:
   m_ObjectHideFlags: 0

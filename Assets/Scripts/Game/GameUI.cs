@@ -36,6 +36,9 @@ public class GameUI : MonoBehaviour
 	[HideInInspector] public Vector2 mousePos;
 	[HideInInspector] public bool pressed;
 
+	[Space]
+	public Image controller;
+
 	private void Start()
 	{
 		if(p1health != null)
@@ -65,9 +68,18 @@ public class GameUI : MonoBehaviour
 				blueHealth += player.health;
 			}
 
+			//check if players turn
 			if(player.IsTurn())
 			{
-				player.GetComponent<Movement>().horizontal = pressed ? (mousePos.x > 0 ? (1) : (-1)) : 0;
+				int dir = 0;
+
+				//find mouse direction
+				if(pressed)
+				{
+					dir = mousePos.x > controller.rectTransform.position.x ? 1 : -1;
+				}
+
+				player.GetComponent<Movement>().horizontal = dir;
 			}
 		}
 
@@ -284,24 +296,26 @@ public class GameUI : MonoBehaviour
 
 	public void UpJump()
 	{
+		print("Upjump!");
 		foreach(PlayerDataSP player in FindObjectsOfType<PlayerDataSP>())
 		{
 			if(player.IsTurn())
 			{
-				player.GetComponent<Movement>().jump = true;
 				player.GetComponent<Movement>().upJump = true;
+				player.GetComponent<Movement>().jump = true;
 			}
 		}
 	}
 
 	public void SideJump()
 	{
+		print("SideJump!!");
 		foreach(PlayerDataSP player in FindObjectsOfType<PlayerDataSP>())
 		{
 			if(player.IsTurn())
 			{
-				player.GetComponent<Movement>().jump = true;
 				player.GetComponent<Movement>().upJump = false;
+				player.GetComponent<Movement>().jump = true;
 			}
 		}
 	}
