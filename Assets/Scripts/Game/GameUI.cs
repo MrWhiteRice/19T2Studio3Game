@@ -49,8 +49,16 @@ public class GameUI : MonoBehaviour
 	private void Update()
 	{
 		//Get Mouse Input
-		pressed = Input.GetMouseButton(0);
 		mousePos = Input.mousePosition;
+
+		//get touch mover
+		Rect r = controller.rectTransform.rect;
+		r.x += r.width / 2;
+		r.y += r.height / 2;
+		if(r.Contains(Input.mousePosition))
+		{
+			pressed = Input.GetMouseButton(0);
+		}
 
 		//init healths
 		float redHealth = 0;
@@ -246,30 +254,64 @@ public class GameUI : MonoBehaviour
 	{
 		if(FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.Shoot)
 		{
-			if(!gun.enabled && gun != null)
+			//Mobile check - not mobile
+			if(gun != null)
 			{
-				gun.enabled = true;
-				melee.enabled = true;
-				grenade.enabled = true;
-			}
-
-			foreach(PlayerDataSP player in FindObjectsOfType<PlayerDataSP>())
-			{
-				if(player.IsTurn())
+				if(!gun.enabled && gun != null)
 				{
-					switch(player.GetComponent<Shoot>().selectedWeapon)
+					gun.enabled = true;
+					melee.enabled = true;
+					grenade.enabled = true;
+				}
+
+				foreach(PlayerDataSP player in FindObjectsOfType<PlayerDataSP>())
+				{
+					if(player.IsTurn())
 					{
-						case Shoot.Gun.Class:
-							SetColor(gun);
-							break;
+						switch(player.GetComponent<Shoot>().selectedWeapon)
+						{
+							case Shoot.Gun.Class:
+								SetColor(gun);
+								break;
 
-						case Shoot.Gun.Melee:
-							SetColor(melee);
-							break;
+							case Shoot.Gun.Melee:
+								SetColor(melee);
+								break;
 
-						case Shoot.Gun.Grenade:
-							SetColor(grenade);
-							break;
+							case Shoot.Gun.Grenade:
+								SetColor(grenade);
+								break;
+						}
+					}
+				}
+			}
+			else // is mobile
+			{
+				if(gun.enabled && gun != null)
+				{
+					gun.enabled = false;
+					melee.enabled = false;
+					grenade.enabled = false;
+				}
+
+				foreach(PlayerDataSP player in FindObjectsOfType<PlayerDataSP>())
+				{
+					if(player.IsTurn())
+					{
+						switch(player.GetComponent<Shoot>().selectedWeapon)
+						{
+							case Shoot.Gun.Class:
+								gun.enabled = true;
+								break;
+
+							case Shoot.Gun.Melee:
+								melee.enabled = true;
+								break;
+
+							case Shoot.Gun.Grenade:
+								grenade.enabled = true;
+								break;
+						}
 					}
 				}
 			}

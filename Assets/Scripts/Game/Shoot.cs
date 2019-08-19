@@ -55,7 +55,12 @@ public class Shoot : MonoBehaviour
 	{
 		string use = "";
 		int selWep = (int)selectedWeapon;
-		if(playerNum != 0)
+
+		if(playerNum == -1) //check mobile
+		{
+
+		}
+		else if(playerNum != 0) // check not mobile
 		{
 			if(Input.GetKeyDown("joystick " + playerNum + " button 4"))//LB
 			{
