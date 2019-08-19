@@ -13,10 +13,10 @@ public class Movement : MonoBehaviour
 
 	public bool grounded;
 	public bool jumping;
-	bool jump;
-	bool upJump;
+	public bool jump;
+	public bool upJump;
 	public bool facingRight = true;
-	int horizontal;
+	public int horizontal;
 	int lastDir;
 
 	public float jumpForce = 400.0f;

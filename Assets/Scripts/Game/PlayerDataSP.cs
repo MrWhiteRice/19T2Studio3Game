@@ -257,7 +257,12 @@ public class PlayerDataSP : MonoBehaviour
 		if(GetComponent<Movement>().grounded)
 		{
 			//int playerNum = (int)GetComponent<PlayerDataSP>().team + 1;
-			float input = playerNum == 0 ? Input.GetAxisRaw("Horizontal") : Input.GetAxis("P" + playerNum + "Horizontal");
+			print("ASNDANWLDK" + playerNum);
+			float input = 0;
+
+			if(playerNum != -1)
+				input = playerNum == 0 ? Input.GetAxisRaw("Horizontal") : Input.GetAxis("P" + playerNum + "Horizontal");
+
 			SpriteAnim.State str = input != 0 ? SpriteAnim.State.Walk : SpriteAnim.State.Idle;
 			SpriteList spr = input != 0 ? GetComponent<SpriteAnim>().Walk_Sprites : GetComponent<SpriteAnim>().Idle_Sprites;
 			//SpriteAnim.State str = Input.GetAxisRaw("Horizontal") != 0 ? SpriteAnim.State.Walk : SpriteAnim.State.Idle;

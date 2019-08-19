@@ -32,6 +32,10 @@ public class GameUI : MonoBehaviour
 	public Image health;
 	int fullHpActive = -1;
 
+	//Mobile Input
+	[HideInInspector] public Vector2 mousePos;
+	[HideInInspector] public bool pressed;
+
 	private void Start()
 	{
 		if(p1health != null)
@@ -41,6 +45,10 @@ public class GameUI : MonoBehaviour
 
 	private void Update()
 	{
+		//Get Mouse Input
+		pressed = Input.GetMouseButton(0);
+		mousePos = Input.mousePosition;
+
 		//init healths
 		float redHealth = 0;
 		float blueHealth = 0;
@@ -55,6 +63,11 @@ public class GameUI : MonoBehaviour
 			else
 			{
 				blueHealth += player.health;
+			}
+
+			if(player.IsTurn())
+			{
+				player.GetComponent<Movement>().horizontal = pressed ? (mousePos.x > 0 ? (1) : (-1)) : 0;
 			}
 		}
 
@@ -267,6 +280,35 @@ public class GameUI : MonoBehaviour
 		grenade.color = Color.white;
 
 		img.color = Color.yellow;
+	}
+
+	public void UpJump()
+	{
+		foreach(PlayerDataSP player in FindObjectsOfType<PlayerDataSP>())
+		{
+			if(player.IsTurn())
+			{
+				player.GetComponent<Movement>().jump = true;
+				player.GetComponent<Movement>().upJump = true;
+			}
+		}
+	}
+
+	public void SideJump()
+	{
+		foreach(PlayerDataSP player in FindObjectsOfType<PlayerDataSP>())
+		{
+			if(player.IsTurn())
+			{
+				player.GetComponent<Movement>().jump = true;
+				player.GetComponent<Movement>().upJump = false;
+			}
+		}
+	}
+
+	public void Fire()
+	{
+
 	}
 
 	//public void SkipTurn()
