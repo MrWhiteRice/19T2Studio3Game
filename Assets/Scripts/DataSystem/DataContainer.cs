@@ -16,6 +16,9 @@ public class DataContainer
 
 	public bool created;
 
+	//version number, this is used for character or weapon dlc
+	public int version;
+
 	//selected party
 	public CharacterParty[] party = new CharacterParty[3] { new CharacterParty(-1, -1, -1, -1), new CharacterParty(-1, -1, -1, -1), new CharacterParty(-1, -1, -1, -1) };
 

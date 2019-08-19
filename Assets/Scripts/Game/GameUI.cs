@@ -34,6 +34,7 @@ public class GameUI : MonoBehaviour
 
 	private void Start()
 	{
+		if(p1health != null)
 		fullHp = (int)p1health.rectTransform.sizeDelta.x;
 		fullHpActive = (int)health.rectTransform.sizeDelta.x;
 	}
@@ -58,14 +59,20 @@ public class GameUI : MonoBehaviour
 		}
 
 		//adjust team 1 healthbar
-		Vector2 p1Rect = p1health.rectTransform.sizeDelta;
-		p1Rect.x = (redHealth / 300) * fullHp;
-		p1health.rectTransform.sizeDelta = p1Rect;
+		if(p1health != null)
+		{
+			Vector2 p1Rect = p1health.rectTransform.sizeDelta;
+			p1Rect.x = (redHealth / 300) * fullHp;
+			p1health.rectTransform.sizeDelta = p1Rect;
+		}
 
 		//adjust team 2 healthbar
-		Vector2 p2Rect = p2health.rectTransform.sizeDelta;
-		p2Rect.x = (blueHealth / 300) * fullHp;
-		p2health.rectTransform.sizeDelta = p2Rect;
+		if(p2health)
+		{
+			Vector2 p2Rect = p2health.rectTransform.sizeDelta;
+			p2Rect.x = (blueHealth / 300) * fullHp;
+			p2health.rectTransform.sizeDelta = p2Rect;
+		}
 
 		//define if button is clickable
 		if(FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.End || FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.Damage)
@@ -214,7 +221,7 @@ public class GameUI : MonoBehaviour
 	{
 		if(FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.Shoot)
 		{
-			if(!gun.enabled)
+			if(!gun.enabled && gun != null)
 			{
 				gun.enabled = true;
 				melee.enabled = true;
@@ -244,9 +251,12 @@ public class GameUI : MonoBehaviour
 		}
 		else
 		{
-			gun.enabled = false;
-			melee.enabled = false;
-			grenade.enabled = false;
+			if(gun != null)
+			{
+				gun.enabled = false;
+				melee.enabled = false;
+				grenade.enabled = false;
+			}
 		}
 	}
 

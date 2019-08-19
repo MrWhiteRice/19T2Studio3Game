@@ -58,6 +58,11 @@ public class Movement : MonoBehaviour
 
 	void GetInput()
 	{
+		if(playerNum == -1)
+		{
+			return;
+		}
+
 		//check jump
 		if(playerNum == 0 ? Input.GetKeyDown(KeyCode.W) : Input.GetKeyDown("joystick " + playerNum + " button 0") || Input.GetKeyDown("joystick " + playerNum + " button 1"))
 		{

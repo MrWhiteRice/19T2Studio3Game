@@ -26,7 +26,7 @@ public class PlayerDataSP : MonoBehaviour
 	void Start()
 	{
 		int index = (int)team == 0 ? 1 : 2;
-		playerNum = PlayerPrefs.GetInt("Player" + index + "Controller");
+		playerNum = PlayerPrefs.GetInt("Player" + index + "Controller", -1);
 
 		character = FindObjectOfType<GameManager>().data.party[ID%3];
 

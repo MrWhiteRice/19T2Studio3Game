@@ -9,6 +9,7 @@ public class LootBox : MonoBehaviour
 
 	public DataContainer data;
 
+	//              char, 1*, 2*, 3*
 	//int[] weights = { 1, 4, 25, 70};
 	public float[] normalWeights = { 1, 4, 25, 70};
 	public float[] premiumWeights = { 0, 0, 0, 0};
@@ -24,8 +25,11 @@ public class LootBox : MonoBehaviour
 
 	public void LoadData(int player)
 	{
+		//set player
 		PlayerPrefs.SetInt("ActivePlayer", player);
+		//load data
 		data = SaveSystem.loadData(player);
+		//set created true
 		data.created = true;
 
 		SaveSystem.SaveData(data);
