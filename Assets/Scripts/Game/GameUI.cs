@@ -38,26 +38,38 @@ public class GameUI : MonoBehaviour
 
 	[Space]
 	public Image controller;
+	bool isMobile;
 
 	private void Start()
 	{
 		if(p1health != null)
 		fullHp = (int)p1health.rectTransform.sizeDelta.x;
 		fullHpActive = (int)health.rectTransform.sizeDelta.x;
+
+		isMobile = PlayerPrefs.GetInt("Player" + 1 + "Controller") == -1 ? true : false;
 	}
 
 	private void Update()
 	{
-		//Get Mouse Input
-		mousePos = Input.mousePosition;
-
-		//get touch mover
-		Rect r = controller.rectTransform.rect;
-		r.x += r.width / 2;
-		r.y += r.height / 2;
-		if(r.Contains(Input.mousePosition))
+		//check if mobile
+		if(isMobile)
 		{
-			pressed = Input.GetMouseButton(0);
+			//get screen input
+			mousePos = Input.mousePosition;
+
+			//get touch mover - adding a half so its correctly centered
+			Rect r = controller.rectTransform.rect;
+			r.x += r.width / 2;
+			r.y += r.height / 2;
+
+			if(r.Contains(mousePos))//check if we're pressing the move stick
+			{
+				pressed = Input.GetMouseButton(0);
+			}
+			else if(Input.GetMouseButtonUp(0))//check if we've released outside the stick
+			{
+				pressed = false;
+			}
 		}
 
 		//init healths
@@ -178,7 +190,7 @@ public class GameUI : MonoBehaviour
 			}
 		}
 
-		if(red == 0)
+		if(red == 0) //death check red
 		{
 			if(win == null)
 			{
@@ -197,7 +209,7 @@ public class GameUI : MonoBehaviour
 				UnityEngine.SceneManagement.SceneManager.LoadScene(0);
 			}
 		}
-		else if(blue == 0)
+		else if(blue == 0) // death check blue
 		{
 			if(win == null)
 			{
@@ -250,66 +262,51 @@ public class GameUI : MonoBehaviour
 		}
 	}
 
+	public void PickWeapon(int select)
+	{
+		//cycle all players
+		foreach(PlayerDataSP player in FindObjectsOfType<PlayerDataSP>())
+		{
+			//find active player
+			if(player.IsTurn())
+			{
+				player.GetComponent<Shoot>().selectedWeapon = (Shoot.Gun)select;
+			}
+		}
+	}
+
 	void WeaponSelected()
 	{
 		if(FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.Shoot)
 		{
-			//Mobile check - not mobile
+			//ensure there is an object to prevent erroring
 			if(gun != null)
 			{
-				if(!gun.enabled && gun != null)
-				{
-					gun.enabled = true;
-					melee.enabled = true;
-					grenade.enabled = true;
-				}
+				//mobile check to enable or disable elements
+				gun.enabled = isMobile ? false : true;
+				melee.enabled = isMobile ? false : true;
+				grenade.enabled = isMobile ? false : true;
 
+				//cycle all players
 				foreach(PlayerDataSP player in FindObjectsOfType<PlayerDataSP>())
 				{
+					//find active player
 					if(player.IsTurn())
 					{
+						print(player.GetComponent<Shoot>().selectedWeapon);
+						//check what weapon we're affecting
 						switch(player.GetComponent<Shoot>().selectedWeapon)
 						{
 							case Shoot.Gun.Class:
-								SetColor(gun);
+								if(!isMobile) SetColor(gun); else gun.enabled = true;
 								break;
 
 							case Shoot.Gun.Melee:
-								SetColor(melee);
+								if(!isMobile) SetColor(melee); else melee.enabled = true;
 								break;
 
 							case Shoot.Gun.Grenade:
-								SetColor(grenade);
-								break;
-						}
-					}
-				}
-			}
-			else // is mobile
-			{
-				if(gun.enabled && gun != null)
-				{
-					gun.enabled = false;
-					melee.enabled = false;
-					grenade.enabled = false;
-				}
-
-				foreach(PlayerDataSP player in FindObjectsOfType<PlayerDataSP>())
-				{
-					if(player.IsTurn())
-					{
-						switch(player.GetComponent<Shoot>().selectedWeapon)
-						{
-							case Shoot.Gun.Class:
-								gun.enabled = true;
-								break;
-
-							case Shoot.Gun.Melee:
-								melee.enabled = true;
-								break;
-
-							case Shoot.Gun.Grenade:
-								grenade.enabled = true;
+								if(!isMobile) SetColor(grenade); else grenade.enabled = true;
 								break;
 						}
 					}
@@ -343,8 +340,7 @@ public class GameUI : MonoBehaviour
 		{
 			if(player.IsTurn())
 			{
-				player.GetComponent<Movement>().upJump = true;
-				player.GetComponent<Movement>().jump = true;
+				player.GetComponent<Movement>().UpJump();
 			}
 		}
 	}
@@ -356,8 +352,7 @@ public class GameUI : MonoBehaviour
 		{
 			if(player.IsTurn())
 			{
-				player.GetComponent<Movement>().upJump = false;
-				player.GetComponent<Movement>().jump = true;
+				player.GetComponent<Movement>().SideJump();
 			}
 		}
 	}

@@ -32,12 +32,12 @@ public class Movement : MonoBehaviour
 
 	void Update()
 	{
-		CheckGrounded();
+		//CheckGrounded();
 		GetInput();
 		Move();
 	}
 	
-	void CheckGrounded()
+	bool CheckGrounded()
 	{
 		grounded = false;
 
@@ -50,10 +50,16 @@ public class Movement : MonoBehaviour
 			if(collisions[x].gameObject != gameObject)
 			{
 				grounded = true;
-				upJump = false;
-				jumping = false;
+				if(jumping)
+				{
+					upJump = false;
+					jumping = false;
+				}
+				return true;
 			}
 		}
+
+		return false;
 	}
 
 	void GetInput()
@@ -66,19 +72,17 @@ public class Movement : MonoBehaviour
 		//check jump
 		if(playerNum == 0 ? Input.GetKeyDown(KeyCode.W) : Input.GetKeyDown("joystick " + playerNum + " button 0") || Input.GetKeyDown("joystick " + playerNum + " button 1"))
 		{
-			upJump = true;
-			jump = true;
+			UpJump();
 		}
 		else if(playerNum == 0 ? Input.GetKeyDown(KeyCode.Space) : Input.GetKeyDown("joystick " + playerNum + " button 3") || Input.GetKeyDown("joystick " + playerNum + " button 2"))
 		{
-			upJump = false;
-			jump = true;
+			SideJump();
 		}
 
 		//get movement direction
-		GetComponent<PlayerDataSP>().controllerMode = false;
-		if(!GetComponent<PlayerDataSP>().controllerMode)
-		{
+		//GetComponent<PlayerDataSP>().controllerMode = false;
+		//if(!GetComponent<PlayerDataSP>().controllerMode)
+		//{
 			float push = playerNum == 0 ? Input.GetAxisRaw("Horizontal") : Input.GetAxisRaw("P" + playerNum + "Horizontal");
 
 			if(push != 0)
@@ -96,23 +100,35 @@ public class Movement : MonoBehaviour
 			{
 				horizontal = 0;
 			}
-		}
-		else
-		{
-			horizontal = (int)Input.GetAxisRaw("Horizontal");
-		}
+		//}
+		//else
+		//{
+		//	horizontal = (int)Input.GetAxisRaw("Horizontal");
+		//}
+	}
+
+	public void UpJump()
+	{
+		upJump = true;
+		jump = true;
+	}
+
+	public void SideJump()
+	{
+		upJump = false;
+		jump = true;
 	}
 
 	void Move()
 	{
-		if(grounded)
+		if(CheckGrounded())
 		{
 			//move
 			rb.velocity = new Vector2(horizontal * maxSpeed, rb.velocity.y);
 		}
 
 		//check should burn stamina
-		if(rb.velocity.x != 0 && grounded)
+		if(rb.velocity.x != 0 && CheckGrounded())
 		{
 			GetComponent<PlayerDataSP>().stamina -= Time.deltaTime * 20;
 		}
@@ -121,12 +137,12 @@ public class Movement : MonoBehaviour
 		Flip();
 
 		//check jump
-		if(grounded && jump)
+		if(CheckGrounded() && jump)
 		{
 			rb.velocity = Vector3.zero;
 
 			GetComponent<PlayerDataSP>().stamina -= 20;
-			grounded = false;
+			//grounded = false;
 
 			int flipMod = facingRight ? -1 : 1;
 
@@ -159,7 +175,7 @@ public class Movement : MonoBehaviour
 
 	void Flip()
 	{
-		if(grounded)
+		if(CheckGrounded())
 		{
 			//calc which dir we're facing based on movement speed
 			if(horizontal != 0)

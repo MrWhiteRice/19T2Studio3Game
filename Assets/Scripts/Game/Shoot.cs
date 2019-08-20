@@ -60,7 +60,7 @@ public class Shoot : MonoBehaviour
 		{
 
 		}
-		else if(playerNum != 0) // check not mobile
+		else if(playerNum != 0 && playerNum != -1) // check not mobile
 		{
 			if(Input.GetKeyDown("joystick " + playerNum + " button 4"))//LB
 			{
