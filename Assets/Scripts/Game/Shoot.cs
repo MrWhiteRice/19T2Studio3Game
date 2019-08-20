@@ -11,7 +11,7 @@ public class Shoot : MonoBehaviour
 
 	int playerNum;
 	bool attack;
-	Vector2 conDir;
+	[HideInInspector]public Vector2 conDir;
 	Vector2 dir;
 
 	public enum Gun
@@ -139,8 +139,8 @@ public class Shoot : MonoBehaviour
 	void Aim()
 	{
 		//init variables
-		Vector3 mousePos;
-		Vector3 objectPos;
+		Vector3 mousePos = Vector3.zero;
+		Vector3 objectPos = Vector3.zero;
 
 		if(playerNum > 0) // if controller
 		{
@@ -165,7 +165,7 @@ public class Shoot : MonoBehaviour
 			objectPos = gun.transform.position;
 			objectPos.z = 0;
 		}
-		else //else its keyboard
+		else if(playerNum == 0)//else its keyboard
 		{
 			//get mouse direction from player
 			dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
@@ -174,6 +174,14 @@ public class Shoot : MonoBehaviour
 			mousePos = Input.mousePosition;
 			mousePos.z = 0;
 			objectPos = Camera.main.WorldToScreenPoint(gun.transform.position);
+			objectPos.z = 0;
+		}
+		else if(playerNum == -1)
+		{
+			//zero out position z data
+			mousePos = gun.transform.position + (Vector3)conDir;
+			mousePos.z = 0;
+			objectPos = gun.transform.position;
 			objectPos.z = 0;
 		}
 
@@ -217,44 +225,51 @@ public class Shoot : MonoBehaviour
 			}
 			else
 			{
-				GameObject b;
 				GetComponent<SpriteAnim>().state = SpriteAnim.State.Null;
 
-				//Test which weapon
-				switch(selectedWeapon)
-				{
-					case Gun.Class:
-						b = Instantiate(shoot);
-
-						b.transform.position = gun.GetChild(0).transform.position;
-						b.transform.rotation = gun.transform.rotation;
-						b.GetComponent<Shooter>().Init(3, 0.1f, 10, 2, 50);
-						break;
-
-					case Gun.Grenade:
-						ThrowGrenade();
-						break;
-
-					case Gun.Utility:
-						break;
-
-					case Gun.Special:
-						break;
-
-					case Gun.Melee:
-						b = Instantiate(melee);
-
-						b.transform.position = gun.transform.GetChild(0).transform.position;
-						b.transform.rotation = gun.transform.rotation;
-
-						GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Melee_Sprites, SpriteAnim.State.Melee, false);
-						break;
-				}
+				ShootWeapon();
 			}
 
-			FindObjectOfType<GameManager>().phase++;
 			enabled = false;
 		}
+	}
+
+	public void ShootWeapon()
+	{
+		GameObject b;
+
+		//Test which weapon
+		switch(selectedWeapon)
+		{
+			case Gun.Class:
+				b = Instantiate(shoot);
+
+				b.transform.position = gun.GetChild(0).transform.position;
+				b.transform.rotation = gun.transform.rotation;
+				b.GetComponent<Shooter>().Init(3, 0.1f, 10, 2, 50);
+				break;
+
+			case Gun.Grenade:
+				ThrowGrenade();
+				break;
+
+			case Gun.Utility:
+				break;
+
+			case Gun.Special:
+				break;
+
+			case Gun.Melee:
+				b = Instantiate(melee);
+
+				b.transform.position = gun.transform.GetChild(0).transform.position;
+				b.transform.rotation = gun.transform.rotation;
+
+				GetComponent<SpriteAnim>().PlayAnimation(GetComponent<SpriteAnim>().Melee_Sprites, SpriteAnim.State.Melee, false);
+				break;
+		}
+
+		FindObjectOfType<GameManager>().phase++;
 	}
 
 	void ThrowGrenade()

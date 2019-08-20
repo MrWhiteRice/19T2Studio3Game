@@ -39,6 +39,8 @@ public class GameUI : MonoBehaviour
 	[Space]
 	public Image controller;
 	bool isMobile;
+	public GameObject MoveIcons;
+	public GameObject ShootIcons;
 
 	private void Start()
 	{
@@ -54,6 +56,9 @@ public class GameUI : MonoBehaviour
 		//check if mobile
 		if(isMobile)
 		{
+			//update icons depending on phase
+			IconUpdate();
+
 			//get screen input
 			mousePos = Input.mousePosition;
 
@@ -97,9 +102,12 @@ public class GameUI : MonoBehaviour
 				if(pressed)
 				{
 					dir = mousePos.x > controller.rectTransform.position.x ? 1 : -1;
+					player.GetComponent<Shoot>().conDir = mousePos - (Vector2)controller.rectTransform.position;
 				}
 
+
 				player.GetComponent<Movement>().horizontal = dir;
+
 			}
 		}
 
@@ -233,6 +241,21 @@ public class GameUI : MonoBehaviour
 		WeaponSelected();
 	}
 
+	void IconUpdate()
+	{
+		MoveIcons.SetActive(false);
+		ShootIcons.SetActive(false);
+
+		if(FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.Move)
+		{
+			MoveIcons.SetActive(true);
+		}
+		else if(FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.Shoot)
+		{
+			ShootIcons.SetActive(true);
+		}
+	}
+
 	public void ControlsText()
 	{
 		switch(FindObjectOfType<GameManager>().phase)
@@ -359,7 +382,15 @@ public class GameUI : MonoBehaviour
 
 	public void Fire()
 	{
-
+		//cycle all players
+		foreach(PlayerDataSP player in FindObjectsOfType<PlayerDataSP>())
+		{
+			//find active player
+			if(player.IsTurn())
+			{
+				player.GetComponent<Shoot>().ShootWeapon();
+			}
+		}
 	}
 
 	//public void SkipTurn()
