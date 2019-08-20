@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Actor_15
   m_EditorClassIdentifier: 
   id: 15
-  icon: {fileID: 21300000, guid: aceb32c55a97aed4197a035392f4626c, type: 3}
+  icon: {fileID: 21300000, guid: 3962ba2aad3332d438d38109b088b02d, type: 3}
   characterName: Nadyne
   weight: 1
   rarity: 1

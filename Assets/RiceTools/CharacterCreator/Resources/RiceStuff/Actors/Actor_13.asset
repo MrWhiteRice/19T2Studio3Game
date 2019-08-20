@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Actor_13
   m_EditorClassIdentifier: 
   id: 13
-  icon: {fileID: 21300000, guid: 9cf31f59adbed3b42930f117f7386113, type: 3}
+  icon: {fileID: 21300000, guid: b6eca69879c0f694e8ef6b820f2462e4, type: 3}
   characterName: Adam
   weight: 2
   rarity: 1
