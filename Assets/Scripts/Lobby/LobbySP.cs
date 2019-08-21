@@ -8,6 +8,7 @@ public class LobbySP : MonoBehaviour
 	public GameObject[] players;
 	public bool noGo;
 	public bool local;
+	public bool host;
 
 	public GameObject panel;
 	bool playerFound;
@@ -33,33 +34,50 @@ public class LobbySP : MonoBehaviour
 
 		if(!playerFound)
 		{
-			//Check if keyboard is to be used
-			if(Input.GetKeyDown(KeyCode.Space))
+			//if we're local
+			if(local)
 			{
-				PlayerPrefs.SetInt("Player2Controller", 0);
-				playerFound = true;
+				//Check if keyboard is to be used
+				if(Input.GetKeyDown(KeyCode.Space))
+				{
+					PlayerPrefs.SetInt("Player2Controller", 0);
+					playerFound = true;
+				}
+				else
+				{
+					//check which controller is being used
+					for(int x = 1; x <= 4; x++)
+					{
+						if(Input.GetKeyDown("joystick " + x + " button 0"))
+						{
+							print("selected joystick" + x);
+							PlayerPrefs.SetInt("Player2Controller", x);
+							playerFound = true;
+							break;
+						}
+					}
+				}
 			}
 			else
 			{
-				//check which controller is being used
-				for(int x = 1; x <= 4; x++)
-				{
-					if(Input.GetKeyDown("joystick " + x + " button 0"))
-					{
-						print("selected joystick" + x);
-						PlayerPrefs.SetInt("Player2Controller", x);
-						playerFound = true;
-						break;
-					}
-				}
+				playerFound = FindObjectsOfType<Player>().Length >= 2 ? true : false;
+				print(FindObjectsOfType<Player>().Length);
 			}
 		}
 		else
 		{
-			for(int x = 3; x < 6; x++)
+			if(local)
 			{
-				PlayerSetUp(x, true);
+				for(int x = 3; x < 6; x++)
+				{
+					PlayerSetUp(x, true);
+					panel.SetActive(false);
+				}
+			}
+			else
+			{
 				panel.SetActive(false);
+				print("p[layer found!");
 			}
 		}
     }

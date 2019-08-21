@@ -319,6 +319,8 @@ GameObject:
   - component: {fileID: 9047550298075193114}
   - component: {fileID: 2522232585246301221}
   - component: {fileID: -5963946174417563069}
+  - component: {fileID: 6599136852099132645}
+  - component: {fileID: 6074410909296457676}
   m_Layer: 9
   m_Name: Character SP
   m_TagString: Player
@@ -363,7 +365,11 @@ MonoBehaviour:
     m_Bits: 256
   playerSpr: {fileID: 6193192228104032191}
   grounded: 0
+  jumping: 0
+  jump: 0
+  upJump: 0
   facingRight: 1
+  horizontal: 0
   jumpForce: 400
   maxSpeed: 3
 --- !u!114 &4372908342781098886
@@ -382,6 +388,7 @@ MonoBehaviour:
   shoot: {fileID: 6296523901645681565, guid: 0bc9b591ba533a44d94fb27ff78ecce9, type: 3}
   grenade: {fileID: 6076532265113867400, guid: 06b6aa93528bff54dbc9db7424642cad, type: 3}
   melee: {fileID: 6076532265113867400, guid: 43717d91a9955b849b8370e2efc6f4c9, type: 3}
+  conDir: {x: 0, y: 0}
   selectedWeapon: 1
   character: {fileID: 6193192228104032191}
 --- !u!114 &6524276184389340516
@@ -405,12 +412,10 @@ MonoBehaviour:
     weaponID: 0
     classID: 0
     traversalID: 0
-  player:
-    serializedVersion: 2
-    m_Bits: 512
-  ground:
-    serializedVersion: 2
-    m_Bits: 256
+  hurt: 0
+  controllerMode: 0
+  actor: {fileID: 0}
+  playerNum: 0
 --- !u!54 &-1740766124022386151
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -515,6 +520,61 @@ MonoBehaviour:
   weaponSlot: {fileID: 3902787082975758138}
   state: 2
   sprites: []
+--- !u!114 &6599136852099132645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4372908342781098893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8258ea15b8f74c4889ce485d21cbbb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &6074410909296457676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4372908342781098893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d6c522af31447398568cc65334232b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.033333335
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!1 &4372908344435783071
 GameObject:
   m_ObjectHideFlags: 0
