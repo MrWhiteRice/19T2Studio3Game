@@ -407,6 +407,7 @@ MonoBehaviour:
   stamina: 100
   ID: 0
   team: 0
+  teamInt: -1
   character:
     playerID: 0
     weaponID: 0
@@ -416,6 +417,7 @@ MonoBehaviour:
   controllerMode: 0
   actor: {fileID: 0}
   playerNum: 0
+  generate: 0
 --- !u!54 &-1740766124022386151
 Rigidbody:
   m_ObjectHideFlags: 0

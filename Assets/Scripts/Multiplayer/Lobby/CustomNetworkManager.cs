@@ -17,71 +17,80 @@ public class CustomNetworkManager : NetworkManager
 	public Button button;
 	public Button button2;
 
-	[Space]
-	public GameObject player;
-
 	private void Update()
 	{
-		button.interactable = !singleton.isNetworkActive;
-		button2.interactable = !singleton.isNetworkActive;
+		bool ready = false;
 
-		if(!play.activeSelf)
+		foreach(Player p in FindObjectsOfType<Player>())
 		{
-			if(singleton.isNetworkActive)
+			if(p.isHost)
 			{
-				check -= Time.deltaTime;
-
-				if(check <= 0)
-				{
-					if(connected == 0)
-					{
-						print("unloading multiplay module!");
-						Disconnect();
-					}
-				}
-			}
-			else
-			{
-				check = 1;
-				connected = 0;
+				ready = p.gameStart;
 			}
 		}
-		else
+
+		if(!ready)
 		{
-			check = 1;
-			connected = 0;
+			button.interactable = !singleton.isNetworkActive;
+			button2.interactable = !singleton.isNetworkActive;
+
+			if(play != null)
+			{
+				if(!play.activeSelf)
+				{
+					if(singleton.isNetworkActive)
+					{
+						check -= Time.deltaTime;
+
+						if(check <= 0)
+						{
+							if(connected == 0)
+							{
+								print("unloading multiplay module!");
+								Disconnect();
+							}
+						}
+					}
+					else
+					{
+						check = 1;
+						connected = 0;
+					}
+				}
+				else
+				{
+					check = 1;
+					connected = 0;
+				}
+			}
 		}
 	}
 
-	//public override void OnClientConnect(NetworkConnection conn)
-	//{
-	//	connected++;
-	//	lobby.local = false;
-	//	lobby.gameObject.SetActive(true);
-	//}
-
 	public void HostTheMatch()
 	{
-		if(singleton.isNetworkActive == false)
-		{
-			singleton.StartHost();
-			lobby.local = false;
-			lobby.gameObject.SetActive(true);
-		}
+		singleton.StartHost();
+		lobby.local = false;
+		lobby.gameObject.SetActive(true);
 	}
 
 	public void JoinTheMatch()
 	{
-		print("connecting with: " + input.text);
-
+		//create input string
 		string useString = input.text;
+		//check if null
 		if(useString == "")
 		{
+			//fix
 			useString = "localhost";
 		}
 
+		print("connecting with: " + useString);
+
+		//connect timer
 		check = 10;
+		//set ip
 		singleton.networkAddress = useString;
+		//try connect
 		singleton.StartClient();
 	}
 

@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class PlayerDataSP : MonoBehaviour
+public class PlayerDataSP : NetworkBehaviour
 {
 	public float health = 100;
 	public float stamina = 100;
 	public int ID = 0;
 	public SpawnPoint.Team team;
+	[SyncVar] public int teamInt = -1;
 
 	UnityEngine.UI.Text healthText;
 	UnityEngine.UI.Slider staminaSlider;
@@ -23,68 +25,8 @@ public class PlayerDataSP : MonoBehaviour
 
 	public int playerNum = 0;
 
-	void Start()
-	{
-		int index = (int)team == 0 ? 1 : 2;
-		playerNum = PlayerPrefs.GetInt("Player" + index + "Controller", -1);
-
-		character = FindObjectOfType<GameManager>().data.party[ID%3];
-
-		foreach(Weapon w in Resources.LoadAll<Weapon>("RiceStuff/Weapons"))
-		{
-			if(w.ID == character.classID)
-			{
-				GetComponent<SpriteAnim>().weapon = w.Icon;
-			}
-		}
-
-		healthText = GetComponentInChildren<UnityEngine.UI.Text>();
-		staminaSlider = GetComponentInChildren<UnityEngine.UI.Slider>();
-
-		if(team == SpawnPoint.Team.Red)
-		{
-			healthText.color = Color.red;
-		}
-		else
-		{
-			healthText.color = Color.blue;
-		}
-
-		//rigidbody constraints
-		rbc = GetComponent<Rigidbody>().constraints;
-
-		//find correct character to load
-		string nameSearch = "";
-		foreach(Actor a in Resources.LoadAll<Actor>("RiceStuff/Actors"))
-		{
-			if(character.playerID == a.ID)
-			{
-				nameSearch = a.CharacterName;
-				actor = a;
-				//REMOVE print(nameSearch + "," + a.CharacterName);
-			}
-		}
-
-		//load animator
-		SpriteAnim anim = GetComponent<SpriteAnim>();
-
-		//Loading Animations
-		LoadSprites(anim.Idle_Sprites, nameSearch, "Default", 1); //Idle
-		LoadSprites(anim.Walk_Sprites, nameSearch, "Walk", 8); //Walk
-
-		LoadSprites(anim.Melee_Sprites, nameSearch, "Unarmed_Attack", 5); //Melee
-		LoadSprites(anim.Melee_Idle_Sprites, nameSearch, "Melee_Stance_1", 1); //Melee Idle
-
-		LoadSprites(anim.Grenade_Sprites, nameSearch, "Grenade", 5); //Grenade
-
-		LoadSprites(anim.Hurt_Sprites, nameSearch, "Hurt", 3); //Hurt
-		LoadSprites(anim.Jump_Sprites, nameSearch, "Jump", 4); //Jump
-
-		LoadSprites(anim.Aim, nameSearch, "Rifle_Aim_1", 1); //Gun Aim
-
-		//Start idle anim
-		anim.PlayAnimation(GetComponent<SpriteAnim>().Idle_Sprites, SpriteAnim.State.Idle, true);
-	}
+	public bool generate;
+	bool done;
 
 	void LoadSprites(SpriteList list, string charName, string animName, int frames)
 	{
@@ -116,6 +58,89 @@ public class PlayerDataSP : MonoBehaviour
 
 	private void Update()
 	{
+		if(teamInt != -1)
+		{
+			team = (SpawnPoint.Team)teamInt;
+		}
+
+		if(generate)
+		{
+			int index = (int)team == 0 ? 1 : 2;
+			playerNum = PlayerPrefs.GetInt("Player" + index + "Controller", -1);
+
+			if(character.playerID == 0)
+			character = FindObjectOfType<GameManager>().data.party[ID % 3];
+
+			foreach(Weapon w in Resources.LoadAll<Weapon>("RiceStuff/Weapons"))
+			{
+				if(w.ID == character.classID)
+				{
+					GetComponent<SpriteAnim>().weapon = w.Icon;
+				}
+			}
+
+			healthText = GetComponentInChildren<UnityEngine.UI.Text>();
+			staminaSlider = GetComponentInChildren<UnityEngine.UI.Slider>();
+
+			if(team == SpawnPoint.Team.Red)
+			{
+				healthText.color = Color.red;
+			}
+			else
+			{
+				healthText.color = Color.blue;
+			}
+
+			//rigidbody constraints
+			rbc = GetComponent<Rigidbody>().constraints;
+
+			//find correct character to load
+			string nameSearch = "";
+			foreach(Actor a in Resources.LoadAll<Actor>("RiceStuff/Actors"))
+			{
+				if(character.playerID == a.ID)
+				{
+					nameSearch = a.CharacterName;
+					actor = a;
+					//REMOVE print(nameSearch + "," + a.CharacterName);
+				}
+			}
+
+			//load animator
+			SpriteAnim anim = GetComponent<SpriteAnim>();
+
+			//Loading Animations
+			LoadSprites(anim.Idle_Sprites, nameSearch, "Default", 1); //Idle
+			LoadSprites(anim.Walk_Sprites, nameSearch, "Walk", 8); //Walk
+
+			LoadSprites(anim.Melee_Sprites, nameSearch, "Unarmed_Attack", 5); //Melee
+			LoadSprites(anim.Melee_Idle_Sprites, nameSearch, "Melee_Stance_1", 1); //Melee Idle
+
+			LoadSprites(anim.Grenade_Sprites, nameSearch, "Grenade", 5); //Grenade
+
+			LoadSprites(anim.Hurt_Sprites, nameSearch, "Hurt", 3); //Hurt
+			LoadSprites(anim.Jump_Sprites, nameSearch, "Jump", 4); //Jump
+
+			LoadSprites(anim.Aim, nameSearch, "Rifle_Aim_1", 1); //Gun Aim
+
+			//Start idle anim
+			anim.PlayAnimation(GetComponent<SpriteAnim>().Idle_Sprites, SpriteAnim.State.Idle, true);
+
+			generate = false;
+			done = true;
+		}
+
+		if(!done)
+		{
+			return;
+		}
+
+
+		if(GameObject.FindGameObjectWithTag("MyPlayer").GetComponent<Player>().ID != teamInt)
+		{
+			return;
+		}
+
 		//button0 = a
 		//button1 = b
 		//button2 = x

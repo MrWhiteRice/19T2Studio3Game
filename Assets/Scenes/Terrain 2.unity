@@ -1044,6 +1044,7 @@ MonoBehaviour:
   turn: 0
   redPlayers: []
   bluePlayers: []
+  gameStart: 0
   data:
     free: 0
     paid: 0
@@ -1079,6 +1080,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameUI_Both
+      objectReference: {fileID: 0}
+    - target: {fileID: 6107461519428821302, guid: 3a8b65aa06444214e936ed2ba86c3d42,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7707229040430490108, guid: 3a8b65aa06444214e936ed2ba86c3d42,
         type: 3}

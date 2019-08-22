@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
 	public GameObject player;
-	public int turn = 6;
+	[SyncVar]public int turn = 6;
 	public List<GameObject> redPlayers = new List<GameObject>();
 	public List<GameObject> bluePlayers = new List<GameObject>();
-	bool gameStart = false;
+	[SyncVar]public bool gameStart = false;
 
 	public DataContainer data;
 
@@ -24,20 +25,33 @@ public class GameManager : MonoBehaviour
     void Start()
     {
 		data = SaveSystem.loadData(PlayerPrefs.GetInt("ActivePlayer", -1));
-
 		turn = Random.Range(0, 6);
-		SpawnPlayers();
-		NumberPlayers();
-		Invoke("BeginGame", 3f);
+
+		if(!FindObjectOfType<Player>())
+		{
+			SpawnPlayers();
+			NumberPlayers();
+			Invoke("BeginGame", 3f);
+
+			foreach(PlayerDataSP p in FindObjectsOfType<PlayerDataSP>())
+			{
+				p.generate = true;
+			}
+		}
     }
 
-	void BeginGame()
+	public void BeginGame()
 	{
 		gameStart = true;
 	}
 
     void Update()
     {
+		if(gameStart == false)
+		{
+			return;
+		}
+
 		if(phase == TurnPhase.Damage)
 		{
 			if(GameObject.FindGameObjectsWithTag("Weapon").Length == 0)

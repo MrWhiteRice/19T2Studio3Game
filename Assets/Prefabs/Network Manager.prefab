@@ -120,4 +120,3 @@ MonoBehaviour:
   connected: 0
   button: {fileID: 0}
   button2: {fileID: 0}
-  player: {fileID: 5810828039500001916, guid: bbecc9d6ab0652f4db5a930a5bb040b3, type: 3}

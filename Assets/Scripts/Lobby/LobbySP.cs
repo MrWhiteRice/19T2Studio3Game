@@ -32,6 +32,12 @@ public class LobbySP : MonoBehaviour
 			PlayerSetUp(x, false);
 		}
 
+		if(!local)
+		{
+			//find players
+			playerFound = FindObjectsOfType<Player>().Length >= 2 ? true : false;
+		}
+
 		if(!playerFound)
 		{
 			//if we're local
@@ -58,15 +64,10 @@ public class LobbySP : MonoBehaviour
 					}
 				}
 			}
-			else
-			{
-				playerFound = FindObjectsOfType<Player>().Length >= 2 ? true : false;
-				print(FindObjectsOfType<Player>().Length);
-			}
 		}
-		else
+		else //found a player
 		{
-			if(local)
+			if(local) //local
 			{
 				for(int x = 3; x < 6; x++)
 				{
@@ -74,13 +75,117 @@ public class LobbySP : MonoBehaviour
 					panel.SetActive(false);
 				}
 			}
-			else
+			else //online
 			{
+				LoadPlayerData();
 				panel.SetActive(false);
-				print("p[layer found!");
+
+				int ready = 0;
+				foreach(Player p in FindObjectsOfType<Player>())
+				{
+					if(p.lobbyReady)
+					{
+						ready++;
+					}
+				}
+
+				if(ready == 2)
+				{
+					foreach(Player p in FindObjectsOfType<Player>())
+					{
+						if(p.CompareTag("MyPlayer") && p.isHost)
+						{
+							p.CmdSetGameStart(true);
+						}
+					}
+
+					FindObjectOfType<CustomNetworkManager>().ServerChangeScene("Terrain 2");
+					enabled = false;
+				}
 			}
 		}
     }
+
+	public void PlayGame()
+	{
+		//if lan
+		if(local)
+		{
+			if(noGo != true)
+			{
+				UnityEngine.SceneManagement.SceneManager.LoadScene("Terrain 2");
+			}
+		}
+		else//if online
+		{
+			foreach(Player p in FindObjectsOfType<Player>())
+			{
+				if(p.CompareTag("MyPlayer"))
+				{
+					p.CmdSetLobbyReady(true);
+				}
+			}
+		}
+	}
+
+	//Load online player into lobby
+	void LoadPlayerData()
+	{
+		for(int x = 3; x < 6; x++)
+		{
+			int playerSelect = x % 3;
+
+			//setting up player portrait
+			foreach(Actor a in characters)
+			{
+				if(a.ID == FindObjectOfType<LootBox>().data.party[playerSelect].playerID)
+				{
+					players[x].transform.GetChild(0).GetComponent<Image>().sprite = a.Icon; //player
+					break;
+				}
+				else
+				{
+					if(FindObjectOfType<LootBox>().data.party[playerSelect].playerID == -1)
+					{
+						players[x].transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>("Cancel");
+						noGo = true;
+					}
+				}
+			}
+
+			//setting up class weapon
+			foreach(Weapon w in weapons)
+			{
+				if(w.ID == FindObjectOfType<LootBox>().data.party[playerSelect].classID)
+				{
+					players[x].transform.GetChild(1).GetComponent<Image>().sprite = w.Icon; //gun
+					break;
+				}
+				else
+				{
+					players[x].transform.GetChild(1).GetComponent<Image>().sprite = Resources.Load<Sprite>("Cancel");
+				}
+			}
+
+			//setting up special weapon
+			foreach(Weapon w in weapons)
+			{
+				if(w.ID == FindObjectOfType<LootBox>().data.party[playerSelect].weaponID)
+				{
+					players[x].transform.GetChild(2).GetComponent<Image>().sprite = w.Icon; //special
+					break;
+				}
+				else
+				{
+					//use empty texture
+					players[x].transform.GetChild(2).GetComponent<Image>().sprite = Resources.Load<Sprite>("Cancel");
+				}
+			}
+
+			players[x].transform.GetChild(3).GetComponent<Image>().sprite = null; //movement
+			players[x].transform.GetChild(4).GetComponent<Image>().sprite = null; //melee
+		}
+	}
 
 	void PlayerSetUp(int x, bool p2)
 	{
@@ -128,6 +233,7 @@ public class LobbySP : MonoBehaviour
 			}
 			else
 			{
+				//use empty texture
 				players[x].transform.GetChild(2).GetComponent<Image>().sprite = Resources.Load<Sprite>("Cancel");
 			}
 		}

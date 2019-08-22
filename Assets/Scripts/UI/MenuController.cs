@@ -134,14 +134,6 @@ public class MenuController : MonoBehaviour
 		}
 	}
 
-	public void PlayGame()
-	{
-		if(FindObjectOfType<LobbySP>().noGo != true)
-		{
-			SceneManager.LoadScene("Terrain 2");
-		}
-	}
-
 	public void Quit()
 	{
 		Application.Quit();

@@ -6,10 +6,6 @@ using UnityEngine.UI;
 public class GameUI : MonoBehaviour
 {
 	float timer = 3;
-	//public void Skip()
-	//{
-	//	GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().CmdEndTurn();
-	//}
 
 	public Text text;
 	public Text endtext;
@@ -143,6 +139,7 @@ public class GameUI : MonoBehaviour
 			if(p.IsTurn())
 			{
 				//set active icon
+				if(p.actor != null)
 				icon.sprite = p.actor.Icon;
 
 				//set active health
@@ -154,7 +151,19 @@ public class GameUI : MonoBehaviour
 
 		text.text = "Current Phase\n" + FindObjectOfType<GameManager>().phase.ToString();
 
-		//TODO: move to game manager
+
+		if(FindObjectOfType<GameManager>().gameStart)
+		{
+			EndTurnCheck();		
+			CheckGameOver();
+		}
+
+		ControlsText();
+		WeaponSelected();
+	}
+
+	void EndTurnCheck()
+	{
 		if(FindObjectOfType<GameManager>().phase == GameManager.TurnPhase.End)
 		{
 			endtext.text = "Next Turn: " + timer.ToString("f0");
@@ -179,10 +188,13 @@ public class GameUI : MonoBehaviour
 		}
 		else
 		{
-			if(endtext!= null)
-			endtext.text = "";
+			if(endtext != null)
+				endtext.text = "";
 		}
+	}
 
+	void CheckGameOver()
+	{
 		int red = 0;
 		int blue = 0;
 		foreach(PlayerDataSP player in FindObjectsOfType<PlayerDataSP>())
@@ -236,9 +248,6 @@ public class GameUI : MonoBehaviour
 				UnityEngine.SceneManagement.SceneManager.LoadScene(0);
 			}
 		}
-
-		ControlsText();
-		WeaponSelected();
 	}
 
 	void IconUpdate()
