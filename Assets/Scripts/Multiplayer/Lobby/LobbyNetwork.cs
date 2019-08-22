@@ -17,18 +17,18 @@ public class LobbyNetwork : MonoBehaviour
 
 	public void Host()
 	{
-		GameObject.FindObjectOfType<CustomNetworkManager>().HostMatch();
+		//GameObject.FindObjectOfType<CustomNetworkManager>().HostTheMatch();
 	}
 
 	public void Join()
 	{
 		if(ip.text != "")
 		{
-			GameObject.FindObjectOfType<CustomNetworkManager>().JoinMatch(ip.text);
+			//GameObject.FindObjectOfType<CustomNetworkManager>().JoinMatch(ip.text);
 		}
 		else
 		{
-			GameObject.FindObjectOfType<CustomNetworkManager>().JoinMatch(LocalIPAddress());
+			//GameObject.FindObjectOfType<CustomNetworkManager>().JoinMatch(LocalIPAddress());
 		}
 	}
 
