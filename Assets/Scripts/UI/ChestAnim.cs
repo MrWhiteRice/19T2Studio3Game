@@ -55,12 +55,14 @@ public class ChestAnim : MonoBehaviour
             {
                 lootScript.Roll(rollType);
                 animCanvas.SetActive(false);
+                rollOne = false;
             }
 
             if (rollTen == true)
             {
                 lootScript.MultiRoll(rollType);
                 animCanvas.SetActive(false);
+                rollTen = false;
             }
         }
     }
