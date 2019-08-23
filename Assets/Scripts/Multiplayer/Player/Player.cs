@@ -13,8 +13,9 @@ public class Player : NetworkBehaviour
 	[SyncVar] public bool lobbyReady;
 	bool levelReady;
 	string sceneName;
-	[SyncVar]public bool spawned;
+	[SyncVar] public bool spawned;
 	bool toldSpawn;
+	[SyncVar] public int turn = -1;
 
 	CharacterParty[] party;
 	public List<GameObject> partyChars = new List<GameObject>();
@@ -32,6 +33,8 @@ public class Player : NetworkBehaviour
 		CmdSetID(isServer ? 0 : 1);
 		isHost = isServer ? true : false;
 
+		turn = Random.Range(0, 6);
+
 		if(!isHost)
 		{
 			CustomNetworkManager m = FindObjectOfType<CustomNetworkManager>();
@@ -43,7 +46,7 @@ public class Player : NetworkBehaviour
 	}
 
 	//CMD RPC
-	#region
+	//#region
 	[Command]
 	public void CmdSetID(int set)
 	{
@@ -56,74 +59,47 @@ public class Player : NetworkBehaviour
 		ID = set;
 	}
 
-	[ClientRpc]
-	void RpcStartGame()
-	{
-		FindObjectOfType<GameManager>().gameStart = true;
-	}
-
 	[Command]
-	public void CmdSetLobbyReady(bool set)
+	public void CmdSetGameStart()
 	{
-		RpcLobbyReady(set);
+		RpcSetGameStart();
 	}
 
 	[ClientRpc]
-	void RpcLobbyReady(bool set)
-	{
-		lobbyReady = set;
-	}
-
-	[Command]
-	public void CmdSetGameStart(bool set)
-	{
-		RpcSetGameStart(set);
-	}
-
-	[ClientRpc]
-	void RpcSetGameStart(bool set)
+	void RpcSetGameStart()
 	{
 		foreach(Player p in FindObjectsOfType<Player>())
 		{
-			p.gameStart = set;
+			p.gameStart = true;
 		}
 	}
 
 	[Command]
-	public void CmdReady(bool set)
+	public void CmdSetLobbyReady()
 	{
-		RpcReady(set);
+		RpcLobbyReady();
 	}
 
 	[ClientRpc]
-	void RpcReady(bool set)
+	void RpcLobbyReady()
 	{
-		ready = set;
+		lobbyReady = true;
 	}
 
 	[Command]
-	public void CmdSetSpawn(bool set)
+	public void CmdReady()
 	{
-		RpcSetSpawn(set);
+		RpcReady();
 	}
 
 	[ClientRpc]
-	void RpcSetSpawn(bool set)
+	void RpcReady()
 	{
-		foreach(Player p in FindObjectsOfType<Player>())
-		{
-			p.spawned = set;
-		}
+		ready = true;
 	}
 
 	[Command]
-	public void CmdSpawnCharacters()
-	{
-		RpcSpawnCharacters();
-	}
-
-	[ClientRpc]
-	void RpcSpawnCharacters()
+	void CmdSpawnCharacters()
 	{
 		//find all spawn points
 		SpawnPoint[] points = FindObjectsOfType<SpawnPoint>();
@@ -145,21 +121,89 @@ public class Player : NetworkBehaviour
 				r.Add(s);
 			}
 		}
-
-		//cycle all players
-		foreach(Player p in FindObjectsOfType<Player>())
+		for(int x = 0; x < 3; x++)
 		{
-			for(int x = 0; x < 3; x++)
-			{
-				GameObject spawn = (GameObject)Instantiate((GameObject)Resources.Load("Character SP"), p.ID == 0 ? r[x].transform.position : b[x].transform.position, Quaternion.identity);
-				spawn.GetComponent<PlayerDataSP>().teamInt = p.ID;
-				spawn.name = p.ID.ToString();
-				p.partyChars.Add(spawn);
+			GameObject spawn = (GameObject)Instantiate((GameObject)Resources.Load("Character SP"), ID == 0 ? r[x].transform.position : b[x].transform.position, Quaternion.identity);
+			spawn.GetComponent<PlayerDataSP>().teamInt = ID;
+			int add = ID == 0 ? 0 : 3;
+			spawn.GetComponent<PlayerDataSP>().ID = x + add;
+			spawn.name = ID.ToString();
+			partyChars.Add(spawn);
 
-				NetworkServer.Spawn(spawn);
-			}
+			NetworkServer.Spawn(spawn);
 		}
 	}
+
+	/*[Command]
+	public void CmdNextTurn()
+	{
+		RpcNextTurn();
+	}
+
+	[ClientRpc]
+	void RpcNextTurn()
+	{
+		foreach(Player p in FindObjectsOfType<Player>())
+		{
+			p.turn++;
+
+			p.turn %= 6;
+		}
+	}
+
+	[ClientRpc]
+	void RpcStartGame()
+	{
+		FindObjectOfType<GameManager>().gameStart = true;
+	}
+
+	//[Command]
+	//void CmdSpawnOnNetwork()
+	//{
+	//	//find all spawn points
+	//	SpawnPoint[] points = FindObjectsOfType<SpawnPoint>();
+
+	//	//init red and blue list
+	//	List<SpawnPoint> r = new List<SpawnPoint>();
+	//	List<SpawnPoint> b = new List<SpawnPoint>();
+
+	//	//cycle all spawn points
+	//	foreach(SpawnPoint s in points)
+	//	{
+	//		//add depending on team
+	//		if(s.GetTeam() == SpawnPoint.Team.Blue)
+	//		{
+	//			b.Add(s);
+	//		}
+	//		else
+	//		{
+	//			r.Add(s);
+	//		}
+	//	}
+	//	for(int x = 0; x < 3; x++)
+	//	{
+	//		GameObject spawn = (GameObject)Instantiate((GameObject)Resources.Load("Character SP"), ID == 0 ? r[x].transform.position : b[x].transform.position, Quaternion.identity);
+	//		spawn.GetComponent<PlayerDataSP>().teamInt = ID;
+	//		int add = ID == 0 ? 0 : 3;
+	//		spawn.GetComponent<PlayerDataSP>().ID = x + add;
+	//		spawn.name = ID.ToString();
+	//		partyChars.Add(spawn);
+
+	//		NetworkServer.Spawn(spawn);
+	//	}
+	//}
+
+	//[Command]
+	//public void CmdSetSpawn(bool set)
+	//{
+	//	RpcSetSpawn(set);
+	//}
+
+	//[ClientRpc]
+	//void RpcSetSpawn(bool set)
+	//{
+	//	spawned = set;
+	//}
 
 	[Command]
 	public void CmdInitPlayer(int index, int player, int playerID, int classID, int traversalID, int weaponID)
@@ -199,7 +243,7 @@ public class Player : NetworkBehaviour
 		}
 	}
 #endregion
-
+*/
 	void OnEnable()
 	{
 		SceneManager.sceneLoaded += OnSceneLoaded;
@@ -231,7 +275,7 @@ public class Player : NetworkBehaviour
 				{
 					if(sceneName.Contains("Terrain"))
 					{
-						CmdReady(true);
+						CmdReady();
 					}
 				}
 			}
@@ -276,9 +320,8 @@ public class Player : NetworkBehaviour
 				if(!toldSpawn)
 				{
 					toldSpawn = true;
-
 					CmdSpawnCharacters();
-					CmdSetSpawn(true);
+					//CmdSetSpawn(true);
 				}
 			}
 
@@ -295,7 +338,7 @@ public class Player : NetworkBehaviour
 			{
 				if(!FindObjectOfType<GameManager>().gameStart)
 				{
-					RpcStartGame();
+					//RpcStartGame();
 					//FindObjectOfType<GameManager>().BeginGame();
 				}
 			}
@@ -307,14 +350,11 @@ public class Player : NetworkBehaviour
 			{
 				for(int x = 0; x < 3; x++)
 				{
-					InitPlayer(x, ID, party[x]);
+					//CmdInitPlayer(ID, party[x].playerID, party[x].classID, party[x].traversalID, party[x].weaponID);
 				}
+
+				//CmdSpawnOnNetwork();
 			}
 		}
-	}
-
-	void InitPlayer(int index, int player, CharacterParty person)
-	{
-		CmdInitPlayer(index, player, person.playerID, person.classID, person.traversalID, person.weaponID);
 	}
 }

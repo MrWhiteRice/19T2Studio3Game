@@ -93,9 +93,9 @@ public class LobbySP : MonoBehaviour
 				{
 					foreach(Player p in FindObjectsOfType<Player>())
 					{
-						if(p.CompareTag("MyPlayer") && p.isHost)
+						if(p.isHost && p.CompareTag("MyPlayer"))
 						{
-							p.CmdSetGameStart(true);
+							p.CmdSetGameStart();
 						}
 					}
 
@@ -122,7 +122,7 @@ public class LobbySP : MonoBehaviour
 			{
 				if(p.CompareTag("MyPlayer"))
 				{
-					p.CmdSetLobbyReady(true);
+					p.CmdSetLobbyReady();
 				}
 			}
 		}

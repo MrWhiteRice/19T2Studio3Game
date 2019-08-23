@@ -77,6 +77,7 @@ public class GameManager : NetworkBehaviour
 
 	public void NextTurn()
 	{
+		//GameObject.FindGameObjectWithTag("MyPlayer").GetComponent<Player>().CmdNextTurn();
 		turn++;
 
 		turn %= 6;

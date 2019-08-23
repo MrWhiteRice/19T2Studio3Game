@@ -80,3 +80,8 @@ MonoBehaviour:
   ID: -1
   ready: 0
   isHost: 0
+  gameStart: 0
+  lobbyReady: 0
+  spawned: 0
+  turn: -1
+  partyChars: []

@@ -7,7 +7,7 @@ public class PlayerDataSP : NetworkBehaviour
 {
 	public float health = 100;
 	public float stamina = 100;
-	public int ID = 0;
+	[SyncVar] public int ID = 0;
 	public SpawnPoint.Team team;
 	[SyncVar] public int teamInt = -1;
 
@@ -26,7 +26,7 @@ public class PlayerDataSP : NetworkBehaviour
 	public int playerNum = 0;
 
 	public bool generate;
-	bool done;
+	public bool done;
 
 	void LoadSprites(SpriteList list, string charName, string animName, int frames)
 	{
@@ -135,10 +135,25 @@ public class PlayerDataSP : NetworkBehaviour
 			return;
 		}
 
-
-		if(GameObject.FindGameObjectWithTag("MyPlayer").GetComponent<Player>().ID != teamInt)
+		if(GameObject.FindGameObjectWithTag("MyPlayer"))
 		{
-			return;
+			if(GameObject.FindGameObjectWithTag("MyPlayer").GetComponent<Player>().ID != teamInt)
+			{
+				return;
+			}
+		}
+
+		foreach(Player p in FindObjectsOfType<Player>())
+		{
+			if(p.isHost)
+			{
+				if(ID != p.turn)
+				{
+					GetComponent<Shoot>().enabled = false;
+					GetComponent<Movement>().enabled = false;
+					return;
+				}
+			}
 		}
 
 		//button0 = a
@@ -179,8 +194,16 @@ public class PlayerDataSP : NetworkBehaviour
 			}
 		}
 
+		bool check = FindObjectOfType<Player>() ? true : false;
+		if(check)
+		{
+			playerNum = PlayerPrefs.GetInt("Player" + 1 + "Controller", -1);
+			Debug.LogError("playerset" + PlayerPrefs.GetInt("Player" + 1 + "Controller", -1));
+		}
+
+		bool check2 = FindObjectOfType<Player>() ? true : IsTurn();
 		//check if its my turn
-		if(IsTurn())
+		if(check2)
 		{
 			gameObject.layer = LayerMask.NameToLayer("Player");
 
